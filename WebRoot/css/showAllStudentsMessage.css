@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+	margin-right: auto;
+	margin-left: auto;
+	background: transparent
+}
+
+html,body {
+	text-align: center;
+}
+
+#container {
+	height: 670px;
+	width: 1000px
+}
+
+#top_info {
+	height: 20px;
+	width: 1000px;
+	background-color: #aef;
+}
+
+#middle {
+	height: 570px;
+	width: 1000px
+}
+
+#footer {
+	margin: 5px;
+	height: 80px;
+	width: 1000px;
+	font-family: '黑体';
+	font-size: x-small;
+	Color: gray;
+}

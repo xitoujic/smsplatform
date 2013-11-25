@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hanphon.recruit.domain">
+
+	<class name="StudentDomain" table="student_domain">
+		<id name="userId" type="java.lang.String" column="user_id" length="32">
+			<generator class="uuid" />
+		</id>
+
+		<property name="userEmail" type="java.lang.String" column="user_email"
+			length="40" not-null="true" unique="true" />
+
+		<property name="isStudent" type="java.lang.String" column="is_student"
+			length="1" />
+
+		<property name="onStatus" type="java.lang.String" column="on_status"
+			length="1" />
+
+		<property name="userPassword" type="java.lang.String" column="user_password"
+			length="20" />
+
+		<property name="userAuditResult" type="java.lang.String"
+			column="user_audit_result" length="20" />
+
+		<property name="userCategory" type="java.lang.String" column="user_category"
+			length="20" />
+
+		<property name="userName" type="java.lang.String" column="user_name"
+			length="20" />
+
+		<property name="userSex" type="java.lang.String" column="user_sex"
+			length="20" />
+
+		<property name="userBirthday" type="java.lang.String" column="user_birthday"
+			length="20" />
+
+		<property name="userNation" type="java.lang.String" column="user_nation"
+			length="20" />
+
+		<property name="userRdcard" type="java.lang.String" column="user_rdcard"
+			length="20" />
+
+		<property name="userPolStatus" type="java.lang.String"
+			column="user_pol_status" length="20" />
+
+		<property name="userAddress" type="java.lang.String" column="user_address"
+			length="30" />
+
+		<property name="userPostalCode" type="java.lang.String"
+			column="user_postal_code" length="20" />
+
+		<property name="linkMan" type="java.lang.String" column="linkman"
+			length="20" />
+
+
+		<property name="linkPhoneNum" type="java.lang.String" column="link_phone_num"
+			length="12" />
+
+		<property name="fatherName" type="java.lang.String" column="father_name"
+			length="20" />
+
+		<property name="fatherEducation" type="java.lang.String"
+			column="father_education" length="20" />
+
+		<property name="fatherWorkUnit" type="java.lang.String"
+			column="father_work_unit" length="20" />
+
+		<property name="fatherWrkPosition" type="java.lang.String"
+			column="father_work_position" length="20" />
+
+		<property name="fatherCareer" type="java.lang.String" column="father_career"
+			length="20" />
+
+		<property name="fatherPhoneNum" type="java.lang.String"
+			column="father_phone_num" length="20" />
+
+		<property name="motherName" type="java.lang.String" column="mother_name"
+			length="20" />
+
+		<property name="motherEducation" type="java.lang.String"
+			column="mother_education" length="20" />
+
+		<property name="motherWorkUnit" type="java.lang.String"
+			column="mother_work_unit" length="20" />
+
+		<property name="motherWorkPosition" type="java.lang.String"
+			column="mother_work_position" length="20" />
+
+		<property name="motherCareer" type="java.lang.String" column="mother_career"
+			length="20" />
+
+		<property name="motherPhoneNum" type="java.lang.String"
+			column="mother_phone_num" length="20" />
+
+		<property name="juniorSchoolName" type="java.lang.String"
+			column="junior_school_name" length="20"></property>
+
+		<property name="juniorSchoolAddress" type="java.lang.String"
+			column="junior_school_address" length="50" />
+
+		<property name="juniorSchoolPostalCode" type="java.lang.String"
+			column="junior_school_postal_code" length="6" />
+
+		<property name="juniorSchoolLinkman" type="java.lang.String"
+			column="junior_school_linkman" length="20" />
+
+		<property name="juniorSchoolLinkPhoneNum" type="java.lang.String"
+			column="junior_school_link_phone_num" length="20" />
+
+		<property name="juniorSchoolFax" type="java.lang.String"
+			column="junior_school_fax" length="20" />
+
+
+		<property name="testName1" type="java.lang.String" column="test_Name1"
+			length="20" />
+
+		<property name="junior2PreChinese" type="java.lang.Integer"
+			column="junior_2_pre_chinese" length="3" />
+
+		<property name="junior2PreMath" type="java.lang.Integer"
+			column="junior_2_pre_math" length="3" />
+
+		<property name="junior2PreEnglish" type="java.lang.Integer"
+			column="junior_2_pre_english" length="3" />
+
+		<property name="junior2PreHpy" type="java.lang.Integer"
+			column="junior_2_pre_hpy" length="3" />
+
+		<property name="junior2PreChem" type="java.lang.Integer"
+			column="junior_2_pre_chem" length="3" />
+
+		<property name="junior2PrePoli" type="java.lang.Integer"
+			column="junior_2_pre_poli" length="3" />
+
+		<property name="junior2PreHistory" type="java.lang.Integer"
+			column="junior_2_pre_history" length="3" />
+
+
+		<property name="testName2" type="java.lang.String" column="test_Name2"
+			length="20" />
+
+		<property name="junior2NextChinese" type="java.lang.Integer"
+			column="junior_2_next_chinese" length="3" />
+
+		<property name="junior2NextMath" type="java.lang.Integer"
+			column="junior_2_next_math" length="3" />
+
+		<property name="junior2NextEnglish" type="java.lang.Integer"
+			column="junior_2_next_english" length="3" />
+
+		<property name="junior2NextHpy" type="java.lang.Integer"
+			column="junior_2_next_hpy" length="3" />
+
+		<property name="junior2NextChem" type="java.lang.Integer"
+			column="junior_2_next_chem" length="3" />
+
+		<property name="junior2NextPoli" type="java.lang.Integer"
+			column="junior_2_next_poli" length="3" />
+
+		<property name="junior2NextHistory" type="java.lang.Integer"
+			column="junior_2_next_history" length="3" />
+
+
+
+
+		<property name="testName3" type="java.lang.String" column="test_Name3"
+			length="20" />
+
+		<property name="junior3PreChinese" type="java.lang.Integer"
+			column="junior_3_pre_chinese" length="3" />
+
+		<property name="junior3PreMath" type="java.lang.Integer"
+			column="junior_3_pre_math" length="3" />
+
+		<property name="junior3PreEnglish" type="java.lang.Integer"
+			column="junior_3_pre_english" length="3" />
+
+		<property name="junior3PreHpy" type="java.lang.Integer"
+			column="junior_3_pre_hpy" length="3" />
+
+		<property name="junior3PreChem" type="java.lang.Integer"
+			column="junior_3_pre_chem" length="3" />
+
+		<property name="junior3PrePoli" type="java.lang.Integer"
+			column="junior_3_pre_poli" length="3" />
+
+		<property name="junior3PreHistory" type="java.lang.Integer"
+			column="junior_3_pre_history" length="3" />
+
+
+
+		<property name="testName4" type="java.lang.String" column="test_Name4"
+			length="20" />
+
+		<property name="junior3NextMidChinese" type="java.lang.Integer"
+			column="junior_3_next_mid_chinese" length="3" />
+
+		<property name="junior3NextMidMath" type="java.lang.Integer"
+			column="junior_3_next_mid_math" length="3" />
+
+		<property name="junior3NextMidEnglish" type="java.lang.Integer"
+			column="junior_3_next_mid_english" length="3" />
+
+		<property name="junior3NextMidHpy" type="java.lang.Integer"
+			column="junior_3_next_mid_hpy" length="3" />
+
+		<property name="junior3NextMidChem" type="java.lang.Integer"
+			column="junior_3_next_mid_chem" length="3" />
+
+		<property name="junior3NextMidPoli" type="java.lang.Integer"
+			column="junior_3_next_mid_poli" length="3" />
+
+		<property name="junior3NextMidHistory" type="java.lang.Integer"
+			column="junior_3_next_mid_history" length="3" />
+
+
+		<property name="testName5" type="java.lang.String" column="test_Name5"
+			length="20" />
+		<property name="junior3Next1stShamChinese" type="java.lang.Integer"
+			column="junior_3_next_1st_sham_chinese" length="3" />
+
+		<property name="junior3Next1stShamMath" type="java.lang.Integer"
+			column="junior_3_next_1st_sham_math" length="3" />
+
+		<property name="junior3Next1stShamEnglish" type="java.lang.Integer"
+			column="junior_3_next_1st_sham_english" length="3" />
+
+		<property name="junior3Next1stShamHpy" type="java.lang.Integer"
+			column="junior_3_next_1st_sham_hpy" length="3" />
+
+		<property name="junior3Next1stShamChem" type="java.lang.Integer"
+			column="junior_3_next_1st_sham_chem" length="3" />
+
+		<property name="junior3Next1stShamPoli" type="java.lang.Integer"
+			column="junior_3_next_1st_sham_poli" length="3" />
+
+		<property name="junior3Next1stShamHistory" type="java.lang.Integer"
+			column="junior_3_next_1st_sham_history" length="3" />
+
+		<property name="competitionTimeAdr" type="java.lang.String"
+			column="competition_time_adr" length="200" />
+
+		<property name="competitionName" type="java.lang.String"
+			column="competition_name" length="200" />
+
+		<property name="competitionDegree" type="java.lang.String"
+			column="competition_degree" length="200" />
+
+		<property name="competitionResult" type="java.lang.String"
+			column="competition_result" length="200" />
+
+		<property name="userHobby" type="java.lang.String" column="user_hobby"
+			length="200" />
+
+		<property name="userActTime" type="java.lang.String" column="user_act_time"
+			length="200" />
+
+		<property name="userActPosition" type="java.lang.String"
+			column="user_act_position" length="200" />
+
+		<property name="userActContent" type="java.lang.String"
+			column="user_act_content" length="200" />
+
+		<property name="registerTime" column="uregister_time" length="20" />
+
+		<property name="userPhoto" type="java.io.File" column="user_photo"
+			length="255" />
+
+		<property name="chineseScore" type="java.lang.Integer"
+			column="chinese_score"  length="3" />
+			
+		<property name="mathScore" type="java.lang.Integer" column="math_score"
+			length="3" />
+			
+		<property name="englishScore" type="java.lang.Integer"
+			column="english_score" length="3" />
+			
+		<property name="physicsScore" type="java.lang.Integer"
+			column="physics_score" length="3" />
+			
+		<property name="chemistryScore" type="java.lang.Integer"
+			column="chemistry_score" length="3" />
+			
+		<property name="historyScore" type="java.lang.Integer"
+			column="history_score" length="3" />
+			
+		<property name="politicsScore" type="java.lang.Integer"
+			column="politics_score" length="3" />
+			
+		<property name="sumScore" type="java.lang.Integer"
+			column="sum_score" length="3" />
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,276 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="base" namespace="/" extends="struts-default">
+	   
+	   
+	  
+	
+	
+	
+	
+	
+		<interceptors>
+			<interceptor name="permissionInterceptor"
+				class="com.hanphon.recruit.interceptor.PermissionInterceptor">
+			</interceptor>
+
+			<interceptor-stack name="permissionStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="permissionInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<global-results>
+			<result name="interception">
+				/pages/message.jsp
+			</result>
+			<result name="message">
+				/pages/message.jsp
+			</result>
+		</global-results>
+
+		<action name="getNoticesAction" class="com.hanphon.recruit.action.GetNoticesAction">
+			<result name="success">
+				/index.jsp
+			</result>
+		</action>
+
+		<action name="toRegisterAction" class="com.hanphon.recruit.action.ToRegisterAction">
+			<result name="success" type="redirect">
+				/pages/register.jsp
+			</result>
+		</action>
+
+		<action name="loginAction" class="com.hanphon.recruit.action.LoginAction">
+			<result name="fail">
+				/index.jsp
+			</result>
+			<result name="success" type="redirectAction">
+				toZoneAction
+			</result>
+		</action>
+
+		<action name="toZoneAction" class="com.hanphon.recruit.action.ToZoneAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="studentZone">
+				/WEB-INF/pages/studentZone.jsp
+			</result>
+			<result name="teacherZone">
+				/WEB-INF/pages/teacherZone.jsp
+			</result>
+		</action>
+
+		<action name="applicationGetAction" class="com.hanphon.recruit.action.ApplicationGetAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="success">
+				/WEB-INF/pages/application.jsp
+			</result>
+			<result name="fail">
+				/WEB-INF/pages/application.jsp
+			</result>
+		</action>
+
+		<action name="toCheckedAction" class="com.hanphon.recruit.action.ToCheckedAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="success">
+				/WEB-INF/pages/toChecked.jsp
+			</result>
+			<result name="fail">
+				/WEB-INF/pages/toChecked.jsp
+			</result>
+		</action>
+
+		<action name="toDownloadAppplicationAction"
+			class="com.hanphon.recruit.action.ToDownloadAppplicationAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="success">
+				/WEB-INF/pages/downloadApplication.jsp
+			</result>
+		</action>
+
+		<action name="toScoreAction" class="com.hanphon.recruit.action.ToScoreAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="success">
+				/WEB-INF/pages/socre.jsp
+			</result>
+			<result name="fail">
+				/WEB-INF/pages/socre.jsp
+			</result>
+		</action>
+
+		<action name="messageFillAction" class="com.hanphon.recruit.action.MessageFillAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="success">
+				/WEB-INF/pages/application.jsp
+			</result>
+			<result name="fail">
+				/WEB-INF/pages/application.jsp
+			</result>
+		</action>
+
+		<action name="downloadApplyAction" class="com.hanphon.recruit.action.DownloadApplyAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<!-- result的Type必须为stream -->
+			<result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="contentDisposition">
+					attachment;fileName="${fileName}.pdf"
+    			</param>
+				<param name="bufferSize">2048</param>
+				<param name="inputName">downloadFile</param>
+			</result>
+		</action>
+
+		<action name="downloadAdmissionAction"
+			class="com.hanphon.recruit.action.DownloadAdmissionAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<!-- result的Type必须为stream -->
+			<result name="success" type="stream">
+				<param name="contentType">application/msword</param>
+				<param name="contentDisposition">
+					attachment;fileName="admission.doc"
+    			</param>
+				<param name="inputName">downloadFile</param>
+			</result>
+		</action>
+
+		<!-- 管理员操作 -->
+
+		<action name="toInertNoticeAction" class="com.hanphon.recruit.action.ToInertNoticeAction">
+			<result name="success">
+				/WEB-INF/pages/insertNotice.jsp
+			</result>
+		</action>
+
+		<action name="insertNoticeAction" class="com.hanphon.recruit.action.InsertNoticeAction"
+			method="execute">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+		</action>
+
+		<action name="toStudentMessageAction"
+			class="com.hanphon.recruit.action.ToStudentMessageAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="success">
+				/WEB-INF/pages/studentMessage.jsp
+			</result>
+		</action>
+
+		<action name="showAllStudentAction" class="com.hanphon.recruit.action.ShowAllStudentAction"
+			method="execute">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+		</action>
+
+		<action name="modifyStudentAction" class="com.hanphon.recruit.action.ModifyStudentAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="success">
+				/WEB-INF/pages/modifyStudent.jsp
+			</result>
+		</action>
+
+		<action name="updateMessageAction" class="com.hanphon.recruit.action.UpdateMessageAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="success" type="redirectAction">
+				modifyStudentAction?id=${id}
+			</result>
+			<result name="fail" type="redirectAction">
+				modifyStudentAction?id=${id}
+			</result>
+		</action>
+
+		<action name="deleteStudentMessgeAction"
+			class="com.hanphon.recruit.action.DeleteStudentMessgeAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="success" type="redirectAction">
+				toStudentMessageAction?pageNum=${pageNum}
+			</result>
+			<result name="fail" type="redirectAction">
+				toStudentMessageAction?pageNum=${pageNum}
+			</result>
+		</action>
+
+		<action name="checkingAction" class="com.hanphon.recruit.action.CheckingAction"
+			method="execute">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+		</action>
+
+		<action name="insertScoreAction" class="com.hanphon.recruit.action.InsertScoreAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+			<result name="success">
+				/WEB-INF/pages/insertScore.jsp
+			</result>
+		</action>
+
+		<action name="saveScoreAction" class="com.hanphon.recruit.action.SaveScoreAction"
+			method="saveScoreDomain">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+		</action>
+
+		<action name="searchStudentByNameAction"
+			class="com.hanphon.recruit.action.SearchStudentByNameAction" method="searchStudentByNameAction">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+		</action>
+
+		<action name="noticeAction" class="com.hanphon.recruit.action.NoticeItemAction">
+			<result name="success" type="redirect">
+				/pages/notice.jsp
+			</result>
+		</action>
+
+		<action name="deleteNoticeAction" class="com.hanphon.recruit.action.DeleteNoticeAction"
+			method="delete">
+			<interceptor-ref name="permissionStack"></interceptor-ref>
+		</action>
+
+		<action name="registerAction" class="com.hanphon.recruit.action.RegisterAction"
+			method="execute">
+		</action>
+
+		<action name="logoutAction" class="com.hanphon.recruit.action.LogoutAction">
+			<result name="success" type="redirect">
+				/index.jsp
+			</result>
+		</action>
+		
+		
+		
+		  <action name="userLoginAction" class="smsplatform.action.UserLoginAction">
+			<result name="fail">
+				/index.jsp
+			</result>
+			<result name="success" >
+				/index.jsp
+			</result>
+		</action>
+		 <action name="randPic" class="smsplatform.action.RandomAction">      
+          <result type="stream">      
+            <param name="contentType">image/jpeg</param>      
+            <param name="inputName">inputStream</param>      
+          </result> 
+        </action>
+        <action name="findpassword_*_Action" class="smsplatform.action.findpasswordAction" method = "{1}">
+			<result name="fail">
+				/index.jsp
+			</result>
+			<result name="success" >
+				/WEB-INF/pages/smsRewrite.jsp
+			</result>
+		</action>
+        
+        
+        <!--  
+       <action name="*_*" class="{1}Action" method="{2}">  
+        <action name="Login" class="com.org.momo.action.LoginAction">
+            <result name="success">/success.jsp</result>
+            
+           
+            <result name="error">/fail.jsp</result>
+        </action>
+		
+		
+
+	--></package>
+
+</struts>
+

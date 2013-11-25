@@ -1,0 +1,106 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: white;
+}
+
+ul,li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+html,body {
+	text-align: center;
+}
+
+#container {
+	height: 670px;
+	width: 1000px
+}
+
+#top_info {
+	height: 20px;
+	width: 1000px;
+	background-color: #aef;
+}
+
+#head {
+	height: 120px;
+	width: 1000px
+}
+
+#middle {
+	height: 300px;
+	width: 1000px;
+}
+
+#footer {
+	text-align: center;
+	margin:5px;
+	height: 80px;
+	width: 1000px;
+	font-family: '黑体';
+	font-size: x-small;
+	Color: gray;
+}
+
+#middle_table {
+	height: 300px;
+	width: 1000px
+}
+
+#middle_column_left {
+	height: 300px;
+	width: 150px
+}
+
+#middle_column_right {
+	height: 300px;
+	width: 850px;
+}
+
+#left_zone_teacher {
+	height: 300px;
+	width: 150px;
+	display: none;
+}
+
+#left_zone_teacher li {
+	margin: 5px, 5px, 0, 5px;
+	height: 65px;
+	width: 150px;
+	background-color: #817db8;
+	border: 3px solid white;
+	Color: white;
+	font-weight: bold;
+	font-family: '仿宋';
+	font-size: large;
+	text-align: center;
+}
+
+#left_zone_teacher li.left_zone_teacher_item {
+	background-color: #a7a6f7;
+	border: 3px solid #a7a6f7;
+	Color: white;
+	font-size: large;
+	font-weight: bold;
+}
+
+div.right_zone_teacher {
+	width: 850px;
+	color: black;
+	display: none;
+}
+
+div.right_zone_teacherin {
+	width: 850px;
+	color: black;
+	display: block;
+}
+
+a.operate {
+	color: white;
+}

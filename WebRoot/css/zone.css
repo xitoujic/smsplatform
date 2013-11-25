@@ -1,0 +1,70 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+ul,li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+html,body {
+	text-align: center;
+}
+
+#container {
+	height: 610px;
+	width: 1000px
+}
+
+#top_info {
+	height: 50px;
+	width: 1000px;
+}
+
+#middle {
+	height: 512px;
+	width: 1000px;
+}
+
+#footer {
+	margin: 5px;
+	height: 50px;
+	width: 1000px;
+	font-family: '黑体';
+	font-size: x-small;
+	Color: gray;
+}
+
+#middle_table {
+	height: 512px;
+	width: 1000px;
+}
+
+#middle_column_right {
+	height: 512px;
+	width: 1000px;
+}
+
+div.right_zone_studentin {
+	height: 512px;
+	width: 1000px;
+	color: black;
+	display: block;
+}
+
+div.right_zone_teacher {
+	height: 512px;
+	width: 1000px;
+	color: black;
+	display: none;
+}
+
+div.right_zone_teacherin {
+	width: 1000px;
+	color: black;
+	display: block;
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hanphon.recruit.domain">
+
+	<class name="ScoreDomain" table="student_domain">
+		<id name="userId" type="java.lang.String" column="user_id" length="32">
+			<generator class="uuid" />
+		</id>
+		
+		<property name="chineseScore" type="java.lang.Integer"
+			column="chinese_score"  length="3" />
+			
+		<property name="mathScore" type="java.lang.Integer" column="math_score"
+			length="3" />
+			
+		<property name="englishScore" type="java.lang.Integer"
+			column="english_score" length="3" />
+			
+		<property name="physicsScore" type="java.lang.Integer"
+			column="physics_score" length="3" />
+			
+		<property name="chemistryScore" type="java.lang.Integer"
+			column="chemistry_score" length="3" />
+			
+		<property name="historyScore" type="java.lang.Integer"
+			column="history_score" length="3" />
+			
+		<property name="politicsScore" type="java.lang.Integer"
+			column="politics_score" length="3" />
+			
+		<property name="sumScore" type="java.lang.Integer"
+			column="sum_score" length="3" />
+
+	</class>
+
+</hibernate-mapping>

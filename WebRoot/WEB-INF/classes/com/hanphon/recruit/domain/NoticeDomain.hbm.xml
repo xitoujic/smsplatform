@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hanphon.recruit.domain">
+
+	<class name="NoticeDomain" table="notice_domain">
+		<id name="ndid" type="java.lang.Integer" column="ndid">
+			<generator class="increment" />
+		</id>
+
+		<property name="ndtitle" type="java.lang.String" column="nd_title"
+			length="50" />
+
+		<property name="content" type="java.lang.String" column="content"
+			length="450" />
+
+		<property name="time" column="time" />
+
+	</class>
+
+</hibernate-mapping>

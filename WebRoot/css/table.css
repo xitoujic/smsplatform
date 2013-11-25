@@ -1,0 +1,51 @@
+#application {
+	margin: 0px 0px 20px px;
+	width: 90%;
+	height: 430px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#applicationBlank {
+	margin: 0px 0px 20px 0px;
+	border: 1px solid gray;
+	border-collapse: collapse;
+	width: 90%;
+	border: 1px solid gray;
+}
+
+#applicationBlank td {
+	border: 1px solid gray;
+	font-family: '仿宋';
+	font-size: small;
+	color: white;
+	text-align: center;
+	height: 25px;
+}
+
+#applicationBlank th {
+	font-family: '仿宋';
+	font-size: large;
+	text-align: center;
+	height: 40px;
+	color: white;
+	text-align: center;
+}
+
+#applicationBlank tr input {
+	height: 25px;
+}
+
+#submit {
+	background-color: #007897;
+	width: 150px;
+	text-align:center;
+	height: 40px;
+	font-family: '仿宋';
+	font-weight: bold;
+	font-size: large;
+}
+
+table{
+	border-collapse: collapse;
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.hanphon.recruit.domain">
+
+	<class name="ShowStudentDomain" table="student_domain">
+		<id name="userId" type="java.lang.String" column="user_id" length="32">
+			<generator class="uuid" />
+		</id>
+
+		<property name="userEmail" type="java.lang.String" column="user_email"
+			length="40" not-null="true" unique="true" />
+
+		<property name="onStatus" type="java.lang.String" column="on_status"
+			length="1" />
+
+		<property name="userCategory" type="java.lang.String" column="user_category"
+			length="20" />
+
+		<property name="userName" type="java.lang.String" column="user_name"
+			length="20" />
+
+		<property name="userSex" type="java.lang.String" column="user_sex"
+			length="20" />
+
+		<property name="userBirthday" type="java.lang.String" column="user_birthday"
+			length="20" />
+
+		<property name="userNation" type="java.lang.String" column="user_nation"
+			length="20" />
+
+		<property name="userAuditResult" type="java.lang.String"
+			column="user_audit_result" length="20" />
+
+		<property name="isStudent" type="java.lang.String" column="is_student"
+			length="1" />
+	</class>
+
+</hibernate-mapping>
