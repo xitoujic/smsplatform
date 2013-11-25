@@ -13,11 +13,11 @@ import java.io.StringWriter;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
-import org.apache.velocity.VelocityContext;
+/*import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.apache.velocity.Template;
+import org.apache.velocity.Template;*/
 
 import smsplatform.dao.UserDomainDAO;
 import smsplatform.util.EmailSender;
