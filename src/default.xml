@@ -249,6 +249,14 @@
             <param name="inputName">inputStream</param>      
           </result> 
         </action>
+        
+		 <action name="AddUserAction" class="smsplatform.action.AddUserAction">      
+           <result name="fail"></result>
+           <result name="success">
+                <param name="message">message</param>
+            </result>
+
+         </action>
         <action name="findpassword_*_Action" class="smsplatform.action.findpasswordAction" method = "{1}">
 			<result name="fail">
 				/index.jsp
