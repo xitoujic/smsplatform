@@ -40,11 +40,11 @@ public class UserLoginAction {
 		}
 		System.out.println("name="+userName);
 		
-		
+		/*
 		UserDomainDAO userDomainDAO  = new UserDomainDAO();
 		
 		System.out.println("size:"+userDomainDAO.findAll().size());
-		System.out.println(userDomainDAO.getCount());;
+		System.out.println(userDomainDAO.getCount());;*/
 		
 		
 		

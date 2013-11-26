@@ -1,0 +1,264 @@
+﻿.left .devicePanel {
+    width: 200px;
+    margin-top:5px;
+    margin-left:5px;
+    height: 99%;
+    padding: 0px;
+    background: #ffffff;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+    border-color: #999;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+#dataDeviceTree
+{
+    overflow: auto; 
+    width: 200px;
+    height: 90%;  
+ }
+
+.left .energyPanel {
+    width: 200px;
+    margin-top:7px;
+    margin-left:5px;
+    height: 47%;
+    padding: 0px;
+    overflow-y: auto;
+    overflow-x: auto;
+    background: #ffffff;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+    border-color: #999;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.left .baseInfoheader
+ {
+    width:100%;
+    height:26px;
+ }
+
+.left .baseInfo-span
+ {
+    margin-top:5px;
+    margin-left:10px;
+    float:left;
+    font-family:@微软雅黑;
+    font-weight:bold;
+    font-size:15px;
+ }
+ 
+ #dataManage .dataManagerTop
+ {
+    height:99%;
+    width:100%;
+    margin-top:2px;
+    border:#909090 1px solid;
+    background:#fff;
+    color:#333;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
+    -moz-box-shadow: 2px 2px 5px #909090;/*firefox*/
+    -webkit-box-shadow: 2px 2px 5px #909090;/*safari或chrome*/
+    box-shadow:2px 2px 5px #909090;/*opera或ie9*/
+ }
+ 
+#addCompare
+ {
+    z-index:9999;
+	position:absolute;
+	font-size:10px;
+	color:Red;
+	cursor: pointer;
+	left:50%;
+	bottom:10px;
+	width:38px;
+	height:19px;
+	padding-top:3px;
+	box-sizing: border-box; 
+	-webkit-box-shadow: 0px 1px 7px; 
+	box-shadow: rgba(0, 0, 0, 1) 0px 1px 7px; 
+	-moz-box-shadow:  0px 1px 7px; 
+	text-align:center;
+	-moz-border-radius: 19px 19px 0px 0px;
+	-webkit-border-radius: 19px 19px 0px 0px;
+	border-radius: 19px 19px 0px 0px;
+	-moz-border-radius: 19px 19px 0px 0px;
+	-webkit-border-radius: 19px 19px 0px 0px;
+	border-radius: 19px 19px 0px 0px;
+ }
+ 
+ .ContrastGroup
+{
+    background: #E3E3E3 url("textures/highlight.png") repeat-x 50%;
+    border-bottom: 1px solid #C5C5C5;
+    border-left: 0px #C5C5C5;
+    border-right: 0px #C5C5C5;
+    border-top: 0px #C5C5C5;
+    color: #2E2E2E;
+    text-align: right;
+    display: block;
+    font: normal normal 400 12px/normal Arial, Tahoma, 微软雅黑;
+    height: 20px;
+    min-height: 20px;
+    padding: 2px 0px 8px 0px;
+    left: 10px;
+}
+
+ .ChooseGroup
+{
+    background: #E3E3E3 url("textures/highlight.png") repeat-x 50%;
+    border-bottom: 1px solid #C5C5C5;
+    border-left: 0px #C5C5C5;
+    border-right: 0px #C5C5C5;
+    border-top: 0px #C5C5C5;
+    color: #2E2E2E;
+    text-align: right;
+    display: block;
+    font: normal normal 400 12px/normal Arial, Tahoma, 微软雅黑;
+    height: 20px;
+    min-height: 20px;
+    padding: 2px 0px 8px 0px;
+    left: 10px;
+}
+
+#deviceTitle
+{
+    display:inline;
+    float: left;
+    margin-left:10px;
+    margin-top:5px;
+    text-align:center;
+	text-overflow:ellipsis; white-space:nowrap; overflow:hidden;    
+}
+
+#energyTitle
+{
+    display:inline;
+    float: left;
+    margin-left:10px;
+    margin-top:5px;
+    text-align:center;
+	text-overflow:ellipsis; white-space:nowrap; overflow:hidden;    
+}
+
+.ctDateGroup
+{
+    display:inline;
+}
+
+.cDateGroup
+{
+    display:inline;
+}
+
+.chartText{
+	font-size: 40px;
+	text-align: center;
+	opacity: 0.6;
+	height:100%;
+	vertical-align:middle;
+}
+
+#dataManage .dataManagerBottom
+ {
+    height:49%;
+    width:100%;
+    margin-top:2px;
+    border:#909090 1px solid;
+    background:#fff;
+    color:#333;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
+    -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+    box-shadow:2px 2px 10px #909090;/*opera或ie9*/
+ }
+ 
+ .updateData
+{
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 3px;
+	border-color: red red transparent transparent;
+	margin-top:-23px;
+	overflow: hidden;
+	vertical-align:top;
+	
+}
+
+.toolbarFloat
+{
+    float:right   
+ }
+ 
+ .toolbarButton
+{
+    float:left   
+ }
+ 
+ #addwindow ul
+{
+	list-style: none;
+	margin-left:-30px;
+}
+#editwindow ul
+{
+	list-style: none;
+	margin-left:-30px;
+}
+#addwindow ul li
+{
+	margin-top:10px;
+}
+#editwindow ul li
+{
+	margin-top:10px;
+}
+#addsave
+{
+	float:right;
+}
+#editsave
+{
+	float:right;
+}
+.invalid {
+    color: red;
+}  
+
+#energyDate
+{
+    width:180px;
+    position:relative;  
+}
+
+.loadWaiting
+{
+    z-index:100003;
+    width:100%;
+    height:100%;
+    background-color:#404040;
+    opacity:0.5;
+    position:absolute;
+    display:none;
+}
+
+#waitingImg
+{
+    position: absolute;
+    left: 49%;
+    top: 41%;
+    width: 125px;
+    height: 125px;
+    overflow: hidden;
+    font-size: 0;
+    background: url("../images/waiting.gif");    
+}    

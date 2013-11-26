@@ -1,0 +1,527 @@
+﻿#ammeterPanel
+{
+   height:98%;     
+}
+
+.main .tabdiv #ammeterManager1
+{
+   width:100%;
+   margin-top:2px;
+   border:#909090 1px solid;
+   background:#fff;
+   color:#333;
+   filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
+   -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
+   -webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+   box-shadow:2px 2px 10px #909090;/*opera或ie9*/ 
+}
+
+.main .tabdiv #ammeterNode
+{
+    margin:0 auto; 
+    width: 100%;
+    height: 99%;    
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeTop
+{
+    height:30%;
+    margin-bottom:5px; 
+    border:#909090 1px solid;
+    background-image:url(../images/handmadepaper.png);
+    color:#333;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
+    -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+    box-shadow:2px 2px 10px #909090;/*opera或ie9*/ 
+    overflow-y:scroll;
+    overflow-x:scroll;
+    scrollbar-face-color:#B3DDF7;
+    scrollbar-shadow-color:#B3DDF7;
+    scrollbar-highlight-color:#B3DDF7;
+    scrollbar-3dlight-color:#EBEBE4;
+    scrollbar-darkshadow-color:#EBEBE4;
+    scrollbar-track-color:#F4F4F0;
+    scrollbar-arrow-color:#000000;
+}
+
+#ammeterNodeBaseInfo
+{
+    height: 160px;
+    width: 1095px;    
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeTop .uploadAmmImg
+{
+    height:100px; 
+    width:120px;    
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeTop .ammeterImg
+{
+    height:120px; 
+    width:120px;
+    margin-left:20px;
+    cursor: pointer;
+    float:left;
+    margin-top:25px;
+    background-image: url(../images/pic.png);
+    -moz-background-size: 100% 100%; 
+    -o-background-size: 100% 100%; 
+    -webkit-background-size: 100% 100%; 
+    background-size: 100% 100%; 
+    -moz-border-image: url(./btn.png) 0; 
+    background-repeat:no-repeat\9; 
+    background-image:none\9; 
+    margin-bottom:5px;    
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeTop .ammeterImg .pencil
+{
+    height:15px; 
+    width:15px;
+    cursor: pointer;
+    float:right;
+    margin-top:5px;
+    margin-left:85px;
+    background-image: url(../images/pencil.png);
+    background-color:blue;
+    -moz-background-size: 100% 100%; 
+    -o-background-size: 100% 100%; 
+    -webkit-background-size: 100% 100%; 
+    background-size: 100% 100%; 
+    -moz-border-image: url(./btn.png) 0; 
+    background-repeat:no-repeat\9; 
+    background-image:none\9;   
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeTop .ammeterImg .updateAmmeter
+{
+    height:15px; 
+    width:15px;
+    cursor: pointer;
+    float:left;
+    margin-top:5px;
+    background-image: url(../images/4.png);
+    background-color:blue;
+    -moz-background-size: 100% 100%; 
+    -o-background-size: 100% 100%; 
+    -webkit-background-size: 100% 100%; 
+    background-size: 100% 100%; 
+    -moz-border-image: url(./btn.png) 0; 
+    background-repeat:no-repeat\9; 
+    background-image:none\9;   
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeTop .ammeterName
+{
+    height:60%;
+    width:255px;
+    margin-left:10px;
+    margin-top:20px;
+    float:left;    
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeTop #ammeterNodeInfo
+{
+    height:93%;
+    width:665px;
+    margin-left:10px;
+    margin-top:10px;
+    margin-right:10px;
+    float:right;
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeTop #ammeterButtons
+{
+    width:10%;
+    height:95%;
+    margin-right:10px;
+    -moz-background-size: 100% 100%; 
+    -o-background-size: 100% 100%; 
+    -webkit-background-size: 100% 100%; 
+    background-size: 100% 100%; 
+    -moz-border-image: url(./btn.png) 0; 
+    background-repeat:no-repeat\9; 
+    background-image:none\9;
+    float:right;       
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeTop #ammeterButtons .ammeterProperty
+{
+    width:110px;
+    height:40px;
+    margin-right:10px;
+    background-image: url(../images/property_out.png);
+    -moz-background-size: 100% 100%; 
+    -o-background-size: 100% 100%; 
+    -webkit-background-size: 100% 100%; 
+    background-size: 100% 100%; 
+    -moz-border-image: url(./btn.png) 0; 
+    background-repeat:no-repeat\9; 
+    background-image:none\9;
+    margin-top: 50px;
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeTop #ammeterButtons .ammeterUpdate
+{
+    width:110px;
+    height:40px;
+    margin-right:10px;
+    background-image: url(../images/updateAmm.png);
+    -moz-background-size: 100% 100%; 
+    -o-background-size: 100% 100%; 
+    -webkit-background-size: 100% 100%; 
+    background-size: 100% 100%; 
+    -moz-border-image: url(./btn.png) 0; 
+    background-repeat:no-repeat\9; 
+    background-image:none\9;
+    margin-top: 10px;
+}
+
+.main .tabdiv #ammeterNode #ammeterNodeDown
+{
+    height:69%; 
+    margin-bottom:5px; 
+    border:#909090 1px solid;
+    color:#333;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
+    -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+    box-shadow:2px 2px 10px #909090;/*opera或ie9*/ 
+    overflow:auto;  
+}
+
+.main .tabdiv #ammeterNodeDown .logGridToolbar
+{
+    width:100%;
+    height:37px;  
+ }
+
+#ChooseGroup
+{
+    background: #E3E3E3;
+    border-bottom: 0px solid #C5C5C5;
+    border-left: 0px #C5C5C5;
+    border-right: 0px #C5C5C5;
+    border-top: 0px #C5C5C5;
+    color: #2E2E2E;
+    display: block;
+    text-align: right;
+    min-height: 25px;
+    padding: 0px 0px 0px 0px;
+    left: 10px;
+    top: 0px;
+}
+
+#ExportParam
+{
+    width: 65px;
+}
+
+#cDateGroup
+{
+    right: 90px;
+    width: 365px;
+    float: right;
+}
+
+.Lable1 {
+    font-size: 13px;
+    font-weight: normal;
+    padding-left: 5px;
+    text-align:center;
+    border-right: 1px solid #C1C3C2;
+    background:#F6F6F6;
+    color:black;
+}
+
+.Lable2 {
+    font-size: 13px;
+    font-weight: normal;
+    width:224px;
+    padding-left: 5px;
+    text-align:left;
+    background:#F6F6F6;
+    color:black;
+}
+
+.Lable3 {
+    font-size: 13px;
+    font-weight: normal;
+    padding-left : 5px;
+    text-align:center;
+    background:#F1F1F1;
+    border-right: 1px solid #C1C3C2;
+    color:black;
+}
+
+.Lable4 {
+    font-size: 13px;
+    font-weight: normal;
+    padding-left : 5px;
+    text-align:left;
+    background:#F1F1F1;
+    color:black;
+}
+
+#ammeterNodeInfo .configuration 
+{
+    height: 140px;
+    width: 212px;
+    float:left;
+    margin-top:5px;
+    margin-right:10px;
+    -webkit-transform-origin:170px -20px;
+    -ms-transform-origin:170px -20px;
+    border:solid 1px #C1C3C2;
+    background:#F1F1F1;
+}
+
+#ammeterNodeInfo .configuration_center 
+{
+    height: 140px;
+    width: 212px;
+    float:left;
+    margin-top:5px;
+    margin-right:10px;
+    border:solid 1px #C1C3C2;
+    background:#F1F1F1;
+    -moz-background-size: 100% 100%; 
+    -o-background-size: 100% 100%; 
+    -webkit-background-size: 100% 100%;
+}
+
+#ammeterNodeInfo .configuration_right 
+{
+    height: 140px;
+    width: 212px;
+    float: left;
+    margin-top:5px;
+    -webkit-transform-origin:170px 160px;
+    -ms-transform-origin:170px 160px;
+    border:solid 1px #C1C3C2;
+    background:#F1F1F1;
+}
+
+.configHead
+{
+    font-family:"微软雅黑";
+    width:100%;
+    font-size:17px;
+    float:left;
+    text-align:left;
+    margin-bottom:5px;
+    color:#29975F;
+}
+
+.configSmallHead
+{
+    font-family:"微软雅黑";
+    width:100%;
+    float:left;
+    margin-bottom:2px;
+    text-align:left;
+    font-size:14px;
+    color:#686868;
+}
+
+.CardHead
+{
+    font-family:"微软雅黑";
+    font-size:16px;
+    font-weight:bold;
+    color:#626262;
+    text-align:left;
+    margin-left:12px;
+}
+
+.mainText
+{
+    width:40%;
+    font-family:"微软雅黑";
+    text-align:left;
+    font-size:16px;
+    margin-left:10px;
+    margin-top:1px;
+    float:left;
+    color:gray;
+}
+
+.mainText2
+{
+    width:53%;
+    font-family:"微软雅黑";
+    text-align:left;
+    font-size:16px;
+    margin-top:1px;
+    float:left;
+    color:gray;
+}
+
+.configuration label {
+    display: block;
+    float: none;
+}
+
+.configuration .name {
+    margin-top: -3px;
+    width: 130px;
+}
+.code-sample {
+    clear: right;
+}
+
+.checkboxStyle
+{ 
+    width:30px;
+    margin-top:5px;
+}
+
+.batchSelect
+{
+    width:100%;
+    height:30%;  
+}
+
+.batchSelect2
+{
+    width:100%;
+    height:30%;  
+}
+
+.batchSelectButton
+{
+    width:100%;
+    height:10%;    
+}
+
+.batchSelectLeft
+{
+    width:30%;
+    height:50%;
+    float:left; 
+    margin-top:10px;  
+}
+.batchSelectRight
+{
+    width:68%;
+    height:99%;
+    float:right; 
+}
+
+.SelectButton
+{
+    width:35%;
+    height:70%;
+    margin-top:5px;
+    float:right;    
+}
+
+.fieldLegend
+{
+    display: block;
+    -webkit-padding-start: 2px;
+    -webkit-padding-end: 2px;
+    border: none;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    font: bold 12px tahoma, arial, helvetica, sans-serif;
+    color: #15428b;
+}
+
+.legendInput
+{
+    margin-right: 3px;
+    float: left !important;
+    height: 13px;
+    width: 13px;
+}
+
+.k-fieldset-s
+{
+    padding-bottom: 0 !important;
+    border-width: 1px 1px 1px 1px !important;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.k-fieldset
+{
+    width:150px;
+    height:70px;
+    border-color: #b5b8c8;
+    float:left;
+    overflow: hidden;
+    border: 1px solid;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-left:15px;
+    display: block;    
+    display: block;
+    -webkit-margin-start: 5px;
+    -webkit-margin-end: 5px;
+    -webkit-padding-before: 0.35em;
+    -webkit-padding-start: 0.75em;
+    -webkit-padding-end: 0.75em;
+    -webkit-padding-after: 0.625em;
+    border: 2px groove threedface;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    min-width: -webkit-min-content;
+}
+
+
+.editTr
+{
+    width: 100%;
+    height:28px;
+    margin-top:5px;
+    margin-bottom:10px;
+ }
+
+.editTr .editCell
+{
+    width: 230px;
+    float:left; 
+    margin-left:5px;
+    margin-right:5px;
+ }
+
+.editTr .editCell2
+{
+    width: 230px;
+    float: right; 
+    margin-left:5px;
+ }
+ 
+ #editFixTime
+ {
+    width:148px;    
+ }
+ 
+ #ammeterImgEnlarge
+ {
+    height:302px; 
+    width:302px;
+    margin-left:13px;
+    margin-bottom:5px; 
+    border:#909090 1px solid;
+    color:#333;
+    -moz-background-size: 100% 100%; 
+    -o-background-size: 100% 100%; 
+    -webkit-background-size: 100% 100%; 
+    background-size: 100% 100%; 
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
+    -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+    box-shadow:2px 2px 10px #909090;/*opera或ie9*/ 
+    overflow:auto;  
+ }
+ 
