@@ -1,0 +1,75 @@
+@CHARSET "UTF-8";
+
+*{
+	margin:0;
+	padding:0; 
+	font-family:"宋体";
+	color:#444;
+}
+
+ul,li{
+	list-style: none;
+}
+
+input{
+	width: 150px;
+	height:20px;
+	line-height: 20px;
+}
+
+div#remain{
+	position:absolute;
+	left:500px;
+	top:200px;
+	width:250px;
+	height:50;
+	line-height:50px;
+	text-align:center;
+	font-weight:bold;
+	background-color: #fff;
+	border: 1px solid #1aa8f5;
+}
+
+div#authorgraph{
+	position: absolute;
+	top:450px;
+	left:800px;	
+	border: 1px solid #1aa8f5;
+}
+
+
+/**************************** josn_demo.jsp ****************************/
+div#div_json{
+	position: absolute;
+	top:100px;
+	left:360px;
+	height:150px;
+	font-size:14px;
+	background-color: #fff;
+	border:1px solid #ccc;
+	padding:4px;
+}
+#div_json input.btn{
+	width: 80px;
+	border: 0;
+	background-color: #1aa8f5;
+	color:#fff;
+}
+#div_json h5{
+	border:1px solid #ddd;
+	width:70px;
+	text-align: center;
+}
+#div_json li{
+	float: left;
+	width:150px;
+}
+#div_json li.li_layout{
+	margin-left:50px;
+}
+#div_json li span{
+	text-decoration: underline;
+}
+
+
+

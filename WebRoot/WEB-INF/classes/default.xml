@@ -2,7 +2,7 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="base" namespace="/" extends="struts-default">
+	<package name="base" namespace="/" extends="struts-default,json-default">
 	   
 	   
 	  
@@ -252,10 +252,10 @@
         
 		 <action name="AddUserAction" class="smsplatform.action.AddUserAction">      
            <result name="fail"></result>
-           <result name="success">
-                <param name="message">message</param>
-            </result>
-
+			<!-- 返回json类型数据 -->
+			<result type="json">
+				<param name="root">message<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 --></param>
+			</result>
          </action>
         <action name="findpassword_*_Action" class="smsplatform.action.findpasswordAction" method = "{1}">
 			<result name="fail">
@@ -265,7 +265,13 @@
 				/WEB-INF/pages/smsRewrite.jsp
 			</result>
 		</action>
-        
+        <action name="*JsonAction" method="{1}" class="smsplatform.action.JsonAction">
+			<result name="fail"></result>
+			<!-- 返回json类型数据 -->
+			<result type="json">
+				<param name="root">result<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 --></param>
+			</result>
+		</action>
         
         <!--  
        <action name="*_*" class="{1}Action" method="{2}">  

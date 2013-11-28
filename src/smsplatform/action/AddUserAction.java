@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.apache.poi.hssf.record.formula.functions.Tdist;
 import org.apache.struts2.ServletActionContext;
 
@@ -25,7 +27,7 @@ public class AddUserAction {
 		tBdUser= new TBdUser();
 		tBdUser.setFEmail("1033761115@qq.com");
 		System.out.println("name="+F_UserName);
-		/* Map<String,Object> map = new HashMap<String,Object>();
+		 Map<String,Object> map = new HashMap<String,Object>();
 		
 		             map.put("name", "99");
 		       map.put("age","89");
@@ -35,9 +37,9 @@ public class AddUserAction {
 		
 		             JSONObject json = JSONObject.fromObject(map);//将map对象转换成json类型数据
 		
-		         String    result = json.toString();*/
+		         String    result = json.toString();
 		
-		message = "hello word";
+		message = result;
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml");

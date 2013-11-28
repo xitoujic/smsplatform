@@ -318,7 +318,7 @@
                     dataType: "json",
                     data: { F_UserName: newUserNameString },
                     success: function (res) {
-                    	debugger;
+                    	alert("deef");
                     },
                     error: function (res, text) {
                     }
