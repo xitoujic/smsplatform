@@ -49,32 +49,24 @@ public class AddUserAction {
 		if ("".equals(F_UserName.trim()) || F_UserName == null) {
 			return "fail";
 		}
-<<<<<<< HEAD
-		
-		
-=======
+
 		if ("".equals(F_Password.trim()) || F_Password == null) {
 			return "fail";
 		}
 		if ("".equals(F_type.trim()) || F_type == null) {
 			return "fail";
 		}
->>>>>>> origin/newbranch
 
 		tBdUser= new TBdUser();
 		tBdUser.setFEmail("1033761115@qq.com");
 		System.out.println("name="+F_UserName);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 		System.out.println("password="+F_Password);
 		System.out.println("type="+F_type);
->>>>>>> origin/newbranch
-		 Map<String,Object> map = new HashMap<String,Object>();
-=======
-		
+      Map<String,Object> map = new HashMap<String,Object>();
+/*
 		TBdUserDAO tBdUserDAO = new TBdUserDAO();
-		System.out.println(tBdUserDAO.findAll().size());
+		System.out.println(tBdUserDAO.findAll().size());*/
 		/* Map<String,Object> map = new HashMap<String,Object>();
 >>>>>>> cfd8233ab8a31099fdede8a1366f54262f312de5
 		
