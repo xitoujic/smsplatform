@@ -12,6 +12,7 @@ import org.apache.poi.hssf.record.formula.functions.Tdist;
 import org.apache.struts2.ServletActionContext;
 
 import smsplatform.dao.TBdUser;
+import smsplatform.dao.TBdUserDAO;
 
 public class AddUserAction {
 	public String F_UserName;
@@ -23,11 +24,20 @@ public class AddUserAction {
 		if ("".equals(F_UserName.trim()) || F_UserName == null) {
 			return "fail";
 		}
+		
+		
 
 		tBdUser= new TBdUser();
 		tBdUser.setFEmail("1033761115@qq.com");
 		System.out.println("name="+F_UserName);
+<<<<<<< HEAD
 		 Map<String,Object> map = new HashMap<String,Object>();
+=======
+		
+		TBdUserDAO tBdUserDAO = new TBdUserDAO();
+		System.out.println(tBdUserDAO.findAll().size());
+		/* Map<String,Object> map = new HashMap<String,Object>();
+>>>>>>> cfd8233ab8a31099fdede8a1366f54262f312de5
 		
 		             map.put("name", "99");
 		       map.put("age","89");
