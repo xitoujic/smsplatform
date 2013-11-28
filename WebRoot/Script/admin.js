@@ -310,19 +310,28 @@
 			$("#newSure").jqxButton({ width: '60', height: '25', theme: theme });
             $("#newCancle").jqxButton({ width: '60', height: '25', theme: theme });
             $("#newSure").click(function(){
+            	//debugger;
             	var newUserNameString = $("#newUserName").val();
-            	debugger;
+            	var newPasswordString = $("#newPassword").val();
+            	var newTypeString = $("#newUserRole").val();
             	$.ajax({
-                    type: 'POST',
-                    url: "AddUserAction",
-                    dataType: "json",
-                    data: { F_UserName: newUserNameString },
-                    success: function (res) {
-                    	alert("deef");
-                    },
-                    error: function (res, text) {
-                    }
-                });
+					type:"post",
+					url:"AddUserAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+					data:{//设置数据源
+            			F_UserName: newUserNameString,
+						F_Password: newPasswordString,
+						F_type: newTypeString//这里不要加","  不然会报错，而且根本不会提示错误地方
+					},
+					dataType:"json",//设置需要返回的数据类型
+					success:function(data){
+						debugger;
+						alert("正常，请稍后重试！");
+						
+					},
+					error:function(){
+						alert("系统异常，请稍后重试！");
+					}//这里不要加","
+				});
             });
             $("#newCancle").click(function(){
             	$('#newComUserWindow').jqxWindow('close');

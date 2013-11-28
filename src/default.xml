@@ -248,15 +248,20 @@
             <param name="contentType">image/jpeg</param>      
             <param name="inputName">inputStream</param>      
           </result> 
-        </action>
+        </action><!--
         
 		 <action name="AddUserAction" class="smsplatform.action.AddUserAction">      
+          
+         </action>
+         -->
+		 <action name="AddUserAction" class="smsplatform.action.AddUserAction">      
            <result name="fail"></result>
-			<!-- 返回json类型数据 -->
+			
 			<result type="json">
-				<param name="root">message<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 --></param>
+				<param name="root">result</param>
 			</result>
          </action>
+       
         <action name="findpassword_*_Action" class="smsplatform.action.findpasswordAction" method = "{1}">
 			<result name="fail">
 				/index.jsp

@@ -3,9 +3,10 @@
 	<head>
 		<title>移动短信平台</title>
 		<!-- 库文件引用 -->
+		<script type="text/javascript" src="scripts/jquery-1.8.2.js"></script>
 		<script type="text/javascript" src="jqwidgets/scripts/gettheme.js"></script>
 	    <link rel="stylesheet" href="jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
-	    <script type="text/javascript" src="jqwidgets/scripts/jquery-1.10.2.min.js"></script>
+	    <script type="text/javascript" src="jqwidgets/scripts/jquery-2.0.3.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxcore.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxtabs.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxwindow.js"></script>
