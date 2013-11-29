@@ -19,7 +19,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
 import smsplatform.dao.TBdUser;
-import smsplatform.dao.TBdUserDAO;
+
 
 public class AddUserAction {
 	public String F_UserName;

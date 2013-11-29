@@ -1,6 +1,7 @@
-package smsplatform.dao;
+package smsplatform.dao.impl;
 
 import org.hibernate.Session;
+
 
 
 /**

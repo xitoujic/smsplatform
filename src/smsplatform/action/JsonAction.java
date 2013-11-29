@@ -9,6 +9,9 @@ import net.sf.json.JSONObject;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import smsplatform.dao.TBdUser;
+import smsplatform.dao.impl.UserDao;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class JsonAction extends ActionSupport implements ServletRequestAware{
@@ -34,6 +37,15 @@ public class JsonAction extends ActionSupport implements ServletRequestAware{
 	public String excuteAjax(){
 		
 		try {
+			UserDao userDao = new UserDao();
+			TBdUser tBdUser = new TBdUser();
+			tBdUser.setFSex(true);
+			tBdUser.setFPassword("FPassword");
+			tBdUser.setFUserFullName("FUserFullName");
+			tBdUser.setFUserName("FUserName");
+			tBdUser.setFRole("FRole");
+			userDao.save(tBdUser);
+			System.out.println(userDao.findById(1l).getFUserName());
 			
 			String name = request.getParameter("name");
 			int age = Integer.parseInt(request.getParameter("age")); 

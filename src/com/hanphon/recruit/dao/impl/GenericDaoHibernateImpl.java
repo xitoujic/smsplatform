@@ -70,6 +70,7 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 			session.save(entity);
 			transaction.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		} finally {
 			if (session != null) {
