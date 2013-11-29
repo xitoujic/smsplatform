@@ -31,7 +31,6 @@ public class UserDomainDAO extends BaseHibernateDAO {
 	public void save(UserDomain transientInstance) {
 		log.debug("saving UserDomain instance");
 		try {
-			
 			getSession().save(transientInstance);
 			log.debug("save successful");
 		} catch (RuntimeException re) {
@@ -154,17 +153,5 @@ public class UserDomainDAO extends BaseHibernateDAO {
 			log.error("attach failed", re);
 			throw re;
 		}
-	}
-	public Long getCount(){
-		Long result;
-		log.debug("attaching clean UserDomain instance");
-		try {
-			result = (Long)getSession().createQuery("select count (o) from UserDomain o").uniqueResult();
-			log.debug("attach successful");
-		} catch (RuntimeException re) {
-			log.error("attach failed", re);
-			throw re;
-		}
-		return result;
 	}
 }

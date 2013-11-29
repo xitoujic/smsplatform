@@ -10,7 +10,7 @@ public class TBdMessagenumberId implements java.io.Serializable {
 
 	// Fields
 
-	private Long FUserId;
+	private TBdUser TBdUser;
 	private Long FMessageNumber;
 	private Double FMoney;
 	private Timestamp FUpdateTime;
@@ -22,9 +22,9 @@ public class TBdMessagenumberId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TBdMessagenumberId(Long FUserId, Long FMessageNumber, Double FMoney,
-			Timestamp FUpdateTime) {
-		this.FUserId = FUserId;
+	public TBdMessagenumberId(TBdUser TBdUser, Long FMessageNumber,
+			Double FMoney, Timestamp FUpdateTime) {
+		this.TBdUser = TBdUser;
 		this.FMessageNumber = FMessageNumber;
 		this.FMoney = FMoney;
 		this.FUpdateTime = FUpdateTime;
@@ -32,12 +32,12 @@ public class TBdMessagenumberId implements java.io.Serializable {
 
 	// Property accessors
 
-	public Long getFUserId() {
-		return this.FUserId;
+	public TBdUser getTBdUser() {
+		return this.TBdUser;
 	}
 
-	public void setFUserId(Long FUserId) {
-		this.FUserId = FUserId;
+	public void setTBdUser(TBdUser TBdUser) {
+		this.TBdUser = TBdUser;
 	}
 
 	public Long getFMessageNumber() {
@@ -73,10 +73,10 @@ public class TBdMessagenumberId implements java.io.Serializable {
 			return false;
 		TBdMessagenumberId castOther = (TBdMessagenumberId) other;
 
-		return ((this.getFUserId() == castOther.getFUserId()) || (this
-				.getFUserId() != null
-				&& castOther.getFUserId() != null && this.getFUserId().equals(
-				castOther.getFUserId())))
+		return ((this.getTBdUser() == castOther.getTBdUser()) || (this
+				.getTBdUser() != null
+				&& castOther.getTBdUser() != null && this.getTBdUser().equals(
+				castOther.getTBdUser())))
 				&& ((this.getFMessageNumber() == castOther.getFMessageNumber()) || (this
 						.getFMessageNumber() != null
 						&& castOther.getFMessageNumber() != null && this
@@ -96,7 +96,7 @@ public class TBdMessagenumberId implements java.io.Serializable {
 		int result = 17;
 
 		result = 37 * result
-				+ (getFUserId() == null ? 0 : this.getFUserId().hashCode());
+				+ (getTBdUser() == null ? 0 : this.getTBdUser().hashCode());
 		result = 37
 				* result
 				+ (getFMessageNumber() == null ? 0 : this.getFMessageNumber()

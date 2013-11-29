@@ -1,20 +1,20 @@
 #MyEclipse Hibernate Properties
-#Mon Nov 25 20:28:14 CST 2013
+#Fri Nov 29 13:48:10 CST 2013
 sessionFactoryName=smsplatform.dao.HibernateSessionFactory
-genBasicCompId=true
+genBasicCompId=false
 profile=
 daoSFId=
 version=3.3
 jndiPath=
-detectM2M=true
+detectM2M=false
 reStrategyClass=
-detectO2O=true
+detectO2O=false
 springDaoFile=
 useJavaTypes=true
 keyGenerator=
 libInstallFolder=WebRoot/WEB-INF/lib
 addLibs2Project=true
-genVersionTag=true
+genVersionTag=false
 sessionFactoryId=
 basePersistenceClass=
 genAnnotations=false

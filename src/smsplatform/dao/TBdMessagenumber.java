@@ -9,7 +9,6 @@ public class TBdMessagenumber implements java.io.Serializable {
 	// Fields
 
 	private TBdMessagenumberId id;
-	private TBdUser TBdUser;
 
 	// Constructors
 
@@ -18,9 +17,8 @@ public class TBdMessagenumber implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TBdMessagenumber(TBdMessagenumberId id, TBdUser TBdUser) {
+	public TBdMessagenumber(TBdMessagenumberId id) {
 		this.id = id;
-		this.TBdUser = TBdUser;
 	}
 
 	// Property accessors
@@ -31,14 +29,6 @@ public class TBdMessagenumber implements java.io.Serializable {
 
 	public void setId(TBdMessagenumberId id) {
 		this.id = id;
-	}
-
-	public TBdUser getTBdUser() {
-		return this.TBdUser;
-	}
-
-	public void setTBdUser(TBdUser TBdUser) {
-		this.TBdUser = TBdUser;
 	}
 
 }

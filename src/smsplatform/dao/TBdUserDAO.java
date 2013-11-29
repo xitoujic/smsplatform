@@ -171,7 +171,6 @@ public class TBdUserDAO extends BaseHibernateDAO {
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
-			System.out.println(re);
 			throw re;
 		}
 	}

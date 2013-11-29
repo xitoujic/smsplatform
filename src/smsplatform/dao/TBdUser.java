@@ -27,8 +27,8 @@ public class TBdUser implements java.io.Serializable {
 	private Boolean FRight;
 	private Integer FDeductScale;
 	private String FEmail;
-	private Set TBdMessagenumbers = new HashSet(0);
 	private Set TBdMessagesendgroups = new HashSet(0);
+	private Set TBdMessagenumbers = new HashSet(0);
 	private Set TBdRechargeandconsumptions = new HashSet(0);
 
 	// Constructors
@@ -50,7 +50,7 @@ public class TBdUser implements java.io.Serializable {
 			String FCompanyType, Boolean FCheckType, String FSignature,
 			String FSignatureFlag, Boolean FUrgent, Boolean FUpdateStatus,
 			Boolean FRight, Integer FDeductScale, String FEmail,
-			Set TBdMessagenumbers, Set TBdMessagesendgroups,
+			Set TBdMessagesendgroups, Set TBdMessagenumbers,
 			Set TBdRechargeandconsumptions) {
 		this.FUserName = FUserName;
 		this.FUserFullName = FUserFullName;
@@ -67,8 +67,8 @@ public class TBdUser implements java.io.Serializable {
 		this.FRight = FRight;
 		this.FDeductScale = FDeductScale;
 		this.FEmail = FEmail;
-		this.TBdMessagenumbers = TBdMessagenumbers;
 		this.TBdMessagesendgroups = TBdMessagesendgroups;
+		this.TBdMessagenumbers = TBdMessagenumbers;
 		this.TBdRechargeandconsumptions = TBdRechargeandconsumptions;
 	}
 
@@ -202,20 +202,20 @@ public class TBdUser implements java.io.Serializable {
 		this.FEmail = FEmail;
 	}
 
-	public Set getTBdMessagenumbers() {
-		return this.TBdMessagenumbers;
-	}
-
-	public void setTBdMessagenumbers(Set TBdMessagenumbers) {
-		this.TBdMessagenumbers = TBdMessagenumbers;
-	}
-
 	public Set getTBdMessagesendgroups() {
 		return this.TBdMessagesendgroups;
 	}
 
 	public void setTBdMessagesendgroups(Set TBdMessagesendgroups) {
 		this.TBdMessagesendgroups = TBdMessagesendgroups;
+	}
+
+	public Set getTBdMessagenumbers() {
+		return this.TBdMessagenumbers;
+	}
+
+	public void setTBdMessagenumbers(Set TBdMessagenumbers) {
+		this.TBdMessagenumbers = TBdMessagenumbers;
 	}
 
 	public Set getTBdRechargeandconsumptions() {

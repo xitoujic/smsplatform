@@ -34,19 +34,19 @@ public class JsonAction extends ActionSupport implements ServletRequestAware{
 	public String excuteAjax(){
 		
 		try {
-			//��ȡ���
+			
 			String name = request.getParameter("name");
 			int age = Integer.parseInt(request.getParameter("age")); 
 			String position = request.getParameter("position");
-			
-			//����ݴ洢��map���ת����json������ݣ�Ҳ�����Լ��ֶ�����json�������
+		
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("name", name);
 			map.put("age",age);
 			map.put("position", position);
 			
-			JSONObject json = JSONObject.fromObject(map);//��map����ת����json�������
-			result = json.toString();//��result��ֵ�����ݸ�ҳ��
+			JSONObject json = JSONObject.fromObject(map);
+			result = json.toString();
+			System.out.println("ok");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

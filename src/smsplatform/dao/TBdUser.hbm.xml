@@ -55,17 +55,17 @@
         <property name="FEmail" type="java.lang.String">
             <column name="F_Email" length="50" />
         </property>
-        <set name="TBdMessagenumbers" inverse="true">
-            <key>
-                <column name="F_UserID" not-null="true" />
-            </key>
-            <one-to-many class="smsplatform.dao.TBdMessagenumber" />
-        </set>
         <set name="TBdMessagesendgroups" inverse="true">
             <key>
                 <column name="F_UserID" not-null="true" />
             </key>
             <one-to-many class="smsplatform.dao.TBdMessagesendgroup" />
+        </set>
+        <set name="TBdMessagenumbers" inverse="true">
+            <key>
+                <column name="F_UserID" not-null="true" />
+            </key>
+            <one-to-many class="smsplatform.dao.TBdMessagenumber" />
         </set>
         <set name="TBdRechargeandconsumptions" inverse="true">
             <key>
