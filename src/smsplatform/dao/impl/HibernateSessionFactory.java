@@ -1,4 +1,4 @@
-package smsplatform.dao;
+package smsplatform.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
