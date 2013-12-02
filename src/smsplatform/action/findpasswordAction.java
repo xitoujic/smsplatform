@@ -19,7 +19,7 @@ import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.Template;*/
 
-import smsplatform.dao.UserDomainDAO;
+
 import smsplatform.util.EmailSender;
 
 import com.hanphon.recruit.dao.RegisterMessageDao;

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
-import smsplatform.dao.UserDomainDAO;
+
 
 import com.hanphon.recruit.dao.RegisterMessageDao;
 import com.hanphon.recruit.dao.impl.RegisterMessageDaoHibernateImpl;

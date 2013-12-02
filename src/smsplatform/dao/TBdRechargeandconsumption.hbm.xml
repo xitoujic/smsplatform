@@ -14,13 +14,13 @@
             <column name="F_UserID" not-null="true" />
         </many-to-one>
         <property name="FBeforeRechargeMoney" type="java.lang.Double">
-            <column name="F_BeforeRechargeMoney" precision="12" />
+            <column name="F_BeforeRechargeMoney" precision="22" scale="0" />
         </property>
         <property name="FRechargeMoney" type="java.lang.Double">
-            <column name="F_RechargeMoney" precision="12" />
+            <column name="F_RechargeMoney" precision="22" scale="0" />
         </property>
         <property name="FAfterRechargeMoney" type="java.lang.Double">
-            <column name="F_AfterRechargeMoney" precision="12" />
+            <column name="F_AfterRechargeMoney" precision="22" scale="0" />
         </property>
         <property name="FBeforeRechargeNum" type="java.lang.Long">
             <column name="F_BeforeRechargeNum" />
@@ -32,13 +32,13 @@
             <column name="F_AfterRechargeNum" />
         </property>
         <property name="FBeforeConsumpteMoney" type="java.lang.Double">
-            <column name="F_BeforeConsumpteMoney" precision="12" />
+            <column name="F_BeforeConsumpteMoney" precision="22" scale="0" />
         </property>
         <property name="FConsumpteMoney" type="java.lang.Double">
-            <column name="F_ConsumpteMoney" precision="12" />
+            <column name="F_ConsumpteMoney" precision="22" scale="0" />
         </property>
         <property name="FAfterConsumpteMoney" type="java.lang.Double">
-            <column name="F_AfterConsumpteMoney" precision="12" />
+            <column name="F_AfterConsumpteMoney" precision="22" scale="0" />
         </property>
         <property name="FBeforeConsumpteNum" type="java.lang.Long">
             <column name="F_BeforeConsumpteNum" />

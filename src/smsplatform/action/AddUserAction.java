@@ -19,7 +19,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
 import smsplatform.dao.TBdUser;
-import smsplatform.dao.TBdUserDAO;
+
 
 public class AddUserAction {
 	public String F_UserName;
@@ -57,12 +57,14 @@ public class AddUserAction {
 			return "fail";
 		}
 
+
 		tBdUser= new TBdUser();
 		tBdUser.setFEmail("1033761115@qq.com");
 		System.out.println("name="+F_UserName);
 
 		System.out.println("password="+F_Password);
 		System.out.println("type="+F_type);
+<<<<<<< HEAD
 		TBdUser transientInstance = new TBdUser();
 		transientInstance.setFUserName(F_UserName.trim());
 		transientInstance.setFPassword(F_Password.trim());
@@ -78,6 +80,12 @@ public class AddUserAction {
 		
         Map<String,Object> map = new HashMap<String,Object>();
 /*
+=======
+
+		 Map<String,Object> map = new HashMap<String,Object>();
+
+		/*
+>>>>>>> bad950b492c8140d9290d31aa86e738ef23edec0
 		TBdUserDAO tBdUserDAO = new TBdUserDAO();
 		System.out.println(tBdUserDAO.findAll().size());*/
 		/* Map<String,Object> map = new HashMap<String,Object>();
