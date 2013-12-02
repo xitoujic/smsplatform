@@ -46,6 +46,7 @@ public class TBdUserDAO extends BaseHibernateDAO {
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);
+			re.printStackTrace();
 			throw re;
 		}
 	}

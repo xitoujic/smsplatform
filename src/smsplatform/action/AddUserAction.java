@@ -63,7 +63,20 @@ public class AddUserAction {
 
 		System.out.println("password="+F_Password);
 		System.out.println("type="+F_type);
-      Map<String,Object> map = new HashMap<String,Object>();
+		TBdUser transientInstance = new TBdUser();
+		transientInstance.setFUserName(F_UserName.trim());
+		transientInstance.setFPassword(F_Password.trim());
+		transientInstance.setFRole("1");
+		
+		
+		
+		TBdUserDAO tBdUserDAO =  new TBdUserDAO();
+		
+		tBdUserDAO.save(transientInstance);
+		
+		System.out.println(tBdUserDAO.findAll().size()+"_____size");
+		
+        Map<String,Object> map = new HashMap<String,Object>();
 /*
 		TBdUserDAO tBdUserDAO = new TBdUserDAO();
 		System.out.println(tBdUserDAO.findAll().size());*/
