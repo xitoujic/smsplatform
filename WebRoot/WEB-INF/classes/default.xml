@@ -269,6 +269,9 @@
 			<result name="success" >
 				/WEB-INF/pages/smsRewrite.jsp
 			</result>
+			<result name="gender" >
+				/WEB-INF/pages/gender.jsp
+			</result>
 		</action>
         <action name="*JsonAction" method="{1}" class="smsplatform.action.JsonAction">
 			<result name="fail"></result>
