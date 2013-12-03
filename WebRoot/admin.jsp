@@ -123,7 +123,7 @@
                 					<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">用户名:</span>
                 				</div>
                 				<div class="columnRight">
-                					<input id="newUserName" type="text" style="width:100%;height:28px;float:left;"></input>
+                					<input id="newUserName" type="text" maxlength="32" style="width:100%;height:28px;float:left;"></input>
                 				</div>
                 			</div>
                 			<div class="newUserColumn">
@@ -131,7 +131,7 @@
                 					<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">初始密码:</span>
                 				</div>
                 				<div class="columnRight">
-                					<input id="newPassword" type="password" style="width:100%;height:28px;float:left;"></input>
+                					<input id="newPassword" type="password" maxlength="32" style="width:100%;height:28px;float:left;"></input>
                 				</div>
                 			</div>
                 			<div class="newUserColumn">
@@ -139,7 +139,7 @@
                 					<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">用户类型:</span>
                 				</div>
                 				<div class="columnRight">
-                					<input id="newUserRole" type="password" style="width:100%;height:28px;float:left;"></input>
+                					<div id="newUserRole"></div>
                 				</div>
                 			</div>
                 			<div class="newUserColumn">

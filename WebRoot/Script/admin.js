@@ -309,28 +309,29 @@
 		$("#addCompanyUser").click(function(){
 			$("#newSure").jqxButton({ width: '60', height: '25', theme: theme });
             $("#newCancle").jqxButton({ width: '60', height: '25', theme: theme });
+            
             $("#newSure").click(function(){
-            	//debugger;
             	var newUserNameString = $("#newUserName").val();
             	var newPasswordString = $("#newPassword").val();
-            	var newTypeString = $("#newUserRole").val();
+            	var newTypeString = $('#newUserRole')[0].textContent;
+            	debugger;
             	$.ajax({
 					type:"post",
 					url:"AddUserAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
 					data:{//设置数据源
             			F_UserName: newUserNameString,
 						F_Password: newPasswordString,
-						F_type: newTypeString//这里不要加","  不然会报错，而且根本不会提示错误地方
+						F_type: newTypeString
 					},
 					dataType:"json",//设置需要返回的数据类型
 					success:function(data){
 						debugger;
+						var result = eval("("+data+")");
 						alert("正常，请稍后重试！");
-						
 					},
 					error:function(){
 						alert("系统异常，请稍后重试！");
-					}//这里不要加","
+					}
 				});
             });
             $("#newCancle").click(function(){
@@ -348,6 +349,11 @@
                 }
             });
 			$('#newComUserWindow').jqxWindow('open');
+			var userType = [
+                                     "管理员",
+                                     "普通用户"
+                                     ];
+            $("#newUserRole").jqxDropDownList({ source: userType, selectedIndex: 0, width: '240', height: '28',dropDownHeight:60, theme: theme });
 		});
 		//集团用户配置
 		$("#companyConfig").click(function(){
@@ -455,6 +461,27 @@
 	            	}
 	            });
 	});
+	
+	
+	//日志信息
+	$("#userRechargeLog").click(function(){
+		debugger;
+		$.ajax({
+			type:"get",
+			url:"LoglogAction",
+			dataType:"json",//设置需要返回的数据类型
+			success:function(data){
+				debugger;
+				var result = eval("("+data+")");
+				alert("正常，请稍后重试！");
+			},
+			error:function(){
+				alert("系统异常，请稍后重试！");
+			}
+		});
+	});
+	
+	
 	//个人信息
 	$("#personInfoDetails").click(function(){
 		var personInfohtml = '<div class="personeInfoDiv">'
