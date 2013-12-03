@@ -6,6 +6,7 @@ import smsplatform.dao.Gender;
 import smsplatform.dao.TBdUser;
 
 import smsplatform.dao.impl.UserDao;
+import smsplatform.service.UserService;
 
 public class teast {
 	@Test
@@ -17,13 +18,20 @@ public class teast {
 		
 		UserDao userDao = new UserDao();
 		TBdUser tBdUser = new TBdUser();
-		tBdUser.setFSex(true);
+	//	tBdUser.setFSex(true);
 		tBdUser.setFPassword("FPassword");
 		tBdUser.setFUserFullName("FUserFullName");
 		userDao.save(tBdUser);
 		TBdUser tBdUser2 =userDao.findById(1l);
 		System.out.println(tBdUser2.getFUserFullName());
 		
+	}
+	
+	@Test 
+	 public void t(){
+		UserService userService = new UserService();
+		int i = userService.getScrollData().size();
+		System.out.println(i+1);
 	}
 
 }

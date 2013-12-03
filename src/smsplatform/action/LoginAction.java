@@ -76,10 +76,11 @@ public class LoginAction {
 */
 		//	ActionContext.getContext().getSession().put("uid", retValString[2]);
 			ActionContext.getContext().getSession().put("password", password);
-		//	ActionContext.getContext().getSession().put("isLogin", "yes");
+			ActionContext.getContext().getSession().put("isLogin", "yes");
 			ActionContext.getContext().getSession().put("userName", userName);
 			ActionContext.getContext().getSession().put("uid", 1);
 			ActionContext.getContext().getSession().put("isAdmin", "N");
+		
 			return "success";
 		
 

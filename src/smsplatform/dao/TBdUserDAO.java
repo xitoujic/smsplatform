@@ -1,28 +1,15 @@
 package smsplatform.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-<<<<<<< HEAD
 import smsplatform.dao.impl.BaseHibernateDAO;
-
-/**
- 	* A data access object (DAO) providing persistence and search support for TBdUser entities.
- 			* Transaction control of the save(), update() and delete() operations 
-		can directly support Spring container-managed transactions or they can be augmented	to handle user-managed Spring transactions. 
-		Each of these methods provides additional information for how to configure it for the desired type of transaction control. 	
-	 * @see smsplatform.dao.TBdUser
-  * @author MyEclipse Persistence Tools 
- */
-
-public class TBdUserDAO extends BaseHibernateDAO  {
-	     private static final Logger log = LoggerFactory.getLogger(TBdUserDAO.class);
-		//property constants
-=======
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -39,7 +26,6 @@ public class TBdUserDAO extends BaseHibernateDAO  {
 public class TBdUserDAO extends BaseHibernateDAO {
 	private static final Logger log = LoggerFactory.getLogger(TBdUserDAO.class);
 	// property constants
->>>>>>> e7336afd87a13d26b3f175ef78e2d41288cc42a7
 	public static final String _FUSER_NAME = "FUserName";
 	public static final String _FUSER_FULL_NAME = "FUserFullName";
 	public static final String _FPASSWORD = "FPassword";
@@ -55,184 +41,31 @@ public class TBdUserDAO extends BaseHibernateDAO {
 	public static final String _FRIGHT = "FRight";
 	public static final String _FDEDUCT_SCALE = "FDeductScale";
 	public static final String _FEMAIL = "FEmail";
+	public static final String _FMESSAGE_NUMBER = "FMessageNumber";
+	public static final String _FMONEY = "FMoney";
 
-<<<<<<< HEAD
-
-
-    
-    public void save(TBdUser transientInstance) {
-        log.debug("saving TBdUser instance");
-        try {
-            getSession().save(transientInstance);
-            log.debug("save successful");
-        } catch (RuntimeException re) {
-            log.error("save failed", re);
-            throw re;
-        }
-    }
-    
-	public void delete(TBdUser persistentInstance) {
-        log.debug("deleting TBdUser instance");
-        try {
-            getSession().delete(persistentInstance);
-            log.debug("delete successful");
-        } catch (RuntimeException re) {
-            log.error("delete failed", re);
-            throw re;
-        }
-    }
-    
-    public TBdUser findById( java.lang.Long id) {
-        log.debug("getting TBdUser instance with id: " + id);
-        try {
-            TBdUser instance = (TBdUser) getSession()
-                    .get("smsplatform.dao.TBdUser", id);
-            return instance;
-        } catch (RuntimeException re) {
-            log.error("get failed", re);
-            throw re;
-        }
-    }
-    
-    
-    public List findByExample(TBdUser instance) {
-        log.debug("finding TBdUser instance by example");
-        try {
-            List results = getSession()
-                    .createCriteria("smsplatform.dao.TBdUser")
-                    .add(Example.create(instance))
-            .list();
-            log.debug("find by example successful, result size: " + results.size());
-            return results;
-        } catch (RuntimeException re) {
-            log.error("find by example failed", re);
-            throw re;
-        }
-    }    
-    
-    public List findByProperty(String propertyName, Object value) {
-      log.debug("finding TBdUser instance with property: " + propertyName
-            + ", value: " + value);
-      try {
-         String queryString = "from TBdUser as model where model." 
-         						+ propertyName + "= ?";
-         Query queryObject = getSession().createQuery(queryString);
-		 queryObject.setParameter(0, value);
-		 return queryObject.list();
-      } catch (RuntimeException re) {
-         log.error("find by property name failed", re);
-         throw re;
-      }
-	}
-
-	public List findByFUserName(Object FUserName
-	) {
-		return findByProperty(_FUSER_NAME, FUserName
-		);
-	}
-	
-	public List findByFUserFullName(Object FUserFullName
-	) {
-		return findByProperty(_FUSER_FULL_NAME, FUserFullName
-		);
-	}
-	
-	public List findByFPassword(Object FPassword
-	) {
-		return findByProperty(_FPASSWORD, FPassword
-		);
-	}
-	
-	public List findByFPhoneNumber(Object FPhoneNumber
-	) {
-		return findByProperty(_FPHONE_NUMBER, FPhoneNumber
-		);
-	}
-	
-	public List findByFSex(Object FSex
-	) {
-		return findByProperty(_FSEX, FSex
-		);
-	}
-	
-	public List findByFRole(Object FRole
-	) {
-		return findByProperty(_FROLE, FRole
-		);
-	}
-	
-	public List findByFCompanyType(Object FCompanyType
-	) {
-		return findByProperty(_FCOMPANY_TYPE, FCompanyType
-		);
-	}
-	
-	public List findByFCheckType(Object FCheckType
-	) {
-		return findByProperty(_FCHECK_TYPE, FCheckType
-		);
-	}
-	
-	public List findByFSignature(Object FSignature
-	) {
-		return findByProperty(_FSIGNATURE, FSignature
-		);
-	}
-	
-	public List findByFSignatureFlag(Object FSignatureFlag
-	) {
-		return findByProperty(_FSIGNATURE_FLAG, FSignatureFlag
-		);
-	}
-	
-	public List findByFUrgent(Object FUrgent
-	) {
-		return findByProperty(_FURGENT, FUrgent
-		);
-	}
-	
-	public List findByFUpdateStatus(Object FUpdateStatus
-	) {
-		return findByProperty(_FUPDATE_STATUS, FUpdateStatus
-		);
-	}
-	
-	public List findByFRight(Object FRight
-	) {
-		return findByProperty(_FRIGHT, FRight
-		);
-	}
-	
-	public List findByFDeductScale(Object FDeductScale
-	) {
-		return findByProperty(_FDEDUCT_SCALE, FDeductScale
-		);
-	}
-	
-	public List findByFEmail(Object FEmail
-	) {
-		return findByProperty(_FEMAIL, FEmail
-		);
-	}
-	
-=======
 	public void save(TBdUser transientInstance) {
 		log.debug("saving TBdUser instance");
+		Transaction transaction = null;
 		try {
+			transaction = getSession().beginTransaction();
 			getSession().save(transientInstance);
+			transaction.commit();
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);
-			re.printStackTrace();
 			throw re;
 		}
 	}
 
 	public void delete(TBdUser persistentInstance) {
 		log.debug("deleting TBdUser instance");
+		Transaction transaction = null;
 		try {
+			transaction = getSession().beginTransaction();
 			getSession().delete(persistentInstance);
 			log.debug("delete successful");
+			transaction.commit();
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
 			throw re;
@@ -340,61 +173,23 @@ public class TBdUserDAO extends BaseHibernateDAO {
 	public List findByFEmail(Object FEmail) {
 		return findByProperty(_FEMAIL, FEmail);
 	}
->>>>>>> e7336afd87a13d26b3f175ef78e2d41288cc42a7
+
+	public List findByFMessageNumber(Object FMessageNumber) {
+		return findByProperty(_FMESSAGE_NUMBER, FMessageNumber);
+	}
+
+	public List findByFMoney(Object FMoney) {
+		return findByProperty(_FMONEY, FMoney);
+	}
 
 	public List findAll() {
 		log.debug("finding all TBdUser instances");
 		try {
 			String queryString = "from TBdUser";
-<<<<<<< HEAD
-	         Query queryObject = getSession().createQuery(queryString);
-			 return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find all failed", re);
-			throw re;
-		}
-	}
-	
-    public TBdUser merge(TBdUser detachedInstance) {
-        log.debug("merging TBdUser instance");
-        try {
-            TBdUser result = (TBdUser) getSession()
-                    .merge(detachedInstance);
-            log.debug("merge successful");
-            return result;
-        } catch (RuntimeException re) {
-            log.error("merge failed", re);
-            throw re;
-        }
-    }
-
-    public void attachDirty(TBdUser instance) {
-        log.debug("attaching dirty TBdUser instance");
-        try {
-            getSession().saveOrUpdate(instance);
-            log.debug("attach successful");
-        } catch (RuntimeException re) {
-            log.error("attach failed", re);
-            throw re;
-        }
-    }
-    
-    public void attachClean(TBdUser instance) {
-        log.debug("attaching clean TBdUser instance");
-        try {
-            getSession().lock(instance, LockMode.NONE);
-            log.debug("attach successful");
-        } catch (RuntimeException re) {
-            log.error("attach failed", re);
-            throw re;
-        }
-    }
-=======
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
-			System.out.println(re);
 			throw re;
 		}
 	}
@@ -432,5 +227,33 @@ public class TBdUserDAO extends BaseHibernateDAO {
 			throw re;
 		}
 	}
->>>>>>> e7336afd87a13d26b3f175ef78e2d41288cc42a7
+	
+	  @SuppressWarnings("unchecked")
+	public List<TBdUser> queryByPage(int pageSize, int pageNow){
+		  log.debug("finding By page TBdUser instances");
+			try {
+				String queryString = "from TBdUser";
+				Query queryObject = getSession().createQuery(queryString);
+				queryObject.setFirstResult(pageSize * (pageNow - 1));
+				queryObject.setMaxResults(pageSize);
+				return queryObject.list();
+			} catch (RuntimeException re) {
+				log.error("find By page failed", re);
+				throw re;
+			}
+	  }
+	  
+	  public int totalcount(){
+		  log.debug("finding By page TBdUser instances");
+			try {
+				String queryString = "select count(*) from TBdUser";
+				Query queryObject = getSession().createQuery(queryString);
+				
+				return ((Long) queryObject.iterate().next()).intValue();
+			} catch (RuntimeException re) {
+				log.error("find By page failed", re);
+				throw re;
+			}
+		
+	  }
 }

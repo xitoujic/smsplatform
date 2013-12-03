@@ -19,6 +19,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
 import smsplatform.dao.TBdUser;
+import smsplatform.dao.TBdUserDAO;
 
 
 public class AddUserAction {
@@ -64,11 +65,11 @@ public class AddUserAction {
 
 		System.out.println("password="+F_Password);
 		System.out.println("type="+F_type);
-<<<<<<< HEAD
+
 		TBdUser transientInstance = new TBdUser();
 		transientInstance.setFUserName(F_UserName.trim());
 		transientInstance.setFPassword(F_Password.trim());
-		transientInstance.setFRole("1");
+		transientInstance.setFRole(F_type);
 		
 		
 		
@@ -76,7 +77,7 @@ public class AddUserAction {
 		
 		tBdUserDAO.save(transientInstance);
 		
-		System.out.println(tBdUserDAO.findAll().size()+"_____size");
+		System.out.println(tBdUserDAO.findAll().size()+"_____size__"+tBdUserDAO.totalcount());
 		
         Map<String,Object> map = new HashMap<String,Object>();
 /*

@@ -1,0 +1,55 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="sms" namespace="/" extends="struts-default,json-default">
+	   
+	   
+	  
+	
+	
+	
+	
+	
+		<interceptors>
+			<interceptor name="InfoIsAllInterceptor"
+				class="smsplatform.interceptor.InfoIsAllInterceptor">
+			</interceptor>
+
+			<interceptor-stack name="InfoIsAllStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="InfoIsAllInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<global-results>
+			<result name="writeinfo">
+				/login.jsp
+			</result>
+			
+		</global-results>
+		<action name="tosmsZoneAction" class="smsplatform.action.ToZoneAction">
+	        <interceptor-ref name="InfoIsAllStack"></interceptor-ref>
+			<result name="isAdminZone">
+				/admin.jsp
+			</result>
+			<result name="notAdminZone">
+				/admin.jsp
+			</result>
+			
+		</action>
+	  
+		<action name="LoginAction" class="smsplatform.action.LoginAction">
+			<result name="fail">
+				/index.jsp
+			</result>
+			<result name="success" type="redirectAction">
+				tosmsZoneAction
+			</result>
+		</action>
+		
+      
+	
+   </package>
+</struts>
+

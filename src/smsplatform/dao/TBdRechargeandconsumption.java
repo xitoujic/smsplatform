@@ -2,203 +2,199 @@ package smsplatform.dao;
 
 import java.sql.Timestamp;
 
-
 /**
  * TBdRechargeandconsumption entity. @author MyEclipse Persistence Tools
  */
 
-public class TBdRechargeandconsumption  implements java.io.Serializable {
+public class TBdRechargeandconsumption implements java.io.Serializable {
 
+	// Fields
 
-    // Fields    
+	private Long FRcgAndCuptId;
+	private TBdUser TBdUser;
+	private Double FBeforeRechargeMoney;
+	private Double FRechargeMoney;
+	private Double FAfterRechargeMoney;
+	private Long FBeforeRechargeNum;
+	private Long FRechargeNum;
+	private Long FAfterRechargeNum;
+	private Double FBeforeConsumpteMoney;
+	private Double FConsumpteMoney;
+	private Double FAfterConsumpteMoney;
+	private Long FBeforeConsumpteNum;
+	private Long FConsumpteNum;
+	private Long FAfterConsumpteNum;
+	private Timestamp FOperateTime;
+	private Boolean FOperateType;
 
-     private Long FRcgAndCuptId;
-     private TBdUser TBdUser;
-     private Double FBeforeRechargeMoney;
-     private Double FRechargeMoney;
-     private Double FAfterRechargeMoney;
-     private Long FBeforeRechargeNum;
-     private Long FRechargeNum;
-     private Long FAfterRechargeNum;
-     private Double FBeforeConsumpteMoney;
-     private Double FConsumpteMoney;
-     private Double FAfterConsumpteMoney;
-     private Long FBeforeConsumpteNum;
-     private Long FConsumpteNum;
-     private Long FAfterConsumpteNum;
-     private Timestamp FOperateTime;
-     private Boolean FOperateType;
+	// Constructors
 
-
-    // Constructors
-
-    /** default constructor */
-    public TBdRechargeandconsumption() {
-    }
+	/** default constructor */
+	public TBdRechargeandconsumption() {
+	}
 
 	/** minimal constructor */
-    public TBdRechargeandconsumption(TBdUser TBdUser, Timestamp FOperateTime, Boolean FOperateType) {
-        this.TBdUser = TBdUser;
-        this.FOperateTime = FOperateTime;
-        this.FOperateType = FOperateType;
-    }
-    
-    /** full constructor */
-    public TBdRechargeandconsumption(TBdUser TBdUser, Double FBeforeRechargeMoney, Double FRechargeMoney, Double FAfterRechargeMoney, Long FBeforeRechargeNum, Long FRechargeNum, Long FAfterRechargeNum, Double FBeforeConsumpteMoney, Double FConsumpteMoney, Double FAfterConsumpteMoney, Long FBeforeConsumpteNum, Long FConsumpteNum, Long FAfterConsumpteNum, Timestamp FOperateTime, Boolean FOperateType) {
-        this.TBdUser = TBdUser;
-        this.FBeforeRechargeMoney = FBeforeRechargeMoney;
-        this.FRechargeMoney = FRechargeMoney;
-        this.FAfterRechargeMoney = FAfterRechargeMoney;
-        this.FBeforeRechargeNum = FBeforeRechargeNum;
-        this.FRechargeNum = FRechargeNum;
-        this.FAfterRechargeNum = FAfterRechargeNum;
-        this.FBeforeConsumpteMoney = FBeforeConsumpteMoney;
-        this.FConsumpteMoney = FConsumpteMoney;
-        this.FAfterConsumpteMoney = FAfterConsumpteMoney;
-        this.FBeforeConsumpteNum = FBeforeConsumpteNum;
-        this.FConsumpteNum = FConsumpteNum;
-        this.FAfterConsumpteNum = FAfterConsumpteNum;
-        this.FOperateTime = FOperateTime;
-        this.FOperateType = FOperateType;
-    }
+	public TBdRechargeandconsumption(TBdUser TBdUser, Timestamp FOperateTime,
+			Boolean FOperateType) {
+		this.TBdUser = TBdUser;
+		this.FOperateTime = FOperateTime;
+		this.FOperateType = FOperateType;
+	}
 
-   
-    // Property accessors
+	/** full constructor */
+	public TBdRechargeandconsumption(TBdUser TBdUser,
+			Double FBeforeRechargeMoney, Double FRechargeMoney,
+			Double FAfterRechargeMoney, Long FBeforeRechargeNum,
+			Long FRechargeNum, Long FAfterRechargeNum,
+			Double FBeforeConsumpteMoney, Double FConsumpteMoney,
+			Double FAfterConsumpteMoney, Long FBeforeConsumpteNum,
+			Long FConsumpteNum, Long FAfterConsumpteNum,
+			Timestamp FOperateTime, Boolean FOperateType) {
+		this.TBdUser = TBdUser;
+		this.FBeforeRechargeMoney = FBeforeRechargeMoney;
+		this.FRechargeMoney = FRechargeMoney;
+		this.FAfterRechargeMoney = FAfterRechargeMoney;
+		this.FBeforeRechargeNum = FBeforeRechargeNum;
+		this.FRechargeNum = FRechargeNum;
+		this.FAfterRechargeNum = FAfterRechargeNum;
+		this.FBeforeConsumpteMoney = FBeforeConsumpteMoney;
+		this.FConsumpteMoney = FConsumpteMoney;
+		this.FAfterConsumpteMoney = FAfterConsumpteMoney;
+		this.FBeforeConsumpteNum = FBeforeConsumpteNum;
+		this.FConsumpteNum = FConsumpteNum;
+		this.FAfterConsumpteNum = FAfterConsumpteNum;
+		this.FOperateTime = FOperateTime;
+		this.FOperateType = FOperateType;
+	}
 
-    public Long getFRcgAndCuptId() {
-        return this.FRcgAndCuptId;
-    }
-    
-    public void setFRcgAndCuptId(Long FRcgAndCuptId) {
-        this.FRcgAndCuptId = FRcgAndCuptId;
-    }
+	// Property accessors
 
-    public TBdUser getTBdUser() {
-        return this.TBdUser;
-    }
-    
-    public void setTBdUser(TBdUser TBdUser) {
-        this.TBdUser = TBdUser;
-    }
+	public Long getFRcgAndCuptId() {
+		return this.FRcgAndCuptId;
+	}
 
-    public Double getFBeforeRechargeMoney() {
-        return this.FBeforeRechargeMoney;
-    }
-    
-    public void setFBeforeRechargeMoney(Double FBeforeRechargeMoney) {
-        this.FBeforeRechargeMoney = FBeforeRechargeMoney;
-    }
+	public void setFRcgAndCuptId(Long FRcgAndCuptId) {
+		this.FRcgAndCuptId = FRcgAndCuptId;
+	}
 
-    public Double getFRechargeMoney() {
-        return this.FRechargeMoney;
-    }
-    
-    public void setFRechargeMoney(Double FRechargeMoney) {
-        this.FRechargeMoney = FRechargeMoney;
-    }
+	public TBdUser getTBdUser() {
+		return this.TBdUser;
+	}
 
-    public Double getFAfterRechargeMoney() {
-        return this.FAfterRechargeMoney;
-    }
-    
-    public void setFAfterRechargeMoney(Double FAfterRechargeMoney) {
-        this.FAfterRechargeMoney = FAfterRechargeMoney;
-    }
+	public void setTBdUser(TBdUser TBdUser) {
+		this.TBdUser = TBdUser;
+	}
 
-    public Long getFBeforeRechargeNum() {
-        return this.FBeforeRechargeNum;
-    }
-    
-    public void setFBeforeRechargeNum(Long FBeforeRechargeNum) {
-        this.FBeforeRechargeNum = FBeforeRechargeNum;
-    }
+	public Double getFBeforeRechargeMoney() {
+		return this.FBeforeRechargeMoney;
+	}
 
-    public Long getFRechargeNum() {
-        return this.FRechargeNum;
-    }
-    
-    public void setFRechargeNum(Long FRechargeNum) {
-        this.FRechargeNum = FRechargeNum;
-    }
+	public void setFBeforeRechargeMoney(Double FBeforeRechargeMoney) {
+		this.FBeforeRechargeMoney = FBeforeRechargeMoney;
+	}
 
-    public Long getFAfterRechargeNum() {
-        return this.FAfterRechargeNum;
-    }
-    
-    public void setFAfterRechargeNum(Long FAfterRechargeNum) {
-        this.FAfterRechargeNum = FAfterRechargeNum;
-    }
+	public Double getFRechargeMoney() {
+		return this.FRechargeMoney;
+	}
 
-    public Double getFBeforeConsumpteMoney() {
-        return this.FBeforeConsumpteMoney;
-    }
-    
-    public void setFBeforeConsumpteMoney(Double FBeforeConsumpteMoney) {
-        this.FBeforeConsumpteMoney = FBeforeConsumpteMoney;
-    }
+	public void setFRechargeMoney(Double FRechargeMoney) {
+		this.FRechargeMoney = FRechargeMoney;
+	}
 
-    public Double getFConsumpteMoney() {
-        return this.FConsumpteMoney;
-    }
-    
-    public void setFConsumpteMoney(Double FConsumpteMoney) {
-        this.FConsumpteMoney = FConsumpteMoney;
-    }
+	public Double getFAfterRechargeMoney() {
+		return this.FAfterRechargeMoney;
+	}
 
-    public Double getFAfterConsumpteMoney() {
-        return this.FAfterConsumpteMoney;
-    }
-    
-    public void setFAfterConsumpteMoney(Double FAfterConsumpteMoney) {
-        this.FAfterConsumpteMoney = FAfterConsumpteMoney;
-    }
+	public void setFAfterRechargeMoney(Double FAfterRechargeMoney) {
+		this.FAfterRechargeMoney = FAfterRechargeMoney;
+	}
 
-    public Long getFBeforeConsumpteNum() {
-        return this.FBeforeConsumpteNum;
-    }
-    
-    public void setFBeforeConsumpteNum(Long FBeforeConsumpteNum) {
-        this.FBeforeConsumpteNum = FBeforeConsumpteNum;
-    }
+	public Long getFBeforeRechargeNum() {
+		return this.FBeforeRechargeNum;
+	}
 
-    public Long getFConsumpteNum() {
-        return this.FConsumpteNum;
-    }
-    
-    public void setFConsumpteNum(Long FConsumpteNum) {
-        this.FConsumpteNum = FConsumpteNum;
-    }
+	public void setFBeforeRechargeNum(Long FBeforeRechargeNum) {
+		this.FBeforeRechargeNum = FBeforeRechargeNum;
+	}
 
-    public Long getFAfterConsumpteNum() {
-        return this.FAfterConsumpteNum;
-    }
-    
-    public void setFAfterConsumpteNum(Long FAfterConsumpteNum) {
-        this.FAfterConsumpteNum = FAfterConsumpteNum;
-    }
+	public Long getFRechargeNum() {
+		return this.FRechargeNum;
+	}
 
-    public Timestamp getFOperateTime() {
-        return this.FOperateTime;
-    }
-    
-    public void setFOperateTime(Timestamp FOperateTime) {
-        this.FOperateTime = FOperateTime;
-    }
+	public void setFRechargeNum(Long FRechargeNum) {
+		this.FRechargeNum = FRechargeNum;
+	}
 
-    public Boolean getFOperateType() {
-        return this.FOperateType;
-    }
-    
-    public void setFOperateType(Boolean FOperateType) {
-        this.FOperateType = FOperateType;
-    }
-   
+	public Long getFAfterRechargeNum() {
+		return this.FAfterRechargeNum;
+	}
 
+	public void setFAfterRechargeNum(Long FAfterRechargeNum) {
+		this.FAfterRechargeNum = FAfterRechargeNum;
+	}
 
+	public Double getFBeforeConsumpteMoney() {
+		return this.FBeforeConsumpteMoney;
+	}
 
+	public void setFBeforeConsumpteMoney(Double FBeforeConsumpteMoney) {
+		this.FBeforeConsumpteMoney = FBeforeConsumpteMoney;
+	}
 
+	public Double getFConsumpteMoney() {
+		return this.FConsumpteMoney;
+	}
 
+	public void setFConsumpteMoney(Double FConsumpteMoney) {
+		this.FConsumpteMoney = FConsumpteMoney;
+	}
 
+	public Double getFAfterConsumpteMoney() {
+		return this.FAfterConsumpteMoney;
+	}
 
+	public void setFAfterConsumpteMoney(Double FAfterConsumpteMoney) {
+		this.FAfterConsumpteMoney = FAfterConsumpteMoney;
+	}
+
+	public Long getFBeforeConsumpteNum() {
+		return this.FBeforeConsumpteNum;
+	}
+
+	public void setFBeforeConsumpteNum(Long FBeforeConsumpteNum) {
+		this.FBeforeConsumpteNum = FBeforeConsumpteNum;
+	}
+
+	public Long getFConsumpteNum() {
+		return this.FConsumpteNum;
+	}
+
+	public void setFConsumpteNum(Long FConsumpteNum) {
+		this.FConsumpteNum = FConsumpteNum;
+	}
+
+	public Long getFAfterConsumpteNum() {
+		return this.FAfterConsumpteNum;
+	}
+
+	public void setFAfterConsumpteNum(Long FAfterConsumpteNum) {
+		this.FAfterConsumpteNum = FAfterConsumpteNum;
+	}
+
+	public Timestamp getFOperateTime() {
+		return this.FOperateTime;
+	}
+
+	public void setFOperateTime(Timestamp FOperateTime) {
+		this.FOperateTime = FOperateTime;
+	}
+
+	public Boolean getFOperateType() {
+		return this.FOperateType;
+	}
+
+	public void setFOperateType(Boolean FOperateType) {
+		this.FOperateType = FOperateType;
+	}
 
 }

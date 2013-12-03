@@ -39,7 +39,7 @@ public class JsonAction extends ActionSupport implements ServletRequestAware{
 		try {
 			UserDao userDao = new UserDao();
 			TBdUser tBdUser = new TBdUser();
-			tBdUser.setFSex(true);
+			//tBdUser.setFSex(true);
 			tBdUser.setFPassword("FPassword");
 			tBdUser.setFUserFullName("FUserFullName");
 			tBdUser.setFUserName("FUserName");

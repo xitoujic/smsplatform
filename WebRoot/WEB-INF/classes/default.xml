@@ -248,12 +248,8 @@
             <param name="contentType">image/jpeg</param>      
             <param name="inputName">inputStream</param>      
           </result> 
-        </action><!--
-        
-		 <action name="AddUserAction" class="smsplatform.action.AddUserAction">      
-          
-         </action>
-         -->
+        </action>
+    
 		 <action name="AddUserAction" class="smsplatform.action.AddUserAction">      
            <result name="fail"></result>
 			
@@ -293,7 +289,7 @@
 		
 
 	-->
-	<action name="LoginAction" class="smsplatform.action.LoginAction">
+	<!--<action name="LoginAction" class="smsplatform.action.LoginAction">
 			<result name="fail">
 				/index.jsp
 			</result>
@@ -304,7 +300,7 @@
 	
 	
 	
-	<action name="tosmsZoneAction" class="smsplatform.action.ToZoneAction">
+	--><!--<action name="tosmsZoneAction" class="smsplatform.action.ToZoneAction">
 	
 			<result name="isAdminZone">
 				/admin.jsp
@@ -315,11 +311,11 @@
 		</action>
 	<action name="Log*Action" method="{1}" class="smsplatform.action.LogAction">
 	    <result name="fail"></result>
-			<!-- 返回json类型数据 -->
+			 返回json类型数据 
 			<result type="json">
-				<param name="root">result<!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 --></param>
+				<param name="root">result result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 </param>
 			</result>
 		</action>
-   </package>
+   --></package>
 </struts>
 

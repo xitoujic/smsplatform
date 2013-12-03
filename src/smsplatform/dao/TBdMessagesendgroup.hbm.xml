@@ -31,6 +31,9 @@
         <property name="FGroupSendTime" type="java.sql.Timestamp">
             <column name="F_GroupSendTime" length="19" />
         </property>
+        <property name="FGroupPhones" type="java.lang.String">
+            <column name="F_GroupPhones" length="65535" />
+        </property>
         <set name="TBdMessagesends" inverse="true">
             <key>
                 <column name="F_SendGroupID" not-null="true" />
