@@ -29,22 +29,18 @@ public class ToZoneAction {
 				+ ActionContext.getContext().getSession().get("userName")
 				+ "\t" + "已经成功登陆本系统<br><br>";
 
-		ActionContext.getContext().getSession().put("messageNotice", this.messageNotice);
-		
-		/*NoticeDao dao = new NoticeDaoHibernateImpl();
-		noticeDomains = dao.getAll();*/
+		ActionContext.getContext().getSession().put("messageNotice",
+				this.messageNotice);
 
+	
 		String string = (String) ActionContext.getContext().getSession().get(
 				"isAdmin");
 
 		if ("Y".equals(string)) {
-			String idString = (String)ActionContext
-					.getContext().getSession().get("uid");
-            
-			
+
 			return "isAdminZone";
 		} else {
-			
+
 			return "notAdminZone";
 		}
 	}

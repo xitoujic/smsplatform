@@ -8,6 +8,7 @@ package smsplatform.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,52 +38,36 @@ public class LoginAction {
 		if ("".equals(password.trim()) || password == null) {
 			return "fail";
 		}
-/*		TBdUserDAO tBdUserDAO = new TBdUserDAO();
+
+		TBdUserDAO tBdUserDAO = new TBdUserDAO();
 		TBdUser tBdUser = new TBdUser();
 		tBdUser.setFUserName(userName.trim());
-		TBdUser tBdUser_r = (TBdUser) tBdUserDAO.findByFUserName(tBdUser);
-		
-		if (!tBdUser_r.getFPassword().equals(password.trim()) || tBdUser_r == null) {
-			return "fail";
-		}*/
-		
-/*
-		RegisterMessageDao<RegisterMessageDomain, String> dao = new RegisterMessageDaoHibernateImpl();
-
-		String[] retValString = dao.findByEmail(this.userName.trim());
-
-		if (retValString == null) {
-			System.out.println("Reject You Login In The System");
+	
+		if (tBdUserDAO.findByFUserName(tBdUser.getFUserName()).size() == 0) {
 			return "fail";
 		}
+		
+		TBdUser tBdUser_r = (TBdUser) tBdUserDAO.findByFUserName(tBdUser.getFUserName()).get(0);
 
-		if (!retValString[0].equals(this.password)) {
-			HttpServletResponse response = ServletActionContext.getResponse();
-			response.setContentType("text/html;");
-			PrintWriter out = response.getWriter();
-			out.print("error password");
-			out.flush();
-			out.close();
-
-			ActionContext.getContext().getSession().put("isLogin", "no");
-
+		if (!tBdUser_r.getFPassword().equals(password.trim())
+				|| tBdUser_r == null) {
 			return "fail";
-		} else {
-			if (retValString[1].equals("Y")) {
-				ActionContext.getContext().getSession().put("isStudent", "Y");
-			} else {
-				ActionContext.getContext().getSession().put("isStudent", "N");
-			}
-*/
-		//	ActionContext.getContext().getSession().put("uid", retValString[2]);
-			ActionContext.getContext().getSession().put("password", password);
-			ActionContext.getContext().getSession().put("isLogin", "yes");
-			ActionContext.getContext().getSession().put("userName", userName);
-			ActionContext.getContext().getSession().put("uid", 1);
+		}
+		System.out.println(tBdUser_r.getFRole()+"++++++++++++");
+		if (tBdUser_r.getFRole().equals("管理员")) {
+			ActionContext.getContext().getSession().put("isAdmin", "Y");
+		}else {
 			ActionContext.getContext().getSession().put("isAdmin", "N");
 		
-			return "success";
-		
+		}
+
+		ActionContext.getContext().getSession().put("password", password);
+		ActionContext.getContext().getSession().put("isLogin", "yes");
+		ActionContext.getContext().getSession().put("userName", userName);
+		ActionContext.getContext().getSession().put("uid",
+				tBdUser_r.getFUserId());
+
+		return "success";
 
 	}
 

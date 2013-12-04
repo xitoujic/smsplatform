@@ -34,17 +34,36 @@
 				/admin.jsp
 			</result>
 			<result name="notAdminZone">
-				/admin.jsp
+				/index.jsp
 			</result>
 			
 		</action>
 	  
 		<action name="LoginAction" class="smsplatform.action.LoginAction">
 			<result name="fail">
+				/login.jsp
+			</result>
+			<result name="success" type="redirectAction">
+				tosmsZoneAction
+			</result>
+		</action>
+		<action name="User*Action" method="{1}" class="smsplatform.action.UserAction">
+			<result name="fail">
 				/index.jsp
 			</result>
 			<result name="success" type="redirectAction">
 				tosmsZoneAction
+			</result>
+		</action>
+		<action name="Admin*Action" method="{1}" class="smsplatform.action.AdminAction">
+			<result name="fail">
+				/index.jsp
+			</result>
+			<result name="success" type="redirectAction">
+				tosmsZoneAction
+			</result>
+			<result type="json">
+				<param name="root">result</param>
 			</result>
 		</action>
 		
