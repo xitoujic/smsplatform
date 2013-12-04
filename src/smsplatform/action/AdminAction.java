@@ -5,12 +5,52 @@ import smsplatform.dao.TBdMessagesendgroup;
 import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdUser;
 import smsplatform.domain.Page;
+import smsplatform.service.UserService;
 
 public class AdminAction {
      public   Page<TBdUser> userPage ;
      public   Page<TBdMessagesend> msgsendPage;
      public   Page<TBdMessagesendgroup> msgGrouPage;
      public   Page<TBdRechargeandconsumption> consumPage;
+     public   int usrID;
+     public   int money;
+     /**
+      * 查询用户信息
+      * @return
+      */
+     public String findUser(){
+    	 try {
+			 UserService userService = new UserService();
+			 userPage.setRecords(userService.getScrollData(userPage.getMaxresult(), userPage.getCurrentpage()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "fail";
+		}
+    	return "success";
+     }
+     /**
+      * 用户充值（用户名，充值金额）
+      * @return
+      */
+     public String recharge(){
+    	 try {
+    		 UserService userService = new UserService();
+    		 userService.recharge(usrID, money);
+    		 } catch (Exception e) {
+    		 // TODO Auto-generated catch block
+    		 e.printStackTrace();
+    		 return "fail";
+    	 }
+    	 return "success";
+     }
+     
+     
+     
+     
+     
+     
+     
      
      
      

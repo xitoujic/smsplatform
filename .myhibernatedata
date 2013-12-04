@@ -1,5 +1,5 @@
 #MyEclipse Hibernate Properties
-#Tue Dec 03 19:04:20 CST 2013
+#Wed Dec 04 19:25:56 CST 2013
 sessionFactoryName=smsplatform.dao.HibernateSessionFactory
 genBasicCompId=true
 profile=

@@ -39,6 +39,13 @@ public class TBdUser implements java.io.Serializable {
 	/** default constructor */
 	public TBdUser() {
 	}
+	
+
+	public TBdUser(Long fUserId) {
+		super();
+		FUserId = fUserId;
+	}
+
 
 	/** minimal constructor */
 	public TBdUser(String FUserName, String FPassword, String FRole) {

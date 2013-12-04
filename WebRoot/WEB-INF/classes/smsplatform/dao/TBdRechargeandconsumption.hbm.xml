@@ -52,8 +52,8 @@
         <property name="FOperateTime" type="java.sql.Timestamp">
             <column name="F_OperateTime" length="19" not-null="true" />
         </property>
-        <property name="FOperateType" type="java.lang.Boolean">
-            <column name="F_OperateType" not-null="true" />
+        <property name="FOperateType" type="java.lang.String">
+            <column name="F_OperateType" length="4" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

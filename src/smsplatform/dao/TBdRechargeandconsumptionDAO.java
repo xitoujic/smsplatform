@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,11 +43,15 @@ public class TBdRechargeandconsumptionDAO extends BaseHibernateDAO {
 
 	public void save(TBdRechargeandconsumption transientInstance) {
 		log.debug("saving TBdRechargeandconsumption instance");
+		 Transaction transaction = null;
 		try {
+			transaction = getSession().beginTransaction();
 			getSession().save(transientInstance);
+			 transaction.commit();
 			log.debug("save successful");
 		} catch (RuntimeException re) {
 			log.error("save failed", re);
+			 transaction.rollback();
 			throw re;
 		}
 	}
@@ -200,6 +205,21 @@ public class TBdRechargeandconsumptionDAO extends BaseHibernateDAO {
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
+			throw re;
+		}
+	}
+	
+	public TBdRechargeandconsumption findLastResultById(java.lang.Long id) {
+		log.debug("getting TBdRechargeandconsumption instance with id: " + id);
+		try {
+			String queryString = "from TBdRechargeandconsumption  as model where model.TBdUser.FUserId= ?" +"order by model.FRcgAndCuptId desc";
+			Query queryObject = getSession().createQuery(queryString);
+			queryObject.setParameter(0, id);
+			queryObject.setMaxResults(1).uniqueResult();
+			
+			return  (queryObject.list().size()>0?(TBdRechargeandconsumption)queryObject.list().get(0):null);
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
 			throw re;
 		}
 	}
