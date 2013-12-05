@@ -5,7 +5,7 @@ import smsplatform.dao.TBdMessagesendgroup;
 import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdUser;
 import smsplatform.domain.Page;
-import smsplatform.service.UserService;
+import smsplatform.service.AdminService;
 
 public class AdminAction {
      public   Page<TBdUser> userPage ;
@@ -20,7 +20,7 @@ public class AdminAction {
       */
      public String findUser(){
     	 try {
-			 UserService userService = new UserService();
+			 AdminService userService = new AdminService();
 			 userPage.setRecords(userService.getScrollData(userPage.getMaxresult(), userPage.getCurrentpage()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -35,7 +35,7 @@ public class AdminAction {
       */
      public String recharge(){
     	 try {
-    		 UserService userService = new UserService();
+    		 AdminService userService = new AdminService();
     		 userService.recharge(usrID, money);
     		 } catch (Exception e) {
     		 // TODO Auto-generated catch block
@@ -44,6 +44,8 @@ public class AdminAction {
     	 }
     	 return "success";
      }
+     
+    
      
      
      

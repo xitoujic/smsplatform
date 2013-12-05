@@ -34,6 +34,7 @@
 
 		<mapping
 			resource="smsplatform/dao/TBdRechargeandconsumption.hbm.xml" />
+		<mapping resource="smsplatform/dao/TBdLog.hbm.xml" />
 
 	</session-factory>
 

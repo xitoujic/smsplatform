@@ -24,7 +24,10 @@
 
 		<global-results>
 			<result name="writeinfo">
-				/login.jsp
+				/writeinfo.jsp
+			</result>
+			<result name="Noright">
+				/Noright.jsp
 			</result>
 			
 		</global-results>

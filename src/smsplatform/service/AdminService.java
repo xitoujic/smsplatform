@@ -9,9 +9,11 @@ import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdRechargeandconsumptionDAO;
 import smsplatform.dao.TBdUser;
 import smsplatform.dao.TBdUserDAO;
+import smsplatform.dao.impl.SRechargeConsumptionDao;
+import smsplatform.dao.impl.SUserDao;
 import smsplatform.domain.PageView;
 
-public class UserService {
+public class AdminService {
 	
 	
 	public List<TBdUser> getScrollData(){
@@ -24,13 +26,36 @@ public class UserService {
 	}
 	public List<TBdUser> getScrollData(int pagesize,int currrentPage){
 		List<TBdUser> tBdUsers = new ArrayList<TBdUser>();
-		TBdUserDAO tBdUserDAO= new TBdUserDAO();
-		tBdUsers = tBdUserDAO.queryByPage(pagesize, currrentPage) ;
-		
-		System.out.println(tBdUserDAO.totalcount());
+//		TBdUserDAO tBdUserDAO= new TBdUserDAO();
+//		tBdUsers = tBdUserDAO.queryByPage(pagesize, currrentPage) ;
+//	
+		SUserDao sUserDao = new SUserDao();
+		tBdUsers = sUserDao.queryByPage(pagesize, currrentPage);
+	//	System.out.println(tBdUserDAO.totalcount());
 		return tBdUsers;
 	}
 	
+	public String addUser(TBdUser tBdUser){
+		try {
+			SUserDao sUserDao = new SUserDao();
+			if (sUserDao.findByName(tBdUser.getFUserName()).size() > 0) {
+				return "exist";
+			}
+			SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
+			sUserDao.save(tBdUser);
+			TBdRechargeandconsumption tBdRechargeandconsumption = new TBdRechargeandconsumption();
+			tBdRechargeandconsumption.setTBdUser(tBdUser);
+			sRechargeConsumptionDao.save(tBdRechargeandconsumption);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "fail";
+		}
+		
+		
+		return "success";
+		
+	}
 	
 	public boolean recharge(long usrID,int money){
 		
@@ -49,19 +74,7 @@ public class UserService {
 			tBdRechargeandconsumption.setFOperateType("消费");
 			tBdRechargeandconsumptionDAO.save(tBdRechargeandconsumption);
 		}
-		
-	/*	tBdRechargeandconsumption.setFOperateType("充值");
-		
-		tBdRechargeandconsumption.setFBeforeRechargeMoney(tBdRechargeandconsumption.getTBdUser().getFMoney());
-		tBdRechargeandconsumption.setFBeforeRechargeNum(tBdRechargeandconsumption.getTBdUser().getFMessageNumber());
-		tBdRechargeandconsumption.setFAfterRechargeMoney(tBdRechargeandconsumption.getFBeforeRechargeMoney()+money);
-		tBdUser.setFMoney(tBdUser.getFMoney()+money);
-		tBdUser.setFMessageNumber(new Double(tBdUser.getFMessageNumber()+money*1l/0.4).longValue());
-		tBdRechargeandconsumption.setFAfterRechargeMoney(tBdUser.getFMoney()+money);
-		tBdRechargeandconsumption.setFAfterRechargeNum(new Double(tBdUser.getFMessageNumber()+money*1l/0.4).longValue());
-		tBdRechargeandconsumption.setFRcgAndCuptId(null);
-		tBdRechargeandconsumption.setTBdUser(tBdUser);
-		tBdRechargeandconsumptionDAO.save(tBdRechargeandconsumption);*/
+	
 		TBdRechargeandconsumption tBdRechargeandconsumption2 = new TBdRechargeandconsumption();
 		tBdRechargeandconsumption2.setFOperateType("充值");
 		

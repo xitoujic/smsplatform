@@ -20,6 +20,8 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import smsplatform.dao.TBdUser;
 import smsplatform.dao.TBdUserDAO;
+import smsplatform.dao.impl.SUserDao;
+import smsplatform.service.AdminService;
 
 
 public class AddUserAction {
@@ -70,78 +72,34 @@ public class AddUserAction {
 		transientInstance.setFUserName(F_UserName.trim());
 		transientInstance.setFPassword(F_Password.trim());
 		transientInstance.setFRole(F_type);
+     
+		AdminService adminService = new AdminService();
+	    String out = adminService.addUser(tBdUser);
+	    JSONObject json=new JSONObject(); 
+	    if (out.equals("exist")) {
+	    	json.accumulate("message", "用户以存在！！！");
+		}else if (out.equals("fail")) {
+			json.accumulate("message", "添加失败");
+		}else {
+			json.accumulate("message", "操作成功");
+		}
 		
-		
-		
-		TBdUserDAO tBdUserDAO =  new TBdUserDAO();
-		
-		tBdUserDAO.save(transientInstance);
-		
-		System.out.println(tBdUserDAO.findAll().size()+"_____size__"+tBdUserDAO.totalcount());
-		
-        Map<String,Object> map = new HashMap<String,Object>();
-/*
-=======
+      /*  Map<String,Object> map = new HashMap<String,Object>();
 
-		 Map<String,Object> map = new HashMap<String,Object>();
-
-		/*
->>>>>>> bad950b492c8140d9290d31aa86e738ef23edec0
-		TBdUserDAO tBdUserDAO = new TBdUserDAO();
-		System.out.println(tBdUserDAO.findAll().size());*/
-		/* Map<String,Object> map = new HashMap<String,Object>();
->>>>>>> cfd8233ab8a31099fdede8a1366f54262f312de5
-		
-		             map.put("name", "99");
-		             map.put("age","89");
-		 
-		             map.put("position", "ooo");
-	
-		
-		         //    JSONObject json = JSONObject.fromObject(map);//将map对象转换成json类型数据
-		
-		       //   result = json.toString();
-		
-		//message = result;
-		/*HttpServletResponse response = ServletActionContext.getResponse();
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/xml");
-		try {
-			response.getWriter().println(message);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		         /*  r1 = new ErrorCondition("张三", "4306821989021611", "L", "长度错误");  
-		          ErrorCondition r2 = new ErrorCondition("李四", "430682198902191112","X", "校验错误");  
-		          ErrorCondition r3 = new ErrorCondition("王五", "", "N", "身份证信息为空");  
-		            
-		          List<ErrorCondition> list = new ArrayList<ErrorCondition>();  */
 		         TBdUser r1 = new TBdUser();r1.setFUserFullName("zhang san");
 		         TBdUser r2 = new TBdUser();r2.setFUserFullName("zhang san2");
 		         TBdUser r3 = new TBdUser();r3.setFUserFullName("zhang san3");
-		        //  users.add();
+		     
 		          users.add(r1);  
 		          users.add(r2);  
 		          users.add(r3);  
 		            
-		          //将list转化成JSON对象  
-		        /*  JSONArray jsonArray = JSONArray.fromObject(users);  
-		          HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);  
-		          response.setCharacterEncoding("UTF-8");   
-		          try {
-					response.getWriter().print(jsonArray);
-					//response.getWriter().print(json);
-					
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}  */
+		     
 		          JSONObject json=new JSONObject(); 
 		          json.accumulate("user", users);
 		          json.accumulate("map", map);
 		          result = json.toString();
-		System.out.println("*********");
+		System.out.println("*********");*/
 		
 		return "success";
 	}

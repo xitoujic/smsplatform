@@ -12,8 +12,8 @@ import com.hanphon.recruit.dao.impl.GenericDaoHibernateImpl;
 import com.hanphon.recruit.dao.impl.HibernateUtil;
 import com.hanphon.recruit.domain.ScoreDomain;
 
-public class UserDao extends GenericDaoHibernateImpl<TBdUser, Long> {
-	public List<TBdUser> queryByPage(int pageSize, int pageNow) {
+public class SUserDao extends GenericDaoHibernateImpl<TBdUser, Long> {
+	/*public List<TBdUser> queryByPage(int pageSize, int pageNow) {
 		Session session = null;
 		Transaction transaction = null;
 		try {
@@ -29,7 +29,7 @@ public class UserDao extends GenericDaoHibernateImpl<TBdUser, Long> {
 
 			throw re;
 		}
-	}
+	}*/
 
 	public int totalcount() {
 		Session session = null;
@@ -47,27 +47,18 @@ public class UserDao extends GenericDaoHibernateImpl<TBdUser, Long> {
 		}
 
 	}
-
-	public Boolean setOnStatus(String id, String status) {
+	public List findByName(String value) {
 		Session session = null;
-		Transaction transaction = null;
-		try {
-			session = HibernateUtil.getSession();
-			transaction = session.beginTransaction();
+        try {   session = HibernateUtil.getSession();
+                String queryString = "from TBdUser as model where model.FUserName= ?";
+                Query queryObject = session.createQuery(queryString);
+                queryObject.setParameter(0, value);
+                return queryObject.list();
+        } catch (RuntimeException re) {
+              
+                throw re;
+        }
+}
 
-			Query query = session
-					.createQuery("update StudentDomain set onStatus = ? where userId = ?");
-			query.setString(0, status);
-			query.setString(1, id);
-
-			int rowCount = query.executeUpdate();
-
-			transaction.commit();
-
-			return (rowCount != 0);
-		} catch (Exception e) {
-			return false;
-		}
-	}
 
 }

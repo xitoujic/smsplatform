@@ -33,19 +33,13 @@ public class TBdUser implements java.io.Serializable {
 	private Timestamp FUpdateTime;
 	private Set TBdMessagesendgroups = new HashSet(0);
 	private Set TBdRechargeandconsumptions = new HashSet(0);
+	private Set TBdLogs = new HashSet(0);
 
 	// Constructors
 
 	/** default constructor */
 	public TBdUser() {
 	}
-	
-
-	public TBdUser(Long fUserId) {
-		super();
-		FUserId = fUserId;
-	}
-
 
 	/** minimal constructor */
 	public TBdUser(String FUserName, String FPassword, String FRole) {
@@ -61,7 +55,8 @@ public class TBdUser implements java.io.Serializable {
 			String FSignatureFlag, String FUrgent, String FUpdateStatus,
 			String FRight, Integer FDeductScale, String FEmail,
 			Long FMessageNumber, Double FMoney, Timestamp FUpdateTime,
-			Set TBdMessagesendgroups, Set TBdRechargeandconsumptions) {
+			Set TBdMessagesendgroups, Set TBdRechargeandconsumptions,
+			Set TBdLogs) {
 		this.FUserName = FUserName;
 		this.FUserFullName = FUserFullName;
 		this.FPassword = FPassword;
@@ -82,6 +77,7 @@ public class TBdUser implements java.io.Serializable {
 		this.FUpdateTime = FUpdateTime;
 		this.TBdMessagesendgroups = TBdMessagesendgroups;
 		this.TBdRechargeandconsumptions = TBdRechargeandconsumptions;
+		this.TBdLogs = TBdLogs;
 	}
 
 	// Property accessors
@@ -252,6 +248,14 @@ public class TBdUser implements java.io.Serializable {
 
 	public void setTBdRechargeandconsumptions(Set TBdRechargeandconsumptions) {
 		this.TBdRechargeandconsumptions = TBdRechargeandconsumptions;
+	}
+
+	public Set getTBdLogs() {
+		return this.TBdLogs;
+	}
+
+	public void setTBdLogs(Set TBdLogs) {
+		this.TBdLogs = TBdLogs;
 	}
 
 }
