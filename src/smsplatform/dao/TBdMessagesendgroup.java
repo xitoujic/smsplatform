@@ -20,6 +20,7 @@ public class TBdMessagesendgroup implements java.io.Serializable {
 	private Long FGroupPhoneNum;
 	private String FGroupContent;
 	private Timestamp FGroupSendTime;
+	private String FGroupPhones;
 	private Set TBdMessagesends = new HashSet(0);
 
 	// Constructors
@@ -37,7 +38,8 @@ public class TBdMessagesendgroup implements java.io.Serializable {
 	/** full constructor */
 	public TBdMessagesendgroup(TBdUser TBdUser, String FGroupType,
 			String FSubmitType, String FGroupSendStatus, Long FGroupPhoneNum,
-			String FGroupContent, Timestamp FGroupSendTime, Set TBdMessagesends) {
+			String FGroupContent, Timestamp FGroupSendTime,
+			String FGroupPhones, Set TBdMessagesends) {
 		this.TBdUser = TBdUser;
 		this.FGroupType = FGroupType;
 		this.FSubmitType = FSubmitType;
@@ -45,6 +47,7 @@ public class TBdMessagesendgroup implements java.io.Serializable {
 		this.FGroupPhoneNum = FGroupPhoneNum;
 		this.FGroupContent = FGroupContent;
 		this.FGroupSendTime = FGroupSendTime;
+		this.FGroupPhones = FGroupPhones;
 		this.TBdMessagesends = TBdMessagesends;
 	}
 
@@ -112,6 +115,14 @@ public class TBdMessagesendgroup implements java.io.Serializable {
 
 	public void setFGroupSendTime(Timestamp FGroupSendTime) {
 		this.FGroupSendTime = FGroupSendTime;
+	}
+
+	public String getFGroupPhones() {
+		return this.FGroupPhones;
+	}
+
+	public void setFGroupPhones(String FGroupPhones) {
+		this.FGroupPhones = FGroupPhones;
 	}
 
 	public Set getTBdMessagesends() {

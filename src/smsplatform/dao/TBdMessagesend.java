@@ -13,9 +13,9 @@ public class TBdMessagesend implements java.io.Serializable {
 	private Long FMessageId;
 	private TBdMessagesendgroup TBdMessagesendgroup;
 	private String FSendNumber;
-	private Boolean FSendStatus;
-	private Boolean FSendCostStatus;
-	private Boolean FMessageStatus;
+	private String FSendStatus;
+	private String FSendCostStatus;
+	private String FMessageStatus;
 	private String FOperator;
 	private String FNumberArea;
 	private Timestamp FSendTime;
@@ -39,9 +39,8 @@ public class TBdMessagesend implements java.io.Serializable {
 	/** full constructor */
 	public TBdMessagesend(Long FMessageId,
 			TBdMessagesendgroup TBdMessagesendgroup, String FSendNumber,
-			Boolean FSendStatus, Boolean FSendCostStatus,
-			Boolean FMessageStatus, String FOperator, String FNumberArea,
-			Timestamp FSendTime) {
+			String FSendStatus, String FSendCostStatus, String FMessageStatus,
+			String FOperator, String FNumberArea, Timestamp FSendTime) {
 		this.FMessageId = FMessageId;
 		this.TBdMessagesendgroup = TBdMessagesendgroup;
 		this.FSendNumber = FSendNumber;
@@ -79,27 +78,27 @@ public class TBdMessagesend implements java.io.Serializable {
 		this.FSendNumber = FSendNumber;
 	}
 
-	public Boolean getFSendStatus() {
+	public String getFSendStatus() {
 		return this.FSendStatus;
 	}
 
-	public void setFSendStatus(Boolean FSendStatus) {
+	public void setFSendStatus(String FSendStatus) {
 		this.FSendStatus = FSendStatus;
 	}
 
-	public Boolean getFSendCostStatus() {
+	public String getFSendCostStatus() {
 		return this.FSendCostStatus;
 	}
 
-	public void setFSendCostStatus(Boolean FSendCostStatus) {
+	public void setFSendCostStatus(String FSendCostStatus) {
 		this.FSendCostStatus = FSendCostStatus;
 	}
 
-	public Boolean getFMessageStatus() {
+	public String getFMessageStatus() {
 		return this.FMessageStatus;
 	}
 
-	public void setFMessageStatus(Boolean FMessageStatus) {
+	public void setFMessageStatus(String FMessageStatus) {
 		this.FMessageStatus = FMessageStatus;
 	}
 
