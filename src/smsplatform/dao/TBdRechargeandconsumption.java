@@ -25,7 +25,7 @@ public class TBdRechargeandconsumption implements java.io.Serializable {
 	private Long FConsumpteNum;
 	private Long FAfterConsumpteNum;
 	private Timestamp FOperateTime;
-	private Boolean FOperateType;
+	private String FOperateType;
 
 	// Constructors
 
@@ -35,7 +35,7 @@ public class TBdRechargeandconsumption implements java.io.Serializable {
 
 	/** minimal constructor */
 	public TBdRechargeandconsumption(TBdUser TBdUser, Timestamp FOperateTime,
-			Boolean FOperateType) {
+			String FOperateType) {
 		this.TBdUser = TBdUser;
 		this.FOperateTime = FOperateTime;
 		this.FOperateType = FOperateType;
@@ -49,7 +49,7 @@ public class TBdRechargeandconsumption implements java.io.Serializable {
 			Double FBeforeConsumpteMoney, Double FConsumpteMoney,
 			Double FAfterConsumpteMoney, Long FBeforeConsumpteNum,
 			Long FConsumpteNum, Long FAfterConsumpteNum,
-			Timestamp FOperateTime, Boolean FOperateType) {
+			Timestamp FOperateTime, String FOperateType) {
 		this.TBdUser = TBdUser;
 		this.FBeforeRechargeMoney = FBeforeRechargeMoney;
 		this.FRechargeMoney = FRechargeMoney;
@@ -189,11 +189,11 @@ public class TBdRechargeandconsumption implements java.io.Serializable {
 		this.FOperateTime = FOperateTime;
 	}
 
-	public Boolean getFOperateType() {
+	public String getFOperateType() {
 		return this.FOperateType;
 	}
 
-	public void setFOperateType(Boolean FOperateType) {
+	public void setFOperateType(String FOperateType) {
 		this.FOperateType = FOperateType;
 	}
 

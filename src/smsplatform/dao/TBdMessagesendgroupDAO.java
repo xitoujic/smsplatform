@@ -8,6 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import smsplatform.dao.impl.BaseHibernateDAO;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -30,6 +31,7 @@ public class TBdMessagesendgroupDAO extends BaseHibernateDAO {
 	public static final String _FGROUP_SEND_STATUS = "FGroupSendStatus";
 	public static final String _FGROUP_PHONE_NUM = "FGroupPhoneNum";
 	public static final String _FGROUP_CONTENT = "FGroupContent";
+	public static final String _FGROUP_PHONES = "FGroupPhones";
 
 	public void save(TBdMessagesendgroup transientInstance) {
 		log.debug("saving TBdMessagesendgroup instance");
@@ -113,6 +115,10 @@ public class TBdMessagesendgroupDAO extends BaseHibernateDAO {
 
 	public List findByFGroupContent(Object FGroupContent) {
 		return findByProperty(_FGROUP_CONTENT, FGroupContent);
+	}
+
+	public List findByFGroupPhones(Object FGroupPhones) {
+		return findByProperty(_FGROUP_PHONES, FGroupPhones);
 	}
 
 	public List findAll() {

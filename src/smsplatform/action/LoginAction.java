@@ -6,15 +6,23 @@
  */
 package smsplatform.action;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
+import smsplatform.dao.TBdMessagesendgroup;
 import smsplatform.dao.TBdUser;
 import smsplatform.dao.TBdUserDAO;
+import smsplatform.service.UserService;
 
 import com.hanphon.recruit.dao.RegisterMessageDao;
 import com.hanphon.recruit.dao.impl.RegisterMessageDaoHibernateImpl;
@@ -28,61 +36,93 @@ import com.opensymphony.xwork2.ActionContext;
 public class LoginAction {
 	private String userName;
 	private String password;
+	private TBdUser tBdUser;
 
+	/*public String execute() throws IOException {
+		ActionContext context = ActionContext.getContext();  
+	    HttpServletRequest request = (HttpServletRequest) context.get(ServletActionContext.HTTP_REQUEST);  
+	    HttpServletResponse response = (HttpServletResponse) context.get(ServletActionContext.HTTP_RESPONSE);  
+	 
+				 String location = "http://jiangnanedu-pc:8080/recruit/";
+				     String location = "http://baidu.com";
+				   //  response.sendRedirect(location);
+			//	    System.out.println(sendGet(location));;
+				
+			
+
+	
+	     String result = "";
+	     try{
+	      String urlName = location ;
+
+	      URL U = new URL(urlName);
+	      URLConnection connection = U.openConnection();
+	      connection.connect();
+	     
+	      BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	      String line;
+	      while ((line = in.readLine())!= null)
+	      {
+	       result += line;
+	      }
+	      in.close();   
+	     }catch(Exception e){
+	      System.out.println("没有结果！"+e);
+	     }
+	   System.out.println( result+"nice___________");
+
+		return "success";
+
+	}*/
 	public String execute() throws IOException {
 		if ("".equals(userName.trim()) || userName == null) {
 			return "fail";
 		}
-
+		
 		if ("".equals(password.trim()) || password == null) {
 			return "fail";
 		}
-/*		TBdUserDAO tBdUserDAO = new TBdUserDAO();
+		
+		TBdUserDAO tBdUserDAO = new TBdUserDAO();
 		TBdUser tBdUser = new TBdUser();
 		tBdUser.setFUserName(userName.trim());
-		TBdUser tBdUser_r = (TBdUser) tBdUserDAO.findByFUserName(tBdUser);
 		
-		if (!tBdUser_r.getFPassword().equals(password.trim()) || tBdUser_r == null) {
-			return "fail";
-		}*/
-		
-/*
-		RegisterMessageDao<RegisterMessageDomain, String> dao = new RegisterMessageDaoHibernateImpl();
-
-		String[] retValString = dao.findByEmail(this.userName.trim());
-
-		if (retValString == null) {
-			System.out.println("Reject You Login In The System");
+		if (tBdUserDAO.findByFUserName(tBdUser.getFUserName()).size() == 0) {
 			return "fail";
 		}
-
-		if (!retValString[0].equals(this.password)) {
-			HttpServletResponse response = ServletActionContext.getResponse();
-			response.setContentType("text/html;");
-			PrintWriter out = response.getWriter();
-			out.print("error password");
-			out.flush();
-			out.close();
-
-			ActionContext.getContext().getSession().put("isLogin", "no");
-
-			return "fail";
-		} else {
-			if (retValString[1].equals("Y")) {
-				ActionContext.getContext().getSession().put("isStudent", "Y");
-			} else {
-				ActionContext.getContext().getSession().put("isStudent", "N");
-			}
-*/
-		//	ActionContext.getContext().getSession().put("uid", retValString[2]);
-			ActionContext.getContext().getSession().put("password", password);
-		//	ActionContext.getContext().getSession().put("isLogin", "yes");
-			ActionContext.getContext().getSession().put("userName", userName);
-			ActionContext.getContext().getSession().put("uid", 1);
-			ActionContext.getContext().getSession().put("isAdmin", "N");
-			return "success";
 		
-
+		TBdUser tBdUser_r = (TBdUser) tBdUserDAO.findByFUserName(tBdUser.getFUserName()).get(0);
+		
+		if (!tBdUser_r.getFPassword().equals(password.trim())
+				|| tBdUser_r == null) {
+			return "fail";
+		}
+		System.out.println(tBdUser_r.getFRole()+"++++++++++++");
+		if (tBdUser_r.getFRole().equals("管理员")) {
+			ActionContext.getContext().getSession().put("isAdmin", "Y");
+		}else {
+			ActionContext.getContext().getSession().put("isAdmin", "N");
+			
+		}
+		
+		ActionContext.getContext().getSession().put("password", password);
+		ActionContext.getContext().getSession().put("isLogin", "yes");
+		ActionContext.getContext().getSession().put("userName", userName);
+		ActionContext.getContext().getSession().put("uid",
+				tBdUser_r.getFUserId());
+		
+		return "success";
+		
+	}
+	
+	public String update(){
+		Long idLong = 
+		(Long) ActionContext.getContext().getSession().get("uid");
+		tBdUser.setFUpdateStatus("已修改");
+		tBdUser.setFUserId(idLong);
+		UserService userService = new UserService();
+		userService.update(tBdUser,idLong);
+		return "success";
 	}
 
 	public String getUserName() {
@@ -99,6 +139,14 @@ public class LoginAction {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public TBdUser gettBdUser() {
+		return tBdUser;
+	}
+
+	public void settBdUser(TBdUser tBdUser) {
+		this.tBdUser = tBdUser;
 	}
 
 }

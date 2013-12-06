@@ -1,35 +1,47 @@
 package smsplatform.dao;
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
+
+
 
 /**
  * TBdUser entity. @author MyEclipse Persistence Tools
  */
 
-public class TBdUser implements java.io.Serializable {
+public class TBdUser   implements Cloneable ,java.io.Serializable {
 
 	// Fields
 
 	private Long FUserId;
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
 	private String FUserName;
 	private String FUserFullName;
 	private String FPassword;
 	private String FPhoneNumber;
-	private Boolean FSex;
+	private String FSex;
 	private String FRole;
 	private String FCompanyType;
-	private Boolean FCheckType;
+	private String FCheckType;
 	private String FSignature;
 	private String FSignatureFlag;
-	private Boolean FUrgent;
-	private Boolean FUpdateStatus;
-	private Boolean FRight;
+	private String FUrgent;
+	private String FUpdateStatus;
+	private String FRight;
 	private Integer FDeductScale;
 	private String FEmail;
-	private Set TBdMessagenumbers = new HashSet(0);
+	private Long FMessageNumber;
+	private Double FMoney;
+	private Timestamp FUpdateTime;
 	private Set TBdMessagesendgroups = new HashSet(0);
 	private Set TBdRechargeandconsumptions = new HashSet(0);
+	private Set TBdLogs = new HashSet(0);
 
 	// Constructors
 
@@ -46,12 +58,13 @@ public class TBdUser implements java.io.Serializable {
 
 	/** full constructor */
 	public TBdUser(String FUserName, String FUserFullName, String FPassword,
-			String FPhoneNumber, Boolean FSex, String FRole,
-			String FCompanyType, Boolean FCheckType, String FSignature,
-			String FSignatureFlag, Boolean FUrgent, Boolean FUpdateStatus,
-			Boolean FRight, Integer FDeductScale, String FEmail,
-			Set TBdMessagenumbers, Set TBdMessagesendgroups,
-			Set TBdRechargeandconsumptions) {
+			String FPhoneNumber, String FSex, String FRole,
+			String FCompanyType, String FCheckType, String FSignature,
+			String FSignatureFlag, String FUrgent, String FUpdateStatus,
+			String FRight, Integer FDeductScale, String FEmail,
+			Long FMessageNumber, Double FMoney, Timestamp FUpdateTime,
+			Set TBdMessagesendgroups, Set TBdRechargeandconsumptions,
+			Set TBdLogs) {
 		this.FUserName = FUserName;
 		this.FUserFullName = FUserFullName;
 		this.FPassword = FPassword;
@@ -67,9 +80,12 @@ public class TBdUser implements java.io.Serializable {
 		this.FRight = FRight;
 		this.FDeductScale = FDeductScale;
 		this.FEmail = FEmail;
-		this.TBdMessagenumbers = TBdMessagenumbers;
+		this.FMessageNumber = FMessageNumber;
+		this.FMoney = FMoney;
+		this.FUpdateTime = FUpdateTime;
 		this.TBdMessagesendgroups = TBdMessagesendgroups;
 		this.TBdRechargeandconsumptions = TBdRechargeandconsumptions;
+		this.TBdLogs = TBdLogs;
 	}
 
 	// Property accessors
@@ -114,11 +130,11 @@ public class TBdUser implements java.io.Serializable {
 		this.FPhoneNumber = FPhoneNumber;
 	}
 
-	public Boolean getFSex() {
+	public String getFSex() {
 		return this.FSex;
 	}
 
-	public void setFSex(Boolean FSex) {
+	public void setFSex(String FSex) {
 		this.FSex = FSex;
 	}
 
@@ -138,11 +154,11 @@ public class TBdUser implements java.io.Serializable {
 		this.FCompanyType = FCompanyType;
 	}
 
-	public Boolean getFCheckType() {
+	public String getFCheckType() {
 		return this.FCheckType;
 	}
 
-	public void setFCheckType(Boolean FCheckType) {
+	public void setFCheckType(String FCheckType) {
 		this.FCheckType = FCheckType;
 	}
 
@@ -162,27 +178,27 @@ public class TBdUser implements java.io.Serializable {
 		this.FSignatureFlag = FSignatureFlag;
 	}
 
-	public Boolean getFUrgent() {
+	public String getFUrgent() {
 		return this.FUrgent;
 	}
 
-	public void setFUrgent(Boolean FUrgent) {
+	public void setFUrgent(String FUrgent) {
 		this.FUrgent = FUrgent;
 	}
 
-	public Boolean getFUpdateStatus() {
+	public String getFUpdateStatus() {
 		return this.FUpdateStatus;
 	}
 
-	public void setFUpdateStatus(Boolean FUpdateStatus) {
+	public void setFUpdateStatus(String FUpdateStatus) {
 		this.FUpdateStatus = FUpdateStatus;
 	}
 
-	public Boolean getFRight() {
+	public String getFRight() {
 		return this.FRight;
 	}
 
-	public void setFRight(Boolean FRight) {
+	public void setFRight(String FRight) {
 		this.FRight = FRight;
 	}
 
@@ -202,12 +218,28 @@ public class TBdUser implements java.io.Serializable {
 		this.FEmail = FEmail;
 	}
 
-	public Set getTBdMessagenumbers() {
-		return this.TBdMessagenumbers;
+	public Long getFMessageNumber() {
+		return this.FMessageNumber;
 	}
 
-	public void setTBdMessagenumbers(Set TBdMessagenumbers) {
-		this.TBdMessagenumbers = TBdMessagenumbers;
+	public void setFMessageNumber(Long FMessageNumber) {
+		this.FMessageNumber = FMessageNumber;
+	}
+
+	public Double getFMoney() {
+		return this.FMoney;
+	}
+
+	public void setFMoney(Double FMoney) {
+		this.FMoney = FMoney;
+	}
+
+	public Timestamp getFUpdateTime() {
+		return this.FUpdateTime;
+	}
+
+	public void setFUpdateTime(Timestamp FUpdateTime) {
+		this.FUpdateTime = FUpdateTime;
 	}
 
 	public Set getTBdMessagesendgroups() {
@@ -224,6 +256,14 @@ public class TBdUser implements java.io.Serializable {
 
 	public void setTBdRechargeandconsumptions(Set TBdRechargeandconsumptions) {
 		this.TBdRechargeandconsumptions = TBdRechargeandconsumptions;
+	}
+
+	public Set getTBdLogs() {
+		return this.TBdLogs;
+	}
+
+	public void setTBdLogs(Set TBdLogs) {
+		this.TBdLogs = TBdLogs;
 	}
 
 }

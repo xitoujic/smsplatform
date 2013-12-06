@@ -19,7 +19,8 @@ import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.Template;*/
 
-import smsplatform.dao.UserDomainDAO;
+
+import smsplatform.dao.Gender;
 import smsplatform.util.EmailSender;
 
 import com.hanphon.recruit.dao.RegisterMessageDao;
@@ -36,8 +37,15 @@ public class findpasswordAction {
 	private String userName;
 	private String password;
 	private String code;   
+	public Gender gender = Gender.MAN;
  
 
+	public Gender getGender() {
+		return gender;
+	}
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
 	public String apply() throws IOException {
 		if ("".equals(userName.trim()) || userName == null) {
 			return "fail";
@@ -143,6 +151,10 @@ public class findpasswordAction {
 		}*/
 
 	}
+		
+		public String gender(){
+			return "gender";
+		}
 
 	public String getUserName() {
 		return userName;

@@ -12,26 +12,29 @@
 		</property>
 		<property name="hbm2ddl.auto">update</property>
 		<property name="connection.url">
-			jdbc:mysql://localhost:3306/smsplatform
+			jdbc:mysql://localhost:3306/smsplatform?useUnicode=true&amp;characterEncoding=UTF-8
 		</property>
 		<property name="connection.username">root</property>
-		<property name="connection.password">zzx1234</property>
+		<property name="connection.password">root</property>
 		<property name="connection.driver_class">
 			com.mysql.jdbc.Driver
 		</property>
-		
-		
-	    <property name="show_sql">false</property>
+
+
+		<property name="show_sql">false</property>
 		<property name="myeclipse.connection.profile">
 			smsplatform
 		</property>
-		<mapping resource="smsplatform/dao/UserDomain.hbm.xml" />
+		<!--<mapping resource="smsplatform/dao/UserDomain.hbm.xml" />
+			<mapping resource="smsplatform/dao/TBdMessagenumber.hbm.xml" />
+		-->
 		<mapping resource="smsplatform/dao/TBdUser.hbm.xml" />
 		<mapping resource="smsplatform/dao/TBdMessagesendgroup.hbm.xml" />
 		<mapping resource="smsplatform/dao/TBdMessagesend.hbm.xml" />
-		<mapping resource="smsplatform/dao/TBdMessagenumber.hbm.xml" />
+
 		<mapping
 			resource="smsplatform/dao/TBdRechargeandconsumption.hbm.xml" />
+		<mapping resource="smsplatform/dao/TBdLog.hbm.xml" />
 
 	</session-factory>
 
