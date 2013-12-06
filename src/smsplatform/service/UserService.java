@@ -4,17 +4,28 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 
 import smsplatform.dao.TBdMessagesend;
 import smsplatform.dao.TBdMessagesendgroup;
+import smsplatform.dao.TBdMessagesendgroupDAO;
 import smsplatform.dao.TBdUser;
 import smsplatform.dao.TBdUserDAO;
 import smsplatform.dao.impl.SUserDao;
+import smsplatform.dao.impl.SmsgGroupDao;
+import smsplatform.domain.Page;
 
 public class UserService {
 	
 	public TBdMessagesend tBdMessagesend;
 	public TBdMessagesendgroup tBdMessagesendgroup ;
+	
+	/**
+	 * 用户添加个人信息
+	 * @param tBdUser
+	 * @param id
+	 * @return
+	 */
 	public String update(TBdUser tBdUser,Long id){
 		try {
 			SUserDao sUserDao = new SUserDao();
@@ -32,6 +43,13 @@ public class UserService {
 		}
 		return "success";
 	}
+	
+	 public List findMessagesendgroup(Page<TBdMessagesendgroup> page,Long uid){
+		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
+		//smsgGroupDao.queryByPage(page.getMaxresult(), page.getCurrentpage(), orderBY, ascORdesc)
+	   return  smsgGroupDao.queryPageByProperty(page.getMaxresult(), page.getCurrentpage(), "FSendGroupId", false, "TBdUser.FUserId",uid );
+	     
+	 }
 	
 	public String sendmsg(TBdMessagesendgroup tBdMessagesendgroup){
 		try {

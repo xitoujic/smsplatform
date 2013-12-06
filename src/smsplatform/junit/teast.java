@@ -5,7 +5,9 @@ import java.util.List;
 import org.junit.Test;
 
 import smsplatform.action.AdminAction;
+import smsplatform.action.UserAction;
 import smsplatform.dao.Gender;
+import smsplatform.dao.TBdMessagesendgroup;
 import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdRechargeandconsumptionDAO;
 import smsplatform.dao.TBdUser;
@@ -34,6 +36,12 @@ public class teast {
 		TBdUser tBdUser2 =userDao.findById(1l);
 		System.out.println(tBdUser2.getFUserFullName());*/
 		
+	}
+	
+	@Test
+	public void user(){
+		UserAction action = new UserAction();
+		action.findMessagesendgroup();
 	}
 	@Test
 	public void da0(){
@@ -105,10 +113,17 @@ public class teast {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test 
 	 public void sendmsg(){
 		UserService userService = new UserService();
-		userService.sendmsg(null);
+		//userService.sendmsg(null);
+		Page<TBdMessagesendgroup> page = new Page<TBdMessagesendgroup>();
+		page.setMaxresult(4);
+		page.setCurrentpage(1);
+		Long uid = 1l;
+		List<TBdMessagesendgroup> tBdMessagesendgroups =userService.findMessagesendgroup(page, uid);
+		System.out.println(tBdMessagesendgroups.size());
 	}
 
 }

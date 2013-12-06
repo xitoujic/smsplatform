@@ -246,6 +246,25 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 			throw re;
 		}
 	}
+	public List<T> queryPageByProperty(int pageSize, int pageNow,String orderBY,boolean ascORdesc,String propertyName, Object value) {
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = HibernateUtil.getSession();
+			transaction = session.beginTransaction();
+			String queryString = "from "+clazz.getName()+" as model where model."+propertyName+"=? order by model."+orderBY+(ascORdesc?" asc":" desc");
+			Query queryObject = session.createQuery(queryString);
+			queryObject.setParameter(0, value);
+			queryObject.setFirstResult(pageSize * (pageNow - 1));
+			queryObject.setMaxResults(pageSize);
+			transaction.commit();
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			
+			throw re;
+		}
+	
+	}
 
 	
 }

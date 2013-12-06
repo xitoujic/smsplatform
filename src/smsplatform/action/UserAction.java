@@ -5,48 +5,29 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+import com.opensymphony.xwork2.ActionContext;
+
 import smsplatform.dao.TBdMessagesendgroup;
+import smsplatform.dao.TBdRechargeandconsumption;
+import smsplatform.domain.Page;
+import smsplatform.service.UserService;
 
 public class UserAction {
-	public String sendmsg(TBdMessagesendgroup tBdMessagesendgroup){
-		try {
-			
-			 String location = "http://www.baidu.com";
-			 /*    String location = "http://baidu.com";
-			 */  //  response.sendRedirect(location);
-			    System.out.println(sendGet(location));;
-			
-			
-		} catch (Exception e) {
-		    e.printStackTrace();
-			return "fail";
-		}
-		return "success";
-	}
-
-	
-	public static String sendGet(String url)
-    {
-     String result = "";
-     try{
-      String urlName = url ;
-
-      URL U = new URL(urlName);
-      URLConnection connection = U.openConnection();
-      connection.connect();
-     
-      BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-      String line;
-      while ((line = in.readLine())!= null)
-      {
-       result += line;
-      }
-      in.close();   
-     }catch(Exception e){
-      System.out.println("没有结果！"+e);
-     }
-     return result;
-    }
-	
+	  public   Page<TBdMessagesendgroup> msgGrouPage;
+	  public   Page<TBdRechargeandconsumption> consumPage;
+	  public   TBdMessagesendgroup tBdMessagesendgroup;
+	  
+	  
+	  public String sendMsg(){
+		  UserService userService = new UserService();
+		  return userService.sendmsg(tBdMessagesendgroup);
+	  }
+	  
+	  public String findMessagesendgroup(){
+		 Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+		  UserService userService = new UserService();
+		  userService.findMessagesendgroup(msgGrouPage,uid);
+		  return "success";
+	  }
 
 }
