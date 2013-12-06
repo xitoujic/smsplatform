@@ -14,6 +14,7 @@ import smsplatform.dao.impl.SUserDao;
 import smsplatform.dao.impl.UserDao;
 import smsplatform.domain.Page;
 import smsplatform.service.AdminService;
+import smsplatform.service.UserService;
 import sun.text.normalizer.UBiDiProps;
 
 public class teast {
@@ -41,6 +42,21 @@ public class teast {
 		sUserDao.findById(1l);
 		List<TBdUser> tBdUsers = sUserDao.queryByPage(5, 2);
 	}
+	@Test
+	public void dao(){
+		SUserDao sUserDao = new SUserDao();
+		System.out.println(sUserDao.findByProperty("FUserName", "nice").size());
+	}
+	@Test
+	public void dao2(){
+		SUserDao sUserDao = new SUserDao();
+		List<TBdUser> list =
+		sUserDao.queryByPage(4, 1, "FUserId", false);
+		//List<TBdUser> list = sUserDao.findByProperty("FUserId", value, orderBY, ascORdesc)
+		System.out.println(sUserDao.findByProperty("FUserName", "nice").size());
+	}
+	
+	
 	@Test
 	public void add(){
 		AdminAction action = new AdminAction();
@@ -72,7 +88,27 @@ public class teast {
 		int i = userService.getScrollData().size();
 		//System.out.println(i+1);
 	}
+	@Test 
+	public void update(){
+		UserService userService = new UserService();
+		TBdUser tBdUser = new TBdUser();
+		tBdUser.setFUserId(1l);
+		tBdUser.setFEmail("4255871115@qq.com");
+		tBdUser.setFCompanyType("无锡四大");
+		tBdUser.setFUpdateStatus("已修改");
+		tBdUser.setFPhoneNumber("18952478547");
+		tBdUser.setFCompanyType("ysdf");
+		tBdUser.setFUserFullName("nice");
+	    userService.update(tBdUser, 1l);
 	
+	 //   userService.recharge(2l, 500);
+		
+	}
 	
+	@Test 
+	 public void sendmsg(){
+		UserService userService = new UserService();
+		userService.sendmsg(null);
+	}
 
 }

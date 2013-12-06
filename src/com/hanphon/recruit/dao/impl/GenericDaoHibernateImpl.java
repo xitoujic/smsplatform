@@ -39,7 +39,7 @@ import com.hanphon.recruit.dao.GenericDao;
 public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 		GenericDao<T, PK> {
 	private Class<T> clazz;
-	
+/*	
 	protected Class<T> entityClass = GenericsUtils.getSuperClassGenricType(this.getClass());
 	protected static <T> String getEntityName(Class<T> clazz){
 		String entityname = clazz.getSimpleName();
@@ -48,7 +48,7 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 			entityname = entity.name();
 		}
 		return entityname;
-	}
+	}*/
 	
 	@SuppressWarnings("unchecked")
 	public GenericDaoHibernateImpl() {
@@ -66,6 +66,7 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 			session.delete(entity);
 			transaction.commit();
 		} catch (Exception e) {
+		
 			return false;
 		} finally {
 			if (session != null) {
@@ -118,6 +119,7 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 			session.update(entity);
 			transaction.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		} finally {
 			if (session != null) {
@@ -144,6 +146,34 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 			throw re;
 		}
 	}
+	public List findByProperty(String propertyName, Object value) {
+		Session session = null;
+        try {
+        	    session = HibernateUtil.getSession();
+                String queryString = "from "+clazz.getName()+" as model where model."
+                                + propertyName + "= ?";
+                Query queryObject = session.createQuery(queryString);
+                queryObject.setParameter(0, value);
+                return queryObject.list();
+        } catch (RuntimeException re) {
+               
+                throw re;
+        }
+    }
+	public List findByProperty(String propertyName, Object value,String orderBY,boolean ascORdesc) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSession();
+			String queryString = "from "+clazz.getName()+" as model where model."
+			+ propertyName + "= ? order by model."+orderBY+(ascORdesc?" asc":" desc");
+			Query queryObject = session.createQuery(queryString);
+			queryObject.setParameter(0, value);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			
+			throw re;
+		}
+	}
 	
 	/*public long getCount() {
 		Session session = null;
@@ -163,7 +193,7 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 	//	return (Long)em.createQuery("select count("+ getCountField(this.entityClass) +") from "+ getEntityName(this.entityClass)+ " o").getSingleResult();
 	}*/
 	
-
+/*
 	protected static <E> String getCountField(Class<E> clazz){
 		String out = "o";
 		try {
@@ -180,9 +210,9 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 			e.printStackTrace();
 		}
         return out;
-	}
+	}*/
 	
-	public List<TBdUser> queryByPage(int pageSize, int pageNow) {
+	public List<T> queryByPage(int pageSize, int pageNow) {
 		Session session = null;
 		Transaction transaction = null;
 		try {
@@ -199,4 +229,23 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 			throw re;
 		}
 	}
+	public List<T> queryByPage(int pageSize, int pageNow,String orderBY,boolean ascORdesc) {
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = HibernateUtil.getSession();
+			transaction = session.beginTransaction();
+			String queryString = "from "+clazz.getName()+" as model order by model."+orderBY+(ascORdesc?" asc":" desc");
+			Query queryObject = session.createQuery(queryString);
+			queryObject.setFirstResult(pageSize * (pageNow - 1));
+			queryObject.setMaxResults(pageSize);
+			transaction.commit();
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			
+			throw re;
+		}
+	}
+
+	
 }

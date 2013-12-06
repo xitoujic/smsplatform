@@ -4,15 +4,23 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
 /**
  * TBdUser entity. @author MyEclipse Persistence Tools
  */
 
-public class TBdUser implements java.io.Serializable {
+public class TBdUser   implements Cloneable ,java.io.Serializable {
 
 	// Fields
 
 	private Long FUserId;
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
 	private String FUserName;
 	private String FUserFullName;
 	private String FPassword;

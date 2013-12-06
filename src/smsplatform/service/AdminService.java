@@ -14,7 +14,7 @@ import smsplatform.dao.impl.SUserDao;
 import smsplatform.domain.PageView;
 
 public class AdminService {
-	
+	public static double price = 0.4;
 	
 	public List<TBdUser> getScrollData(){
 		List<TBdUser> tBdUsers = new ArrayList<TBdUser>();
@@ -59,21 +59,19 @@ public class AdminService {
 	
 	public boolean recharge(long usrID,int money){
 		
-		TBdRechargeandconsumptionDAO tBdRechargeandconsumptionDAO = new TBdRechargeandconsumptionDAO();
+	//	TBdRechargeandconsumptionDAO tBdRechargeandconsumptionDAO = new TBdRechargeandconsumptionDAO();
+		SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
 		
-		TBdUserDAO tBdUserDAO= new TBdUserDAO();
-		TBdUser  tBdUser = tBdUserDAO.findById(usrID);
+		
+		/*TBdUserDAO tBdUserDAO= new TBdUserDAO();
+		TBdUser  tBdUser = tBdUserDAO.findById(usrID);*/
+		SUserDao sUserDao = new SUserDao();
+		TBdUser  tBdUser =  sUserDao.findById(usrID);
 		/**
 		 * 第一次充值
 		 */
-		TBdRechargeandconsumption tBdRechargeandconsumption = tBdRechargeandconsumptionDAO.findLastResultById(usrID);
-		if( tBdRechargeandconsumption == null){
-			tBdRechargeandconsumption = new TBdRechargeandconsumption();
-			tBdRechargeandconsumption.setTBdUser(tBdUser);
-			tBdRechargeandconsumption.setFOperateTime(new Timestamp(System.currentTimeMillis()));
-			tBdRechargeandconsumption.setFOperateType("消费");
-			tBdRechargeandconsumptionDAO.save(tBdRechargeandconsumption);
-		}
+	//	TBdRechargeandconsumption tBdRechargeandconsumption = tBdRechargeandconsumptionDAO.findLastResultById(usrID);
+		TBdRechargeandconsumption tBdRechargeandconsumption = sRechargeConsumptionDao.findLastResultById(usrID);
 	
 		TBdRechargeandconsumption tBdRechargeandconsumption2 = new TBdRechargeandconsumption();
 		tBdRechargeandconsumption2.setFOperateType("充值");
@@ -83,15 +81,16 @@ public class AdminService {
 		//tBdRechargeandconsumption2.setFAfterRechargeMoney(tBdRechargeandconsumption.getFBeforeRechargeMoney()+money);
 		
 		tBdRechargeandconsumption2.setFAfterRechargeMoney(tBdUser.getFMoney()+money);
-		tBdRechargeandconsumption2.setFAfterRechargeNum(new Double(tBdUser.getFMessageNumber()+money*1l/0.4).longValue());
+		tBdRechargeandconsumption2.setFAfterRechargeNum(new Double(tBdUser.getFMessageNumber()+money*1l/price).longValue());
 		tBdRechargeandconsumption2.setFRcgAndCuptId(null);
 		tBdRechargeandconsumption2.setFRechargeMoney(new Double(money));
 		
 		tBdRechargeandconsumption2.setFOperateTime(new Timestamp(System.currentTimeMillis()));
 		tBdUser.setFMoney(tBdUser.getFMoney()+money);
-		tBdUser.setFMessageNumber(new Double(tBdUser.getFMessageNumber()+money*1l/0.4).longValue());
+		tBdUser.setFMessageNumber(new Double(tBdUser.getFMessageNumber()+money*1l/price).longValue());
 		tBdRechargeandconsumption2.setTBdUser(tBdUser);
-		tBdRechargeandconsumptionDAO.save(tBdRechargeandconsumption2);
+	//	tBdRechargeandconsumptionDAO.save(tBdRechargeandconsumption2);
+		sRechargeConsumptionDao.save(tBdRechargeandconsumption2);
 		return true;
 		
 	}
