@@ -29,5 +29,7 @@ public class UserAction {
 		  userService.findMessagesendgroup(msgGrouPage,uid);
 		  return "success";
 	  }
+	  
+	
 
 }

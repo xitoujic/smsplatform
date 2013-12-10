@@ -11,6 +11,7 @@ import smsplatform.dao.TBdUser;
 import smsplatform.dao.TBdUserDAO;
 import smsplatform.dao.impl.SRechargeConsumptionDao;
 import smsplatform.dao.impl.SUserDao;
+import smsplatform.dao.impl.SmsgGroupDao;
 import smsplatform.domain.PageView;
 
 public class AdminService {
@@ -93,6 +94,25 @@ public class AdminService {
 		sRechargeConsumptionDao.save(tBdRechargeandconsumption2);
 		return true;
 		
+	}
+	/**
+	 * 查看所有的用户信息
+	 * @return
+	 */
+	public List findAllUser(){
+		SUserDao sUserDao = new SUserDao();
+		return sUserDao.findALLObject();
+	}
+	
+	public List findAllRechargeConsumeByUid(Long uid){
+        SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
+		return sRechargeConsumptionDao.findByProperty("TBdUser.FUserId", uid);
+	}
+	
+	public  List findAllsendMSGByUid(Long uid){
+		
+		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
+		return smsgGroupDao.findByProperty("FSendGroupId",uid);
 	}
 
 }

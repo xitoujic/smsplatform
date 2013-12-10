@@ -11,6 +11,7 @@ import smsplatform.dao.TBdMessagesendgroup;
 import smsplatform.dao.TBdMessagesendgroupDAO;
 import smsplatform.dao.TBdUser;
 import smsplatform.dao.TBdUserDAO;
+import smsplatform.dao.impl.SRechargeConsumptionDao;
 import smsplatform.dao.impl.SUserDao;
 import smsplatform.dao.impl.SmsgGroupDao;
 import smsplatform.domain.Page;
@@ -50,7 +51,35 @@ public class UserService {
 	   return  smsgGroupDao.queryPageByProperty(page.getMaxresult(), page.getCurrentpage(), "FSendGroupId", false, "TBdUser.FUserId",uid );
 	     
 	 }
-	
+	 /**
+	  * 查询所有的发送消息记录
+	  * @param uid
+	  * @return
+	  */
+	public  List  findAllMsg(Long uid){
+		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
+		return smsgGroupDao.findByProperty("TBdUser.FUserId", uid);
+	}
+	/**
+	 * 查询所有的消费、充值记录
+	 * @param uid
+	 * @return
+	 */
+	public  List  findAllConsume(Long uid){
+		SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
+		
+		return sRechargeConsumptionDao.findByProperty("TBdUser.FUserId", uid);
+	}
+	/**
+	 * 查询剩余短信条数
+	 * @param uid
+	 * @return
+	 */
+	public Long findReleveMsgNumber(Long uid){
+		SUserDao sUserDao = new SUserDao();
+		return sUserDao.findById(uid).getFMessageNumber();
+	}
+		
 	public String sendmsg(TBdMessagesendgroup tBdMessagesendgroup){
 		try {
 			
@@ -91,6 +120,11 @@ public class UserService {
      return result;
     }
 
+
+	
+	
+	
+	
 	public TBdMessagesend gettBdMessagesend() {
 		return tBdMessagesend;
 	}
