@@ -33,7 +33,7 @@ public class UserAction {
 	  }
 	  
 	  public String writeInfo(){
-		  System.out.println("===");
+		 // System.out.println("===");
 		  TBdUser dBdUser = tBdUser;
 		  System.out.println("用户名:"+tBdUser.getFUserFullName());
 		  System.out.println("email:"+tBdUser.getFEmail());
