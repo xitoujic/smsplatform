@@ -9,19 +9,27 @@
 	</head>
 
 	<body>
-	<form action="LoginAction" method="post">
-			<input type="text" class="userName"
-				id="userName"
-				name="userName" maxlength="20"
-			
-				style="width: 100px">	
-			<input type="password" class="password"
-				id="password"
-				name="password" maxlength="20"
-			
-				style="width: 100px">	
-			<input type="submit" value=" 提   交 " id="submit">
-	</form>		
+	<div class="loginMain">
+	<div class="loginHead">
+		<span style="width: 100%;font-size: 60px;text-align:center;float: left;color: white;margin-top:10px;">无锡盈瑞传媒</span>
+	</div>
+	<div class="loginBottom">
+		<form action="LoginAction" method="post">
+				<div class="loginColumn">
+					<span style="width:85px;height:30px;float:left;text-align:center;color:white;margin-top:5px;">用户名:</span>
+					<input type="text" id="userName" name="userName" maxlength="20" style="width: 210px;margin-left:10px;height:30px;">	
+				</div>
+				<div class="loginColumn">
+					<span style="width:85px;height:30px;float:left;text-align:center;color:white;margin-top:5px;">密&nbsp;&nbsp;码:</span>
+					<input type="password" id="password" name="password" style="width: 210px;margin-left:10px;height:30px;">	
+				</div>
+				<div class="loginButton">
+					<input type="submit" value=" 登录 " id="submit" style="width:60px;height:30px;">
+					<button id="loginCancel" style="width:60px;height:30px;">取消</button>
+				</div>
+		</form>		
+	</div>
+	</div>
 		<!--<div class="loginMain">
 			<div class="loginHead">
 				<span style="width: 100%;font-size: 60px;text-align:center;float: left;color: white;margin-top:10px;">无锡盈瑞传媒</span>
