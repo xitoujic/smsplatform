@@ -13,18 +13,18 @@
 			<span style="width: 100%;font-size: 60px;text-align:center;float: left;color: white;margin-top:10px;">个人信息完善</span>
 		</div>
 		<div class="infoBottom">
-			<form action="UserWriteInfoAction" method="post">
+			<form action="UserwriteInfoAction" method="post">
 					<div class="infoColumn">
 						<span style="width:85px;height:30px;float:left;text-align:center;color:white;margin-top:5px;">用户全名:</span>
-						<input type="text" id="userFullName" style="width: 210px;margin-left:10px;height:30px;">	
+						<input type="text" id="tBdUser.FUserFullName" name="tBdUser.FUserFullName" style="width: 210px;margin-left:10px;height:30px;">	
 					</div>
 					<div class="infoColumn">
 						<span style="width:85px;height:30px;float:left;text-align:center;color:white;margin-top:5px;">电话号码:</span>
-						<input type="text" id="phoneNumber" style="width: 210px;margin-left:10px;height:30px;">	
+						<input type="text" id="tBdUser.FPhoneNumber" name="tBdUser.FPhoneNumber" style="width: 210px;margin-left:10px;height:30px;">	
 					</div>
 					<div class="infoColumn">
 						<span style="width:85px;height:30px;float:left;text-align:center;color:white;margin-top:5px;">邮箱:</span>
-						<input type="text" id="emailAddress" style="width: 210px;margin-left:10px;height:30px;">	
+						<input type="text" id="tBdUser.FEmail" name="tBdUser.FEmail" style="width: 210px;margin-left:10px;height:30px;">	
 					</div>
 					<div class="infoButton">
 						<input type="submit" value=" 提交  " id="submit" style="width:60px;height:30px;">
