@@ -125,5 +125,12 @@ public class teast {
 		List<TBdMessagesendgroup> tBdMessagesendgroups =userService.findMessagesendgroup(page, uid);
 		System.out.println(tBdMessagesendgroups.size());
 	}
+	@Test 
+	public void findmsg(){
+		UserService userService = new UserService();
+		//userService.sendmsg(null);
+		List<TBdMessagesendgroup> list =userService.findAllMsg(1l);
+		System.out.println(list.size());
+	}
 
 }

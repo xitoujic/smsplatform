@@ -8,9 +8,7 @@ import org.hibernate.Transaction;
 
 import smsplatform.dao.TBdUser;
 
-import com.hanphon.recruit.dao.impl.GenericDaoHibernateImpl;
-import com.hanphon.recruit.dao.impl.HibernateUtil;
-import com.hanphon.recruit.domain.ScoreDomain;
+
 
 public class SUserDao extends GenericDaoHibernateImpl<TBdUser, Long> {
 	/*public List<TBdUser> queryByPage(int pageSize, int pageNow) {

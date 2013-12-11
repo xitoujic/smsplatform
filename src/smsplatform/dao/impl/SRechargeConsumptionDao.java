@@ -7,9 +7,7 @@ import org.hibernate.Transaction;
 import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdUser;
 
-import com.hanphon.recruit.dao.impl.GenericDaoHibernateImpl;
-import com.hanphon.recruit.dao.impl.HibernateUtil;
-import com.hanphon.recruit.domain.ScoreDomain;
+
 
 public class SRechargeConsumptionDao extends
 		GenericDaoHibernateImpl<TBdRechargeandconsumption, Long> {
