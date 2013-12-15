@@ -74,14 +74,14 @@ public class AddUserAction {
 		transientInstance.setFRole(F_type);
      
 		AdminService adminService = new AdminService();
-	    String out = adminService.addUser(tBdUser);
+	    String out = adminService.addUser(transientInstance);
 	    JSONObject json=new JSONObject(); 
 	    if (out.equals("exist")) {
-	    	json.accumulate("message", "用户以存在！！！");
+	    	json.accumulate("result", "-1");
 		}else if (out.equals("fail")) {
-			json.accumulate("message", "添加失败");
+			json.accumulate("result", "1");
 		}else {
-			json.accumulate("message", "操作成功");
+			json.accumulate("result", "0");
 		}
 		
       /*  Map<String,Object> map = new HashMap<String,Object>();
@@ -100,7 +100,7 @@ public class AddUserAction {
 		          json.accumulate("map", map);
 		          result = json.toString();
 		System.out.println("*********");*/
-		
+	    result = json.toString();
 		return "success";
 	}
 

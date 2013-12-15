@@ -238,14 +238,11 @@
 	});
 	//用户管理
 	//集团用户管理
-	$("#companyUserManager").click(function(){
-		//集团用户管理
-		var html = '<div id="commonUserGrid" style="margin-top:10px;margin-left:15px;"></div>';
-		$(".userManagerRight").empty();
-		$(".userManagerRight").html(html);
+	function getAllUserDate(){
+		//debugger;
 		var source =
 	    {
-	        datatype: "jsonp",
+	        datatype: "json",
 	        datafields: [
 	            { name: 'messageType' },
 	            { name: 'sendPeople' },
@@ -254,10 +251,15 @@
 	            { name: 'phoneNumber' }
 	        ],
 	        async: false,
-	        url: "http://ws.geonames.org/searchJSON",
+	        url: "AdminfindAllUserAction",
 	        pagesize: 18,
 	        pager: function (pagenum, pagesize, oldpagenum) {
 	        },
+	        beforeprocessing: function (data) {
+                debugger;
+                source.totalrecords = data.length;
+                return data;
+            },
 	        data: {
 	            featureClass: "P",
 	            style: "full",
@@ -272,10 +274,18 @@
 	                }
 	            }
 	        );
+		return dataAdapter;
+	};
+	$("#companyUserManager").click(function(){
+		//集团用户管理
+		var html = '<div id="commonUserGrid" style="margin-top:10px;margin-left:15px;"></div>';
+		$(".userManagerRight").empty();
+		$(".userManagerRight").html(html);
+		
 		$("#commonUserGrid").jqxGrid(
 	            {
 	                width: "97%",
-	                source: dataAdapter,
+	                source: getAllUserDate(),
 	                theme: theme,
 	                height: "97%",
 	                pageable: true,
@@ -350,12 +360,12 @@
     					},
     					dataType:"json",//设置需要返回的数据类型
     					success:function(data){
-    						
-    						if(data == "-1"){
+    						var res = eval("("+data+")")
+    						if(res.result == "-1"){
     							alert("用户已存在！");
-    						}else if(data == "1"){
+    						}else if(res.result == "1"){
     							alert("用户添加失败！请稍后重试！");
-    						}else{
+    						}else if(res.result == "0"){
     							alert("开户成功！");
     							$('#newComUserWindow').jqxWindow('close');
     						}

@@ -30,6 +30,10 @@
 				/Noright.jsp
 			</result>
 			
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+			
 		</global-results>
 		<action name="tosmsZoneAction" class="smsplatform.action.ToZoneAction">
 	        <interceptor-ref name="InfoIsAllStack"></interceptor-ref>

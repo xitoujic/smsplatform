@@ -102,6 +102,7 @@ public class AdminService {
 	public List findAllUser(){
 		SUserDao sUserDao = new SUserDao();
 		return sUserDao.findALLObject();
+		
 	}
 	
 	public List findAllRechargeConsumeByUid(Long uid){

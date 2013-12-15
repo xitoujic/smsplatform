@@ -130,14 +130,22 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 	}
 	
 	
-	public List findALLObject(){
+	public List  findALLObject(){
 		Session session = null;
 		Transaction transaction = null;
 		try {
+		/*	session = HibernateUtil.getSession();
+			transaction = session.beginTransaction();
+			String queryString = "from "+clazz.getName();
+			Query queryObject = session.createQuery(queryString);
+			queryObject.setFirstResult(pageSize * (pageNow - 1));
+			queryObject.setMaxResults(pageSize);
+			transaction.commit();
+			return queryObject.list();*/
 			session = HibernateUtil.getSession();
 			transaction = session.beginTransaction();
 			System.out.println(clazz.getName());
-			String queryString = "select count(*) from "+clazz.getName();
+			String queryString = "from "+clazz.getName();
 			Query queryObject = session.createQuery(queryString);
 			transaction.commit();
 			return queryObject.list();
