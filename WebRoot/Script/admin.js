@@ -327,7 +327,8 @@
 					success:function(data){
 						debugger;
 						var result = eval("("+data+")");
-						alert("正常，请稍后重试！");
+						alert("开户成功！")
+						$('#newComUserWindow').jqxWindow('close');
 					},
 					error:function(){
 						alert("系统异常，请稍后重试！");
