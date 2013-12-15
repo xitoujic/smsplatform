@@ -351,9 +351,14 @@
     					dataType:"json",//设置需要返回的数据类型
     					success:function(data){
     						
-    						var result = eval("("+data+")");
-    						alert("开户成功！")
-    						$('#newComUserWindow').jqxWindow('close');
+    						if(data == "-1"){
+    							alert("用户已存在！");
+    						}else if(data == "1"){
+    							alert("用户添加失败！请稍后重试！");
+    						}else{
+    							alert("开户成功！");
+    							$('#newComUserWindow').jqxWindow('close');
+    						}
     					},
     					error:function(){
     						alert("系统异常，请稍后重试！");
