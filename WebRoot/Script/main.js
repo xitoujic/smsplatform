@@ -14,11 +14,12 @@
 				 + '<div class="sendrightBottom">'
 				 + '	<div class="receivePeopleDiv">'
 				 + '		<span style="width:85px;height:30px;float:left;margin-top:7px;text-align:center;font-size:12px;">接收人：</span>'
-				 + '		<input type="text" style="width:75%;height:30px;float:left"></input>'
+				 + '		<input type="text" style="width:55%;height:30px;float:left"></input>'
+				 + '		<span style="width:85px;height:30px;float:left;margin-top:7px;text-align:center;font-size:12px;color:red;">号码之间请以逗号隔开！</span>'
 				 + '    </div>'
 				 + '	<div class="addNumDiv">'
 				 + '		<button id="addNumber" class="k-button k-i-cancle" style="width:80px;height:30px;margin-left:5px;margin-top:5px;float:left;font-size:12px;" type="button">添加号码</button>'
-				 + '		<input type="file" id="numberFile" accept="txt" />'	
+				 + '		<span style="height:30px;float:left;margin-top:7px;text-align:center;font-size:12px;color:red;">号码之间请以逗号隔开！</span>'
 				 + '	</div>'
 				 + '	<div class="messageDiv">'
 				 + '		<span style="width:85px;height:30px;float:left;margin-top:7px;text-align:center;font-size:12px;">短信内容：</span>'
@@ -37,8 +38,17 @@
 		$("#addNumber").jqxButton({ width: '65', height: '25', theme: theme });
 		$("#addNumber").click(function(){
 			debugger;
-			//alert("sw");
+			
 			var sssw = $("#numberFile").val();
+			var fso = new ActiveXObject("Scripting.FileSystemObject"); 
+			var f = fso.OpenTextFile("C:/phonenum/test.txt",1); 
+			var phoneString = ""; 
+			var phoneNumber = [];
+ 			while (!f.AtEndOfStream) 
+			phoneString += f.ReadLine(); 
+			//phoneNumber = phoneString.split(",");
+			f.Close();
+			
 		});
 	});
 	$("#receive").jqxButton({ width: '60', height: '25', theme: theme });
