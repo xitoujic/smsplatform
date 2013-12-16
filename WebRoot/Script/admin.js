@@ -238,14 +238,11 @@
 	});
 	//用户管理
 	//集团用户管理
-	$("#companyUserManager").click(function(){
-		//集团用户管理
-		var html = '<div id="commonUserGrid" style="margin-top:10px;margin-left:15px;"></div>';
-		$(".userManagerRight").empty();
-		$(".userManagerRight").html(html);
+	function getAllUserDate(){
+		//debugger;
 		var source =
 	    {
-	        datatype: "jsonp",
+	        datatype: "json",
 	        datafields: [
 	            { name: 'messageType' },
 	            { name: 'sendPeople' },
@@ -254,10 +251,15 @@
 	            { name: 'phoneNumber' }
 	        ],
 	        async: false,
-	        url: "http://ws.geonames.org/searchJSON",
+	        url: "AdminfindAllUserAction",
 	        pagesize: 18,
 	        pager: function (pagenum, pagesize, oldpagenum) {
 	        },
+	        beforeprocessing: function (data) {
+                debugger;
+                source.totalrecords = data.length;
+                return data;
+            },
 	        data: {
 	            featureClass: "P",
 	            style: "full",
@@ -272,10 +274,18 @@
 	                }
 	            }
 	        );
+		return dataAdapter;
+	};
+	$("#companyUserManager").click(function(){
+		//集团用户管理
+		var html = '<div id="commonUserGrid" style="margin-top:10px;margin-left:15px;"></div>';
+		$(".userManagerRight").empty();
+		$(".userManagerRight").html(html);
+		
 		$("#commonUserGrid").jqxGrid(
 	            {
 	                width: "97%",
-	                source: dataAdapter,
+	                source: getAllUserDate(),
 	                theme: theme,
 	                height: "97%",
 	                pageable: true,
@@ -307,36 +317,7 @@
 		//集团开户
 		var theme = getDemoTheme();
 		$("#addCompanyUser").click(function(){
-			$("#newSure").jqxButton({ width: '60', height: '25', theme: theme });
-            $("#newCancle").jqxButton({ width: '60', height: '25', theme: theme });
-            
-            $("#newSure").click(function(){
-            	var newUserNameString = $("#newUserName").val();
-            	var newPasswordString = $("#newPassword").val();
-            	var newTypeString = $('#newUserRole')[0].textContent;
-            	debugger;
-            	$.ajax({
-					type:"post",
-					url:"AddUserAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
-					data:{//设置数据源
-            			F_UserName: newUserNameString,
-						F_Password: newPasswordString,
-						F_type: newTypeString
-					},
-					dataType:"json",//设置需要返回的数据类型
-					success:function(data){
-						debugger;
-						var result = eval("("+data+")");
-						alert("正常，请稍后重试！");
-					},
-					error:function(){
-						alert("系统异常，请稍后重试！");
-					}
-				});
-            });
-            $("#newCancle").click(function(){
-            	$('#newComUserWindow').jqxWindow('close');
-            });
+			
 			//集团用户
 			$('#newComUserWindow').jqxWindow({
                 showCollapseButton: true,
@@ -353,7 +334,52 @@
                                      "管理员",
                                      "普通用户"
                                      ];
-            $("#newUserRole").jqxDropDownList({ source: userType, selectedIndex: 0, width: '240', height: '28',dropDownHeight:60, theme: theme });
+            $("#newUserRole").jqxDropDownList({ source: userType, selectedIndex: 1, width: '240', height: '28',dropDownHeight:60, theme: theme });
+            
+            $("#newSure").jqxButton({ width: '60', height: '25', theme: theme });
+            $("#newCancle").jqxButton({ width: '60', height: '25', theme: theme });
+            
+            $("#newSure").click(function(){
+            	var newUserNameString = $("#newUserName").val();
+            	var newPasswordString = $("#newPassword").val();
+            	var newTypeString = $('#newUserRole')[0].textContent;
+            	var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/; 
+            	var pswPartn = /^(\w){6,20}$/; 
+            	if (!patrn.exec(newUserNameString)) {
+            		alert("请输入字母与数字的组合！");
+            	}else if(!patrn.exec(newPasswordString)){
+            		alert("请输入6-20个字母、数字、下划线");
+            	}else{
+            		$.ajax({
+    					type:"post",
+    					url:"AddUserAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+    					data:{//设置数据源
+                			F_UserName: newUserNameString,
+    						F_Password: newPasswordString,
+    						F_type: newTypeString
+    					},
+    					dataType:"json",//设置需要返回的数据类型
+    					success:function(data){
+    						var res = eval("("+data+")")
+    						if(res.result == "-1"){
+    							alert("用户已存在！");
+    						}else if(res.result == "1"){
+    							alert("用户添加失败！请稍后重试！");
+    						}else if(res.result == "0"){
+    							alert("开户成功！");
+    							$('#newComUserWindow').jqxWindow('close');
+    						}
+    					},
+    					error:function(){
+    						alert("系统异常，请稍后重试！");
+    					}
+    				});
+            	}
+            	
+            });
+            $("#newCancle").click(function(){
+            	$('#newComUserWindow').jqxWindow('close');
+            });
 		});
 		//集团用户配置
 		$("#companyConfig").click(function(){

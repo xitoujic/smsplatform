@@ -18,6 +18,7 @@
 				 + '    </div>'
 				 + '	<div class="addNumDiv">'
 				 + '		<button id="addNumber" class="k-button k-i-cancle" style="width:80px;height:30px;margin-left:5px;margin-top:5px;float:left;font-size:12px;" type="button">添加号码</button>'
+				 + '		<input type="file" id="numberFile" accept="txt" />'	
 				 + '	</div>'
 				 + '	<div class="messageDiv">'
 				 + '		<span style="width:85px;height:30px;float:left;margin-top:7px;text-align:center;font-size:12px;">短信内容：</span>'
@@ -34,6 +35,11 @@
 		$("#sendSure").jqxButton({ width: '60', height: '25', theme: theme });
 		$("#sendCancle").jqxButton({ width: '60', height: '25', theme: theme });
 		$("#addNumber").jqxButton({ width: '65', height: '25', theme: theme });
+		$("#addNumber").click(function(){
+			debugger;
+			//alert("sw");
+			var sssw = $("#numberFile").val();
+		});
 	});
 	$("#receive").jqxButton({ width: '60', height: '25', theme: theme });
 	$("#receive").click(function(){

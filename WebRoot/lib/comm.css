@@ -118,8 +118,8 @@ a:link, a:visited, a:hover, a:active, a, area
 	float:left;
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
     -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-    -webkit-box-shadow: 2px 2px 10px #909090;/*safari»òchrome*/
-    box-shadow:2px 2px 10px #909090;/*opera»òie9*/ 
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safariï¿½ï¿½chrome*/
+    box-shadow:2px 2px 10px #909090;/*operaï¿½ï¿½ie9*/ 
 }
 
 #tabstrip .tabmain .navSpanDiv
@@ -156,13 +156,13 @@ a:link, a:visited, a:hover, a:active, a, area
 	/*border:1px solid gray;*/
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
     -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-    -webkit-box-shadow: 2px 2px 10px #909090;/*safari»òchrome*/
-    box-shadow:2px 2px 10px #909090;/*opera»òie9*/ 
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safariï¿½ï¿½chrome*/
+    box-shadow:2px 2px 10px #909090;/*operaï¿½ï¿½ie9*/ 
 }
 
 #tabstrip .tabmain .managerRight .sendrightTop
 {
-	width: 97%;
+	width: 90%;
 	height: 50px;
 	float: left;
 	margin-top: 5px;
@@ -224,8 +224,8 @@ a:link, a:visited, a:hover, a:active, a, area
 	float:left;
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
     -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-    -webkit-box-shadow: 2px 2px 10px #909090;/*safari»òchrome*/
-    box-shadow:2px 2px 10px #909090;/*opera»òie9*/
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safariï¿½ï¿½chrome*/
+    box-shadow:2px 2px 10px #909090;/*operaï¿½ï¿½ie9*/
 }
 
 .rechargeAndconsumeRight
@@ -239,8 +239,8 @@ a:link, a:visited, a:hover, a:active, a, area
 	/*border:1px solid gray;*/
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
     -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-    -webkit-box-shadow: 2px 2px 10px #909090;/*safari»òchrome*/
-    box-shadow:2px 2px 10px #909090;/*opera»òie9*/ 
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safariï¿½ï¿½chrome*/
+    box-shadow:2px 2px 10px #909090;/*operaï¿½ï¿½ie9*/ 
 }
 
 .personeInfoLeft
@@ -251,8 +251,8 @@ a:link, a:visited, a:hover, a:active, a, area
 	float:left;
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
     -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-    -webkit-box-shadow: 2px 2px 10px #909090;/*safari»òchrome*/
-    box-shadow:2px 2px 10px #909090;/*opera»òie9*/
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safariï¿½ï¿½chrome*/
+    box-shadow:2px 2px 10px #909090;/*operaï¿½ï¿½ie9*/
 }
 
 .personeInfoRight
@@ -266,8 +266,8 @@ a:link, a:visited, a:hover, a:active, a, area
 	/*border:1px solid gray;*/
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
     -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-    -webkit-box-shadow: 2px 2px 10px #909090;/*safari»òchrome*/
-    box-shadow:2px 2px 10px #909090;/*opera»òie9*/ 
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safariï¿½ï¿½chrome*/
+    box-shadow:2px 2px 10px #909090;/*operaï¿½ï¿½ie9*/ 
 }
 
 .personeInfoDiv
@@ -279,8 +279,8 @@ a:link, a:visited, a:hover, a:active, a, area
 	margin-top:10px;
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#909090,direction=120,strength=4);/*ie*/
     -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
-    -webkit-box-shadow: 2px 2px 10px #909090;/*safari»òchrome*/
-    box-shadow:2px 2px 10px #909090;/*opera»òie9*/
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safariï¿½ï¿½chrome*/
+    box-shadow:2px 2px 10px #909090;/*operaï¿½ï¿½ie9*/
 }
 
 .personeInfoDiv .personHead

@@ -6,6 +6,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
+import com.sun.net.httpserver.Authenticator.Success;
+
 import smsplatform.dao.TBdMessagesend;
 import smsplatform.dao.TBdMessagesendgroup;
 import smsplatform.dao.TBdMessagesendgroupDAO;
@@ -44,6 +46,7 @@ public class UserService {
 		}
 		return "success";
 	}
+	
 	
 	 public List findMessagesendgroup(Page<TBdMessagesendgroup> page,Long uid){
 		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
@@ -119,7 +122,26 @@ public class UserService {
      }
      return result;
     }
-
+    
+	public  String writeInfo(TBdUser tBdUser ,Long uid){
+		try {
+			SUserDao sUserDao = new SUserDao();
+			TBdUser tBdUser2 = sUserDao.findById(uid);
+			tBdUser2.setFUserFullName(tBdUser.getFUserFullName());
+			tBdUser2.setFEmail(tBdUser.getFEmail());
+			tBdUser2.setFPhoneNumber(tBdUser.getFPhoneNumber());
+			tBdUser2.setFUpdateStatus("已修改");
+			sUserDao.update(tBdUser2);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return "fail";
+		}
+		return "success";
+		
+		
+		
+	}
 
 	
 	
