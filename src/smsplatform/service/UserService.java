@@ -65,7 +65,7 @@ public class UserService {
 	 * @param uid
 	 * @return
 	 */
-	public  List  findAllConsume(Long uid){
+	public  List  findAllRechargeConsume(Long uid){
 		SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
 		
 		return sRechargeConsumptionDao.findByProperty("TBdUser.FUserId", uid);
