@@ -8,7 +8,7 @@
     <class name="smsplatform.dao.TBdMessagesend" table="t_bd_messagesend" catalog="smsplatform" dynamic-insert="true" dynamic-update="true">
         <id name="FMessageId" type="java.lang.Long">
             <column name="F_MessageID" />
-            <generator class="assigned" />
+              <generator class="identity" />
         </id>
         <many-to-one name="TBdMessagesendgroup" class="smsplatform.dao.TBdMessagesendgroup" fetch="select">
             <column name="F_SendGroupID" not-null="true" />
@@ -32,7 +32,7 @@
             <column name="F_NumberArea" length="20" />
         </property>
         <property name="FSendTime" type="java.sql.Timestamp">
-            <column name="F_SendTime" length="19" not-null="true" />
+            <column name="F_SendTime" length="19"  />
         </property>
     </class>
 </hibernate-mapping>
