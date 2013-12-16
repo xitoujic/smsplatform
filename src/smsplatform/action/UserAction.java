@@ -21,8 +21,10 @@ public class UserAction {
 	  
 	  
 	  public String sendMsg(){
+		  Long uid = (Long) ActionContext.getContext().getSession().get("uid");
 		  UserService userService = new UserService();
-		  return userService.sendmsg(tBdMessagesendgroup);
+		  
+		  return userService.sendmsg(tBdMessagesendgroup,uid);
 	  }
 	  
 	  public String findMessagesendgroup(){

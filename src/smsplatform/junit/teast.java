@@ -132,5 +132,20 @@ public class teast {
 		List<TBdMessagesendgroup> list =userService.findAllMsg(1l);
 		System.out.println(list.size());
 	}
-
+	public String[] parsePhoneNum(String phone){
+		
+		return phone.split(",");
+		
+	}
+	@Test
+	public void testsplit(){
+		String phoneString="18953768672,18953768672,18953768672,18953768672,18953768672,18953768672,18953768672,18953768672,18953768672,18953768672," +
+				"18953768672,18953768672,18953768672,18953768672,18953768672,18953768672,18953768672,18953768672,18953768672";
+		String [] niceStrings=parsePhoneNum(phoneString);
+		for (int i = 0; i < niceStrings.length; i++) {
+		System.out.println(niceStrings[i]);
+	}
+		System.out.println(parsePhoneNum(phoneString).length);
+	}
+   
 }

@@ -11,15 +11,17 @@ import com.sun.net.httpserver.Authenticator.Success;
 import smsplatform.dao.TBdMessagesend;
 import smsplatform.dao.TBdMessagesendgroup;
 import smsplatform.dao.TBdMessagesendgroupDAO;
+import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdUser;
 import smsplatform.dao.TBdUserDAO;
 import smsplatform.dao.impl.SRechargeConsumptionDao;
 import smsplatform.dao.impl.SUserDao;
 import smsplatform.dao.impl.SmsgGroupDao;
+import smsplatform.dao.impl.SmsgsendDao;
 import smsplatform.domain.Page;
 
 public class UserService {
-	
+	public static double price = 0.4;
 	public TBdMessagesend tBdMessagesend;
 	public TBdMessagesendgroup tBdMessagesendgroup ;
 	
@@ -68,7 +70,7 @@ public class UserService {
 	 * @param uid
 	 * @return
 	 */
-	public  List  findAllConsume(Long uid){
+	public  List  findAllRechargeConsume(Long uid){
 		SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
 		
 		return sRechargeConsumptionDao.findByProperty("TBdUser.FUserId", uid);
@@ -82,15 +84,61 @@ public class UserService {
 		SUserDao sUserDao = new SUserDao();
 		return sUserDao.findById(uid).getFMessageNumber();
 	}
-		
-	public String sendmsg(TBdMessagesendgroup tBdMessagesendgroup){
+	public void msgSend(String [] phones,TBdUser tBdUser,TBdMessagesend tBdMessagesend){
+	//	tBdMessagesend.setTBdMessagesendgroup(TBdMessagesendgroup)
+		SmsgsendDao smsgsendDao = new SmsgsendDao();
+		for (int i = 0; i < phones.length; i++) {
+			tBdMessagesend.setFSendNumber(phones[i]);
+			smsgsendDao.save(tBdMessagesend);
+		}
+	}	
+	public String sendmsg(TBdMessagesendgroup tBdMessagesendgroup,Long uid){
 		try {
+			TBdMessagesend tBdMessagesend = new TBdMessagesend();
+			TBdUser tBdUser = new TBdUser();
+			SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
+			SUserDao sUserDao = new SUserDao();
+			SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
+			TBdRechargeandconsumption  tBdRechargeandconsumption = new TBdRechargeandconsumption();
 			
 			 String location = "http://www.baidu.com";
-			 /*    String location = "http://baidu.com";
-			 */  //  response.sendRedirect(location);
-			    System.out.println(sendGet(location));;
-			
+			 String result = sendGet(location);
+			  System.out.println(result);;
+			  
+			  /*
+			   * 测试  设置全为成功
+			   */
+			  
+			  tBdUser =sUserDao.findById(uid);
+			  tBdMessagesendgroup.setTBdUser(tBdUser);
+			  tBdRechargeandconsumption.setFBeforeConsumpteMoney(tBdUser.getFMoney());
+			  tBdRechargeandconsumption.setFBeforeConsumpteNum(tBdUser.getFMessageNumber());
+			    result = "成功";
+			    if (result.contains("成功")) {
+			    	tBdMessagesendgroup.setFGroupType("不加急");
+				smsgGroupDao.save(tBdMessagesendgroup);
+				
+			    }
+			    tBdMessagesend.setFMessageStatus("发送成功");
+			    tBdMessagesend.setTBdMessagesendgroup(tBdMessagesendgroup);
+			    tBdMessagesend.setFSendStatus("已发送");
+			    tBdMessagesend.setFSendCostStatus("已计费");
+			    String [] phones = tBdMessagesendgroup.getFGroupPhones().split(",");
+			    msgSend(phones, tBdUser, tBdMessagesend);
+			    //收费
+			    tBdUser.setFMoney(tBdUser.getFMoney() - phones.length * price );
+			    tBdUser.setFMessageNumber(Math.round((tBdUser.getFMoney() * 1l / price)));
+			    sUserDao.update(tBdUser);
+			    
+			    
+			    tBdRechargeandconsumption.setFAfterConsumpteMoney(tBdUser.getFMoney());
+			    tBdRechargeandconsumption.setFAfterConsumpteNum(tBdUser.getFMessageNumber());
+			    tBdRechargeandconsumption.setFConsumpteMoney(phones.length * price);
+			    tBdRechargeandconsumption.setFConsumpteNum(phones.length * 1l);
+			    tBdRechargeandconsumption.setFOperateType("消费");
+			    tBdRechargeandconsumption.setTBdUser(tBdUser);
+			    sRechargeConsumptionDao.save(tBdRechargeandconsumption);
+			    
 			
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -98,7 +146,10 @@ public class UserService {
 		}
 		return "success";
 	}
-
+    public  void consume(TBdUser tBdUser,TBdMessagesendgroup tBdMessagesendgroup){
+    	
+    	
+    }
 	
 	public static String sendGet(String url)
     {
@@ -163,5 +214,14 @@ public class UserService {
 		this.tBdMessagesendgroup = tBdMessagesendgroup;
 	}
 
-	
+	public String[] parsePhoneNum(String phone){
+		String string = phone;
+		/*int count=0;
+		while (string.contains(",")) {
+			count++;
+			string = string.split("")
+		}*/
+		return phone.split(",");
+		
+	}
 }
