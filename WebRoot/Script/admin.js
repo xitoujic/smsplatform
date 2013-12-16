@@ -239,16 +239,20 @@
 	//用户管理
 	//集团用户管理
 	function getAllUserDate(){
-		//debugger;
 		var source =
 	    {
 	        datatype: "json",
 	        datafields: [
-	            { name: 'messageType' },
-	            { name: 'sendPeople' },
-	            { name: 'submitType', type: 'float' },
-	            { name: 'messageState' },
-	            { name: 'phoneNumber' }
+	            { name: 'FUserId' },
+	            { name: 'FUserName' },
+	            { name: 'FUserFullName'},
+	            { name: 'FSex' },
+	            { name: 'FPhoneNumber' },
+	            { name: 'FRole' },
+	            { name: 'FCompanyType' },
+	            { name: 'FCheckType' },
+	            { name: 'FRight' },
+	            { name: 'FDeductScale' },
 	        ],
 	        async: false,
 	        url: "AdminfindAllUserAction",
@@ -256,9 +260,7 @@
 	        pager: function (pagenum, pagesize, oldpagenum) {
 	        },
 	        beforeprocessing: function (data) {
-                debugger;
-                source.totalrecords = data.length;
-                return data;
+                return eval("("+data+")");
             },
 	        data: {
 	            featureClass: "P",
@@ -291,15 +293,16 @@
 	                pageable: true,
 	                sortable: true,
 	                columns: [
-	                    { text: '用户名', datafield: 'userName', width: 80 },
-	                    { text: '用户姓名', datafield: 'userFullName', width: 150 },
-	                    { text: '性别', datafield: 'userSex', width: 50 },
-	                    { text: '手机号码', datafield: 'userPhoneNum', width: 150 },
-	                    { text: '用户类型', datafield: 'userRole', minwidth: 50 },
-	                    { text: '行业类型', datafield: 'companyType', width: 80 },
-	                    { text: '审核信息', datafield: 'checkStatus', minwidth: 50 },
-	                    { text: '激活状态', datafield: 'activateType', minwidth: 60 },
-	                    { text: '扣量比', datafield: 'deductScale', minwidth: 80 }
+	                    { text: '用户编号', datafield: 'FUserId', width: 80 ,hidden: true},
+	                    { text: '用户名', datafield: 'FUserName', width: 80 },
+	                    { text: '用户姓名', datafield: 'FUserFullName', width: 150 },
+	                    { text: '性别', datafield: 'FSex', width: 50 },
+	                    { text: '手机号码', datafield: 'FPhoneNumber', width: 150 },
+	                    { text: '用户类型', datafield: 'FRole', minwidth: 50 },
+	                    { text: '行业类型', datafield: 'FCompanyType', width: 80 },
+	                    { text: '审核信息', datafield: 'FCheckType', minwidth: 50 },
+	                    { text: '激活状态', datafield: 'FRight', minwidth: 60 },
+	                    { text: '扣量比', datafield: 'FDeductScale', minwidth: 80 }
 	                ],
 	                showtoolbar: true,
 	                rendertoolbar: function (toolbar) {
@@ -317,8 +320,40 @@
 		//集团开户
 		var theme = getDemoTheme();
 		$("#addCompanyUser").click(function(){
-			
-			//集团用户
+			var addUserHtml = '<div>新增用户</div>'
+				    		+ '<div id="windowBody">'
+							+ '   <div class="newUserColumn">'
+							+ ' 	 <div class="columnLeft">'
+							+ ' 		<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">用户名:</span>'
+							+ '      </div>'
+							+ '     	<div class="columnRight">'
+							+ '      		<input id="newUserName" type="text" maxlength="32" style="width:100%;height:28px;float:left;"></input>'
+							+ '      	</div>'
+							+ '   </div>'
+							+ '   <div class="newUserColumn">'
+							+ '      <div class="columnLeft">'
+							+ ' 		<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">初始密码:</span>'
+							+ '    	 </div>'
+							+ ' 	 <div class="columnRight">'
+							+ ' 		<input id="newPassword" type="password" maxlength="32" style="width:100%;height:28px;float:left;"></input>'
+							+ '  	 </div>'
+							+ '   </div>'
+							+ '   <div class="newUserColumn">'
+							+ ' 	<div class="columnLeft">'
+							+ ' 		<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">用户类型:</span>'
+							+ ' 	</div>'
+							+ ' 	<div class="columnRight">'
+							+ ' 		<div id="newUserRole"></div>'
+							+ ' 	</div>'
+							+ '   </div>'
+							+ '   <div class="newUserColumn">'
+							+ ' 	<button id="newCancle" style="float:right;margin-top:3px;margin-right:40px;" type="button">取消</button>'
+				        	+ ' 	<button id="newSure" style="float:right;margin-top:3px;margin-right:10px;" type="button">确定</button>'
+							+ '   </div>'
+							+ '</div>'
+			$('#newComUserWindow').empty();
+			$('#newComUserWindow').html(addUserHtml);
+ 			//集团用户
 			$('#newComUserWindow').jqxWindow({
                 showCollapseButton: true,
                 height: 210, 
@@ -383,6 +418,59 @@
 		});
 		//集团用户配置
 		$("#companyConfig").click(function(){
+			var configHtml = '<div>用户配置</div>'
+				    	   + '<div id="windowBody">'
+						   + '		<div class="newUserColumn">'
+						   + '			<div class="columnLeft">'
+						   + ' 				<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">审核信息:</span>'
+						   + '			</div>'
+						   + '      	<div class="columnRight">'
+						   + '				<div id="configCheckStatus"></div>'
+						   + '			</div>'
+						   + '		</div>'
+						   + '		<div class="newUserColumn">'
+						   + '			<div class="columnLeft">'
+						   + '				<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">是否加急:</span>'
+						   + '			</div>'
+						   + '			<div class="columnRight">'
+						   + ' 				<div id="configUserUrgent"></div>'
+						   + '			</div>'
+						   + '		</div>'
+						   + '		<div class="newUserColumn">'
+						   + '			<div class="columnLeft">'
+						   + '				<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">激活状态:</span>'
+						   + '			</div>'
+						   + '			<div class="columnRight">'
+						   + '				<div id="configActivateStatus"></div>'
+						   + '			</div>'
+						   + '		</div>'
+						   + '		<div class="newUserColumn">'
+						   + '			<div class="columnLeft">'
+						   + '				<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">扣量比例:</span>'
+						   + '			</div>'
+						   + '			<div class="columnRight">'
+						   + '				<div id="configDeductScale"></div><span style="float:right;width:20px;margin-right:35px;font-size:26px;margin-top: -33px;">%</span>'
+						   + ' 			</div>'
+						   + '		</div>'
+						   + ' 		<div class="newUserColumn">'
+						   + '			<button id="configCancle" style="float:right;margin-top:3px;margin-right:40px;" type="button">取消</button>'
+						   + '			<button id="configSure" style="float:right;margin-top:3px;margin-right:10px;" type="button">确定</button>'
+						   + '		</div>'
+						   + '</div>'
+			$("#cfgComUserWindow").empty();
+			$("#cfgComUserWindow").html(configHtml);
+			//集团用户
+			$('#cfgComUserWindow').jqxWindow({
+                showCollapseButton: true,
+                height: 250, 
+                width: 400, 
+                theme: theme,
+                resizable: false,
+                initContent: function () {
+                    $('#cfgComUserWindow').jqxWindow('focus');
+                }
+            });
+			$('#cfgComUserWindow').jqxWindow('open');
 			$("#configSure").jqxButton({ width: '60', height: '25', theme: theme });
             $("#configCancle").jqxButton({ width: '60', height: '25', theme: theme });
             var checkStatusSource = [
@@ -405,18 +493,6 @@
             $("#configCancle").click(function(){
             	$('#cfgComUserWindow').jqxWindow('close');
             });
-			//集团用户
-			$('#cfgComUserWindow').jqxWindow({
-                showCollapseButton: true,
-                height: 250, 
-                width: 400, 
-                theme: theme,
-                resizable: false,
-                initContent: function () {
-                    $('#cfgComUserWindow').jqxWindow('focus');
-                }
-            });
-			$('#cfgComUserWindow').jqxWindow('open');
 		});
 	});
 	//普通用户管理

@@ -116,78 +116,9 @@
                 	<div class="userManagerRight">
                 	</div>
                 	<div id="newComUserWindow" style="display:none">
-                		<div>新增用户</div>
-                		<div id="windowBody">
-                			<div class="newUserColumn">
-                				<div class="columnLeft">
-                					<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">用户名:</span>
-                				</div>
-                				<div class="columnRight">
-                					<input id="newUserName" type="text" maxlength="32" style="width:100%;height:28px;float:left;"></input>
-                				</div>
-                			</div>
-                			<div class="newUserColumn">
-                				<div class="columnLeft">
-                					<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">初始密码:</span>
-                				</div>
-                				<div class="columnRight">
-                					<input id="newPassword" type="password" maxlength="32" style="width:100%;height:28px;float:left;"></input>
-                				</div>
-                			</div>
-                			<div class="newUserColumn">
-                				<div class="columnLeft">
-                					<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">用户类型:</span>
-                				</div>
-                				<div class="columnRight">
-                					<div id="newUserRole"></div>
-                				</div>
-                			</div>
-                			<div class="newUserColumn">
-                				<button id="newCancle" style="float:right;margin-top:3px;margin-right:40px;" type="button">取消</button>
-	                    		<button id="newSure" style="float:right;margin-top:3px;margin-right:10px;" type="button">确定</button>
-                			</div>
-                		</div>
                 	</div>
                 	<div id="cfgComUserWindow" style="display:none">
-                		<div>用户配置</div>
-                		<div id="windowBody">
-                			<div class="newUserColumn">
-                				<div class="columnLeft">
-                					<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">审核信息:</span>
-                				</div>
-                				<div class="columnRight">
-                					<div id="configCheckStatus"></div>
-                				</div>
-                			</div>
-                			<div class="newUserColumn">
-                				<div class="columnLeft">
-                					<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">是否加急:</span>
-                				</div>
-                				<div class="columnRight">
-                					<div id="configUserUrgent"></div>
-                				</div>
-                			</div>
-                			<div class="newUserColumn">
-                				<div class="columnLeft">
-                					<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">激活状态:</span>
-                				</div>
-                				<div class="columnRight">
-                					<div id="configActivateStatus"></div>
-                				</div>
-                			</div>
-                			<div class="newUserColumn">
-                				<div class="columnLeft">
-                					<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">扣量比例:</span>
-                				</div>
-                				<div class="columnRight">
-                					<div id="configDeductScale"></div><span style="float:right;width:20px;margin-right:35px;font-size:26px;margin-top: -33px;">%</span>
-                				</div>
-                			</div>
-                			<div class="newUserColumn">
-                				<button id="configCancle" style="float:right;margin-top:3px;margin-right:40px;" type="button">取消</button>
-	                    		<button id="configSure" style="float:right;margin-top:3px;margin-right:10px;" type="button">确定</button>
-                			</div>
-                		</div>
+                		
                 	</div>
                 </div>
                 <div class="tabmain">
