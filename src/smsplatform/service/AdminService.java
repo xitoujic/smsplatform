@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import smsplatform.dao.TBdMessagesendgroup;
 import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdRechargeandconsumptionDAO;
 import smsplatform.dao.TBdUser;
@@ -12,6 +13,7 @@ import smsplatform.dao.TBdUserDAO;
 import smsplatform.dao.impl.SRechargeConsumptionDao;
 import smsplatform.dao.impl.SUserDao;
 import smsplatform.dao.impl.SmsgGroupDao;
+import smsplatform.dao.impl.SmsgsendDao;
 import smsplatform.domain.PageView;
 
 public class AdminService {
@@ -25,6 +27,15 @@ public class AdminService {
 		System.out.println(tBdUserDAO.totalcount());
 		return tBdUsers;
 	}
+	public List findallSendMsg(TBdMessagesendgroup tBdMessagesendgroup){
+		
+		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
+		SmsgsendDao smsgsendDao = new SmsgsendDao();
+		
+		return smsgsendDao.findByProperty("TBdMessagesendgroup",tBdMessagesendgroup);
+	}
+	
+	
 	public List<TBdUser> getScrollData(int pagesize,int currrentPage){
 		List<TBdUser> tBdUsers = new ArrayList<TBdUser>();
 //		TBdUserDAO tBdUserDAO= new TBdUserDAO();
@@ -60,18 +71,11 @@ public class AdminService {
 	
 	public boolean recharge(long usrID,int money){
 		
-	//	TBdRechargeandconsumptionDAO tBdRechargeandconsumptionDAO = new TBdRechargeandconsumptionDAO();
+	
 		SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
-		
-		
-		/*TBdUserDAO tBdUserDAO= new TBdUserDAO();
-		TBdUser  tBdUser = tBdUserDAO.findById(usrID);*/
 		SUserDao sUserDao = new SUserDao();
+		
 		TBdUser  tBdUser =  sUserDao.findById(usrID);
-		/**
-		 * 第一次充值
-		 */
-	//	TBdRechargeandconsumption tBdRechargeandconsumption = tBdRechargeandconsumptionDAO.findLastResultById(usrID);
 		TBdRechargeandconsumption tBdRechargeandconsumption = sRechargeConsumptionDao.findLastResultById(usrID);
 	
 		TBdRechargeandconsumption tBdRechargeandconsumption2 = new TBdRechargeandconsumption();
@@ -87,10 +91,12 @@ public class AdminService {
 		tBdRechargeandconsumption2.setFRechargeMoney(new Double(money));
 		
 		tBdRechargeandconsumption2.setFOperateTime(new Timestamp(System.currentTimeMillis()));
+		
 		tBdUser.setFMoney(tBdUser.getFMoney()+money);
 		tBdUser.setFMessageNumber(new Double(tBdUser.getFMessageNumber()+money*1l/price).longValue());
+		
 		tBdRechargeandconsumption2.setTBdUser(tBdUser);
-	//	tBdRechargeandconsumptionDAO.save(tBdRechargeandconsumption2);
+
 		sRechargeConsumptionDao.save(tBdRechargeandconsumption2);
 		return true;
 		

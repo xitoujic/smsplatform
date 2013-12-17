@@ -12,6 +12,7 @@ import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdUser;
 import smsplatform.domain.Page;
 import smsplatform.service.AdminService;
+import smsplatform.service.UserService;
 
 public class AdminAction {
      public   Page<TBdUser> userPage ;
@@ -19,21 +20,55 @@ public class AdminAction {
      public   Page<TBdMessagesendgroup> msgGrouPage;
      public   Page<TBdRechargeandconsumption> consumPage;
      public   List<TBdUser> tBdUsers;
+     public   TBdUser tBdUser;
+	 public   TBdMessagesendgroup tBdMessagesendgroup;
+	  public  List<TBdMessagesend> tBdMessagesends;  //查询发送短信
+	  public  List<TBdMessagesendgroup> tBdMessagesendgroups;  
      public   int usrID;
      public   int money;
      public   String result;
+     public static String msg;
+     
+     public String findallgroupMsg(){
+    	 AdminService adminService = new AdminService();
+    	 tBdMessagesendgroups = adminService.findallgroupMsg();
+    	 JSONObject json=new JSONObject(); 
+		 json.accumulate("tBdMessagesendgroups", tBdMessagesendgroups);
+		 result=json.toString();
+		 return "success";
+     }
+     
+	  /**
+	   * 查询每个分组每条发送短信状态及消息
+	   * @return
+	   */
+
+	  public String findallSendMsg(){
+		  AdminService adminService = new AdminService();
+		  tBdMessagesends = adminService.findallSendMsg(tBdMessagesendgroup);
+		   JsonConfig config = new JsonConfig();
+		   JSONObject json=new JSONObject(); 
+			 json.accumulate("message", msg);
+	       result=json.toString()+JSONArray.fromObject(tBdMessagesends, config).toString();
+		  return "success";
+		  
+	  }
+	  /**
+	   * 查询所有用户
+	   * @return
+	   */
      public String findAllUser(){
     	 try {
     		
-			 AdminService userService = new AdminService();
-			 tBdUsers = userService.findAllUser();
+			 AdminService adminService = new AdminService();
+			 tBdUsers = adminService.findAllUser();
 		/*	 JSONObject json=new JSONObject(); 
 			 json.accumulate("tBdUsers", tBdUsers);
 			 
 			 result = json.toString();
 			 System.out.println(result);*/
 			 
-			     JsonConfig config = new JsonConfig();
+			       JsonConfig config = new JsonConfig();
 			       config.setExcludes(new String[]{"TBdMessagesendgroups","TBdRechargeandconsumptions","TBdLogs"});//除去emps属性
 			       result= JSONArray.fromObject(tBdUsers, config).toString();
 		    
@@ -64,14 +99,20 @@ public class AdminAction {
       * @return
       */
      public String recharge(){
+    	 JSONObject json=new JSONObject(); 
     	 try {
     		 AdminService userService = new AdminService();
     		 userService.recharge(usrID, money);
     		 } catch (Exception e) {
     		 // TODO Auto-generated catch block
     		 e.printStackTrace();
+    		 json.accumulate("message", "0");  //失败
+    		 result=json.toString();
     		 return "fail";
     	 }
+    		
+    		 json.accumulate("message", "1");  //成功
+    		 result=json.toString();
     	 return "success";
      }
      
@@ -139,5 +180,24 @@ public class AdminAction {
 	public void setResult(String result) {
 		this.result = result;
 	}
+	public TBdUser gettBdUser() {
+		return tBdUser;
+	}
+	public void settBdUser(TBdUser tBdUser) {
+		this.tBdUser = tBdUser;
+	}
+	public TBdMessagesendgroup gettBdMessagesendgroup() {
+		return tBdMessagesendgroup;
+	}
+	public void settBdMessagesendgroup(TBdMessagesendgroup tBdMessagesendgroup) {
+		this.tBdMessagesendgroup = tBdMessagesendgroup;
+	}
+	public List<TBdMessagesend> gettBdMessagesends() {
+		return tBdMessagesends;
+	}
+	public void settBdMessagesends(List<TBdMessagesend> tBdMessagesends) {
+		this.tBdMessagesends = tBdMessagesends;
+	}
+	
 
 }

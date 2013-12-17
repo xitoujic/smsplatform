@@ -34,7 +34,7 @@
         <property name="FGroupPhones" type="java.lang.String">
             <column name="F_GroupPhones" length="65535" />
         </property>
-        <set name="TBdMessagesends" inverse="true">
+        <set name="TBdMessagesends" inverse="true"  >
             <key>
                 <column name="F_SendGroupID" not-null="true" />
             </key>

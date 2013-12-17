@@ -84,11 +84,11 @@
             </key>
             <one-to-many class="smsplatform.dao.TBdRechargeandconsumption" />
         </set>
-        <set name="TBdLogs" inverse="true">
+        <set name="TBdLogs" inverse="true" lazy="true" >
             <key>
                 <column name="F_userID" not-null="true" />
             </key>
-            <one-to-many class="smsplatform.dao.TBdLog" />
+            <one-to-many class="smsplatform.dao.TBdLog"/>
         </set>
     </class>
 </hibernate-mapping>
