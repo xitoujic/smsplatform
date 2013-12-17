@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import smsplatform.dao.TBdMessagesendgroup;
 import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdRechargeandconsumptionDAO;
 import smsplatform.dao.TBdUser;
@@ -12,6 +13,7 @@ import smsplatform.dao.TBdUserDAO;
 import smsplatform.dao.impl.SRechargeConsumptionDao;
 import smsplatform.dao.impl.SUserDao;
 import smsplatform.dao.impl.SmsgGroupDao;
+import smsplatform.dao.impl.SmsgsendDao;
 import smsplatform.domain.PageView;
 
 public class AdminService {
@@ -25,6 +27,15 @@ public class AdminService {
 		System.out.println(tBdUserDAO.totalcount());
 		return tBdUsers;
 	}
+	public List findallSendMsg(TBdMessagesendgroup tBdMessagesendgroup){
+		
+		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
+		SmsgsendDao smsgsendDao = new SmsgsendDao();
+		
+		return smsgsendDao.findByProperty("TBdMessagesendgroup",tBdMessagesendgroup);
+	}
+	
+	
 	public List<TBdUser> getScrollData(int pagesize,int currrentPage){
 		List<TBdUser> tBdUsers = new ArrayList<TBdUser>();
 //		TBdUserDAO tBdUserDAO= new TBdUserDAO();

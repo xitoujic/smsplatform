@@ -12,6 +12,7 @@ import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdUser;
 import smsplatform.domain.Page;
 import smsplatform.service.AdminService;
+import smsplatform.service.UserService;
 
 public class AdminAction {
      public   Page<TBdUser> userPage ;
@@ -19,14 +20,31 @@ public class AdminAction {
      public   Page<TBdMessagesendgroup> msgGrouPage;
      public   Page<TBdRechargeandconsumption> consumPage;
      public   List<TBdUser> tBdUsers;
+	public   TBdMessagesendgroup tBdMessagesendgroup;
+	  public  List<TBdMessagesend> tBdMessagesends;  //查询发送短信
      public   int usrID;
      public   int money;
      public   String result;
+	  /**
+	   * 查询每个分组每条发送短信状态及消息
+	   * @return
+	   */
+
+	  public String findallSendMsg(){
+		  AdminService adminService = new AdminService();
+		  tBdMessagesends = adminService.findallSendMsg(tBdMessagesendgroup);
+		  return "success";
+		  
+	  }
+	  /**
+	   * 查询所有用户
+	   * @return
+	   */
      public String findAllUser(){
     	 try {
     		
-			 AdminService userService = new AdminService();
-			 tBdUsers = userService.findAllUser();
+			 AdminService adminService = new AdminService();
+			 tBdUsers = adminService.findAllUser();
 		/*	 JSONObject json=new JSONObject(); 
 			 json.accumulate("tBdUsers", tBdUsers);
 			 
