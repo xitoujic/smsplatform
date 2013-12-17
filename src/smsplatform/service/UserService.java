@@ -25,6 +25,23 @@ public class UserService {
 	public TBdMessagesend tBdMessagesend;
 	public TBdMessagesendgroup tBdMessagesendgroup ;
 	
+	
+	public List findallSendMsg(TBdMessagesendgroup tBdMessagesendgroup){
+		
+		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
+		SmsgsendDao smsgsendDao = new SmsgsendDao();
+		
+		return smsgsendDao.findByProperty("TBdMessagesendgroup",tBdMessagesendgroup);
+	}
+	public  List findallgroupMsg(Long uid){
+		TBdUser tBdUser = new TBdUser();
+		tBdUser.setFUserId(uid);
+		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
+		  LogService.getInstance().log(uid, "查询所有的用户短信组消息");
+		  LogService.getInstance().log(uid, "修改个人消息");
+		return smsgGroupDao.findByProperty("TBdUser", tBdUser);
+		
+	}
 	/**
 	 * 用户添加个人信息
 	 * @param tBdUser
@@ -42,14 +59,21 @@ public class UserService {
 			tBdUser2.setFCompanyType(tBdUser.getFCompanyType());
 			tBdUser2.setFSignature(tBdUser.getFSignature());
 	    	sUserDao.update(tBdUser2);
+	    	LogService.getInstance().log(id, "修改个人消息");
 		} catch (Exception e) {
 		    e.printStackTrace();
 			return "fail";
 		}
 		return "success";
 	}
-	
-	
+
+	 public List findRechargeComsumption(Long uid){
+		SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
+		
+		SUserDao sUserDao = new SUserDao();
+		TBdUser tBdUser = sUserDao.findById(uid);
+		return sRechargeConsumptionDao.findByProperty("TBdUser", tBdUser);
+	 }
 	 public List findMessagesendgroup(Page<TBdMessagesendgroup> page,Long uid){
 		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
 		//smsgGroupDao.queryByPage(page.getMaxresult(), page.getCurrentpage(), orderBY, ascORdesc)

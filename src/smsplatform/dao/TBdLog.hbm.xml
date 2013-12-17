@@ -23,7 +23,7 @@
             <column name="F_after" length="50" />
         </property>
         <property name="FTime" type="java.sql.Timestamp">
-            <column name="F_time" length="19" not-null="true" />
+            <column name="F_time" length="19"  />
         </property>
     </class>
 </hibernate-mapping>

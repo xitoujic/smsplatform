@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2013-12-16 20:32:20
+Date: 2013-12-17 17:05:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,19 +25,22 @@ CREATE TABLE `t_bd_log` (
   `F_befor` varchar(50) DEFAULT NULL,
   `F_operate` varchar(50) DEFAULT NULL,
   `F_after` varchar(50) DEFAULT NULL,
-  `F_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `F_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`F_logID`),
   KEY `User_Log` (`F_userID`) USING BTREE,
   KEY `FK60613FF2140B6C42` (`F_userID`),
   CONSTRAINT `FK60613FF2140B6C42` FOREIGN KEY (`F_userID`) REFERENCES `t_bd_user` (`F_UserID`),
   CONSTRAINT `t_bd_log_ibfk_1` FOREIGN KEY (`F_userID`) REFERENCES `t_bd_user` (`F_UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of t_bd_log
 -- ----------------------------
 INSERT INTO `t_bd_log` VALUES ('00000000000000000001', '1', null, null, null, '2013-12-05 09:03:07');
 INSERT INTO `t_bd_log` VALUES ('00000000000000000002', '2', null, null, null, '2013-12-05 09:05:01');
+INSERT INTO `t_bd_log` VALUES ('00000000000000000003', '47', null, '查询所有的用户短信组消息', null, '2013-12-17 15:27:12');
+INSERT INTO `t_bd_log` VALUES ('00000000000000000004', '47', null, '查询所有的用户短信组消息', null, '2013-12-17 15:36:42');
+INSERT INTO `t_bd_log` VALUES ('00000000000000000005', '47', null, '修改个人消息', null, '2013-12-17 15:36:42');
 
 -- ----------------------------
 -- Table structure for t_bd_messagesend
