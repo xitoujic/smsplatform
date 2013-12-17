@@ -14,16 +14,18 @@
 				 + '<div class="sendrightBottom">'
 				 + '	<div class="receivePeopleDiv">'
 				 + '		<span style="width:85px;height:30px;float:left;margin-top:7px;text-align:center;font-size:12px;">接收人：</span>'
-				 + '		<input type="text" style="width:55%;height:30px;float:left"></input>'
-				 + '		<span style="width:85px;height:30px;float:left;margin-top:7px;text-align:center;font-size:12px;color:red;">号码之间请以逗号隔开！</span>'
+				 + '		<input type="text" id="phoneNumberString" style="width:55%;height:30px;float:left"></input>'
+				 + '		<span style="height:30px;float:left;margin-top:7px;text-align:center;font-size:12px;color:red;">号码之间请以逗号隔开！</span>'
 				 + '    </div>'
 				 + '	<div class="addNumDiv">'
-				 + '		<button id="addNumber" class="k-button k-i-cancle" style="width:80px;height:30px;margin-left:5px;margin-top:5px;float:left;font-size:12px;" type="button">添加号码</button>'
-				 + '		<span style="height:30px;float:left;margin-top:7px;text-align:center;font-size:12px;color:red;">号码之间请以逗号隔开！</span>'
+				 + '		<span style="width:68px;height:30px;float:left;margin-top:11px;margin-left:5px;text-align:left;font-size:12px;">号码文件:</span>'
+				 + '		<input type="text" id="phoneNumTextName" style="width:20%;height:30px;float:left;margin-top:5px;"></input>'
+				 + '		<button id="addNumber" style="margin-top:6px;margin-left:5px;float:left;" type="button">添加号码</button>'
+				 + '		<span style="height:30px;float:left;margin-top:15px;margin-left:5px;text-align:center;font-size:12px;color:red;">请在C盘创建一个phonenum文件夹，将号码.txt文件存到该文件下。在当前输入框输入号码文件的名称。</span>'
 				 + '	</div>'
 				 + '	<div class="messageDiv">'
 				 + '		<span style="width:85px;height:30px;float:left;margin-top:7px;text-align:center;font-size:12px;">短信内容：</span>'
-				 + '		<textarea style="width:75%;height:190px;float:left;resize: none;" ></textarea>'
+				 + '		<textarea id="messageContent" style="width:75%;height:190px;float:left;resize: none;" ></textarea>'
 				 + '		<span style="width:75%;float:left;margin-left:85px;color:red;font-size:12px;">短信内容<span id="contentNum">0</span>个字，短信签名<span id="signatureNum">0</span>个字。按每条70个字拆分，共<span id="messageNum">0</span>条。</span>'
 				 + '	</div>'
 				 + '	<div class="messageSignatureDiv">'
@@ -36,19 +38,59 @@
 		$("#sendSure").jqxButton({ width: '60', height: '25', theme: theme });
 		$("#sendCancle").jqxButton({ width: '60', height: '25', theme: theme });
 		$("#addNumber").jqxButton({ width: '65', height: '25', theme: theme });
+		
+		var phoneString = ""; 
+		var phoneNumber = [];
+		
 		$("#addNumber").click(function(){
-			debugger;
-			
-			var sssw = $("#numberFile").val();
-			var fso = new ActiveXObject("Scripting.FileSystemObject"); 
-			var f = fso.OpenTextFile("C:/phonenum/test.txt",1); 
-			var phoneString = ""; 
-			var phoneNumber = [];
- 			while (!f.AtEndOfStream) 
-			phoneString += f.ReadLine(); 
-			//phoneNumber = phoneString.split(",");
-			f.Close();
-			
+			var textName = $("#phoneNumTextName").val();
+			if(textName == ""){
+				alert("请输入文件名称！");
+			}else{
+				var fso = new ActiveXObject("Scripting.FileSystemObject"); 
+				try{
+					var f = fso.OpenTextFile("C:/phonenum/"+textName+".txt",1); 
+					while (!f.AtEndOfStream) {
+						phoneString += f.ReadLine(); 
+			 			if(phoneString != ""){
+			 				phoneString = ","+phoneString;
+			 				phoneNumber = phoneString.split(",");
+			 			}else{
+			 				alert("号码文件中没有号码！");
+			 			}
+					}
+					f.Close();
+				}catch(e){
+					alert("文件未找到！");
+				}
+			}
+		});
+		
+		// 短信发送；
+		$("#sendSure").click(function(){
+			var phoneNumber = $("#phoneNumberString").val();
+			var messageContent = $("#messageContent").val();
+			var phoneNumberString = phoneNumber+phoneString;
+			if(phoneNumberString == ""){
+				alert("请输入号码或选择一个号码文件！");
+			}else if(messageContent == ""){
+				alert("请输入短信内容！");
+			}else{
+				$.ajax({
+					type:"post",
+					url:"UsersendMsgAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+					data:{//设置数据源
+	        			F_PhoneNumberString: phoneNumberString,
+	        			F_messageContent: messageContent
+					},
+					dataType:"json",//设置需要返回的数据类型
+					success:function(data){
+					},
+					error:function(){
+						alert("系统异常，请稍后重试！");
+					}
+				});
+			}
 		});
 	});
 	$("#receive").jqxButton({ width: '60', height: '25', theme: theme });
