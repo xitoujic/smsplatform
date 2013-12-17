@@ -58,21 +58,21 @@
 			<result name="fail">
 				/login.jsp
 			</result>
-			<result name="writeInfo">
-				/index.jsp
-			</result>
+			<result name="writeInfo" type="redirectAction">
+				tosmsZoneAction
+			</result><!--
 			<result name="success" type="redirectAction">
 				tosmsZoneAction
 			</result>
-		</action>
+		--></action>
 		<action name="Admin*Action" method="{1}" class="smsplatform.action.AdminAction">
 			<result name="fail">
 				/index.jsp
 			</result>
-			<result name="success" type="redirectAction">
+			<!--<result name="success" type="redirectAction">
 				tosmsZoneAction
 			</result>
-			<result type="json">
+			--><result type="json">
 				<param name="root">result</param>
 			</result>
 		</action>
