@@ -71,18 +71,11 @@ public class AdminService {
 	
 	public boolean recharge(long usrID,int money){
 		
-	//	TBdRechargeandconsumptionDAO tBdRechargeandconsumptionDAO = new TBdRechargeandconsumptionDAO();
+	
 		SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
-		
-		
-		/*TBdUserDAO tBdUserDAO= new TBdUserDAO();
-		TBdUser  tBdUser = tBdUserDAO.findById(usrID);*/
 		SUserDao sUserDao = new SUserDao();
+		
 		TBdUser  tBdUser =  sUserDao.findById(usrID);
-		/**
-		 * 第一次充值
-		 */
-	//	TBdRechargeandconsumption tBdRechargeandconsumption = tBdRechargeandconsumptionDAO.findLastResultById(usrID);
 		TBdRechargeandconsumption tBdRechargeandconsumption = sRechargeConsumptionDao.findLastResultById(usrID);
 	
 		TBdRechargeandconsumption tBdRechargeandconsumption2 = new TBdRechargeandconsumption();
@@ -98,10 +91,12 @@ public class AdminService {
 		tBdRechargeandconsumption2.setFRechargeMoney(new Double(money));
 		
 		tBdRechargeandconsumption2.setFOperateTime(new Timestamp(System.currentTimeMillis()));
+		
 		tBdUser.setFMoney(tBdUser.getFMoney()+money);
 		tBdUser.setFMessageNumber(new Double(tBdUser.getFMessageNumber()+money*1l/price).longValue());
+		
 		tBdRechargeandconsumption2.setTBdUser(tBdUser);
-	//	tBdRechargeandconsumptionDAO.save(tBdRechargeandconsumption2);
+
 		sRechargeConsumptionDao.save(tBdRechargeandconsumption2);
 		return true;
 		
