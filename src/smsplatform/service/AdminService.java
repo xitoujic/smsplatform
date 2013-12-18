@@ -27,7 +27,6 @@ public class AdminService {
 		System.out.println(tBdUserDAO.totalcount());
 		return tBdUsers;
 	}
-	
 	public List findallgroupMsg(){
 		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
 		return smsgGroupDao.findALLObject();
@@ -79,17 +78,41 @@ public class AdminService {
 	
 		SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
 		SUserDao sUserDao = new SUserDao();
-		
 		TBdUser  tBdUser =  sUserDao.findById(usrID);
-		TBdRechargeandconsumption tBdRechargeandconsumption = sRechargeConsumptionDao.findLastResultById(usrID);
-	
 		TBdRechargeandconsumption tBdRechargeandconsumption2 = new TBdRechargeandconsumption();
 		tBdRechargeandconsumption2.setFOperateType("充值");
+		tBdRechargeandconsumption2.setFBeforeRechargeMoney(tBdUser.getFMoney());
+		tBdRechargeandconsumption2.setFBeforeRechargeNum(tBdUser.getFMessageNumber());
 		
+	    tBdRechargeandconsumption2.setFAfterRechargeMoney(tBdUser.getFMoney()+money);
+		tBdRechargeandconsumption2.setFAfterRechargeNum(new Double(tBdUser.getFMessageNumber()+money*1l/price).longValue());
+	
+		tBdRechargeandconsumption2.setFRechargeMoney(new Double(money));
+		
+		//tBdRechargeandconsumption2.setFOperateTime(new Timestamp(System.currentTimeMillis()));
+		
+		tBdUser.setFMoney(tBdUser.getFMoney()+money);
+		tBdUser.setFMessageNumber(new Double(tBdUser.getFMessageNumber()+money*1l/price).longValue());
+		
+		tBdRechargeandconsumption2.setTBdUser(tBdUser);
+		tBdUser.setFUpdateTime(new Timestamp(System.currentTimeMillis()));
+		sUserDao.update(tBdUser);
+		sRechargeConsumptionDao.save(tBdRechargeandconsumption2);
+		return true;
+		
+	}
+/*	public boolean recharge(long usrID,int money){
+		
+		
+		SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
+		SUserDao sUserDao = new SUserDao();
+		TBdUser  tBdUser =  sUserDao.findById(usrID);
+		TBdRechargeandconsumption tBdRechargeandconsumption = sRechargeConsumptionDao.findLastResultById(usrID);
+		
+		TBdRechargeandconsumption tBdRechargeandconsumption2 = new TBdRechargeandconsumption();
+		tBdRechargeandconsumption2.setFOperateType("充值");
 		tBdRechargeandconsumption2.setFBeforeRechargeMoney(tBdRechargeandconsumption.getTBdUser().getFMoney());
 		tBdRechargeandconsumption2.setFBeforeRechargeNum(tBdRechargeandconsumption.getTBdUser().getFMessageNumber());
-		//tBdRechargeandconsumption2.setFAfterRechargeMoney(tBdRechargeandconsumption.getFBeforeRechargeMoney()+money);
-		
 		tBdRechargeandconsumption2.setFAfterRechargeMoney(tBdUser.getFMoney()+money);
 		tBdRechargeandconsumption2.setFAfterRechargeNum(new Double(tBdUser.getFMessageNumber()+money*1l/price).longValue());
 		tBdRechargeandconsumption2.setFRcgAndCuptId(null);
@@ -101,11 +124,13 @@ public class AdminService {
 		tBdUser.setFMessageNumber(new Double(tBdUser.getFMessageNumber()+money*1l/price).longValue());
 		
 		tBdRechargeandconsumption2.setTBdUser(tBdUser);
-
+		
 		sRechargeConsumptionDao.save(tBdRechargeandconsumption2);
 		return true;
 		
 	}
+*/	
+	
 	/**
 	 * 查看所有的用户信息
 	 * @return

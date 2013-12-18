@@ -4,14 +4,7 @@
 <struts>
 	<package name="sms" namespace="/" extends="struts-default,json-default">
 	   
-	   
-	  
-	
-	
-	
-	
-	
-		<interceptors>
+	   <interceptors>
 			<interceptor name="InfoIsAllInterceptor"
 				class="smsplatform.interceptor.InfoIsAllInterceptor">
 			</interceptor>

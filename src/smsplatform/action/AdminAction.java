@@ -2,6 +2,8 @@ package smsplatform.action;
 
 import java.util.List;
 
+import com.opensymphony.xwork2.ActionContext;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -12,6 +14,7 @@ import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdUser;
 import smsplatform.domain.Page;
 import smsplatform.service.AdminService;
+import smsplatform.service.LogService;
 import smsplatform.service.UserService;
 
 public class AdminAction {
@@ -28,6 +31,7 @@ public class AdminAction {
      public   int money;
      public   String result;
      public static String msg;
+      public static JSONObject json=new JSONObject(); 
      
      public String findallgroupMsg(){
     	 AdminService adminService = new AdminService();
@@ -35,6 +39,8 @@ public class AdminAction {
     	 JSONObject json=new JSONObject(); 
 		 json.accumulate("tBdMessagesendgroups", tBdMessagesendgroups);
 		 result=json.toString();
+		 Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+		 LogService.getInstance().log(uid, "查询所有短信分組");
 		 return "success";
      }
      
@@ -47,9 +53,12 @@ public class AdminAction {
 		  AdminService adminService = new AdminService();
 		  tBdMessagesends = adminService.findallSendMsg(tBdMessagesendgroup);
 		   JsonConfig config = new JsonConfig();
-		   JSONObject json=new JSONObject(); 
+		//   JSONObject json=new JSONObject(); 
 			 json.accumulate("message", msg);
 	       result=json.toString()+JSONArray.fromObject(tBdMessagesends, config).toString();
+	       
+	       Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+			LogService.getInstance().log(uid, "查询分組"+tBdMessagesendgroup.getFSendGroupId()+"所有短信");
 		  return "success";
 		  
 	  }
@@ -92,6 +101,8 @@ public class AdminAction {
 			e.printStackTrace();
 			return "fail";
 		}
+		    Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+			LogService.getInstance().log(uid, "查询所有用户");
     	return "success";
      }
      /**
@@ -99,7 +110,9 @@ public class AdminAction {
       * @return
       */
      public String recharge(){
-    	 JSONObject json=new JSONObject(); 
+    	// JSONObject json=new JSONObject(); 
+    	 Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+		 LogService.getInstance().log(uid, "充值---");
     	 try {
     		 AdminService userService = new AdminService();
     		 userService.recharge(tBdUser.getFUserId(), money);
@@ -113,6 +126,8 @@ public class AdminAction {
     		
     		 json.accumulate("message", "1");  //成功
     		 result=json.toString();
+    		 
+    		 LogService.getInstance().log(uid, "给用户ID："+usrID+"，充值金额："+money);
     	 return "success";
      }
      

@@ -210,12 +210,15 @@
 		 * 短信号码查询窗口
 		 */
 		$("#checkPhoneNum").click(function(){
+<<<<<<< HEAD
 //			var phonehtml = '<div>查询发送号码信息</div>'
 //						+ '<div>'
 //			    		+ '	  <div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>'
 //			    		+ '</div>';
 			//$('#phoneNumWindow').empty();
 			//$('#phoneNumWindow').html(phonehtml);
+=======
+>>>>>>> origin/master
  			//集团用户
 			$('#phoneNumWindow').jqxWindow({
                 showCollapseButton: true,
@@ -230,9 +233,15 @@
 			$('#phoneNumWindow').jqxWindow('open');
 			
 			/*
+<<<<<<< HEAD
 			 * 号码查询数据源
 			 */
 			function loadPhoneNumInfoSource(){
+=======
+			 * 详细号码数据源
+			 */
+			function phoneNumSource(){
+>>>>>>> origin/master
 				products =
 		            [
 		                {
@@ -278,6 +287,7 @@
 				return dataAdapter;
 			}
 			
+<<<<<<< HEAD
 			
 			/*
 			 * 号码详细记录
@@ -289,6 +299,17 @@
 	                width: "98%",
 	                source: loadPhoneNumInfoSource(),
 	                theme: "",
+=======
+			/*
+			 * 号码详细信息grid
+			 */
+			
+			$("#phoneNumGrid").jqxGrid(
+	            {
+	                width: "98%",
+	                source: phoneNumSource(),
+	                theme: theme,
+>>>>>>> origin/master
 	                height: "98%",
 	                pageable: true,
 	                sortable: true,
@@ -305,18 +326,31 @@
 	                rendertoolbar: function (toolbar) {
 		            	var me = this;
 	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">号码详细记录</span>'
+<<<<<<< HEAD
 	                    				  +'<div style="width:80px;height:32px;float:right;">'
+=======
+	                    				  +'<div style="width:150px;height:32px;float:right;">'
+>>>>>>> origin/master
 	                    						+'<button id="exportGrid" style="float:left;margin-top:3px;margin-left:10px;" type="button">记录导出</button>'
 	                    						//+'<button id="failToSend" style="float:right;margin-top:3px;margin-right:10px;" type="button">失败重发</button>'
 	                    				  +'</div>');
 	                    toolbar.append(container);
 	                    $("#exportGrid").jqxButton({ width: '60', height: '25', theme: theme });
+<<<<<<< HEAD
 	                    $("#exportGrid").click(function(){
 	                    	 $("#phoneNumGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
 	                    });
 	                    //$("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
 	            	}
 	        });
+=======
+	                    //$("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
+	                    $("#exportGrid").click(function () {
+	                        $("#messageGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');           
+	                    });
+	            	}
+	            });
+>>>>>>> origin/master
 		});
 	});
 	

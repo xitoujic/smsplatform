@@ -38,11 +38,7 @@ public class teast {
 		
 	}
 	
-	@Test
-	public void user(){
-		UserAction action = new UserAction();
-		action.findMessagesendgroup();
-	}
+	
 	@Test
 	public void da0(){
 		SUserDao sUserDao = new SUserDao();
