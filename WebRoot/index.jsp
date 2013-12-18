@@ -9,6 +9,7 @@
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxcore.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxtabs.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxbuttons.js"></script>
+	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxwindow.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxbuttongroup.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxradiobutton.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxdata.js"></script> 
@@ -20,6 +21,8 @@
 		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.pager.js"></script>
 		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.sort.js"></script>
 		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.filter.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxdata.export.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.export.js"></script>
 		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.columnsresize.js"></script>
 		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.selection.js"></script>
 		<!-- 系统文件引用 -->
@@ -80,6 +83,12 @@
                 		</div>
                 	</div>
                 	<div class="managerRight">
+                	</div>
+                	<div id="phoneNumWindow" style="display:none">
+                		<div>电话号码详细信息</div>
+                		<div>
+                			<div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>
+                		</div>
                 	</div>
                 </div>
                 <div class="tabmain">

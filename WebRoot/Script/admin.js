@@ -42,29 +42,42 @@
 		$(".managerRight").html(html);
 	});
 	
-	$("#sendedMessage").click(function(){
+	/*
+	 * 已发短信记录
+	 */
+	
+	$("#managerSendedMessage").click(function(){
+		debugger;
 		var html = '<div id="messageGrid" style="margin-top:10px;margin-left:15px;"></div>';
 		$(".managerRight").empty();
 		$(".managerRight").html(html);
 		var source =
 	    {
-	        datatype: "jsonp",
+	        datatype: "json",
 	        datafields: [
-	            { name: 'messageType' },
-	            { name: 'sendPeople' },
-	            { name: 'submitType', type: 'float' },
-	            { name: 'messageState' },
-	            { name: 'phoneNumber' }
+	            { name: 'FSendGroupId' },
+	            { name: 'FGroupType' },
+	            { name: 'FUserName' },
+	            { name: 'FSubmitType' },
+	            { name: 'FGroupSendStatus' },
+	            { name: 'FGroupPhoneNum'},
+	            { name: 'FGroupContent' },
+	            { name: 'time' }
 	        ],
 	        async: false,
-	        url: "http://ws.geonames.org/searchJSON",
+	        url: "AdminfindallgroupMsgAction",
 	        pagesize: 18,
+	        beforeprocessing: function (data) {
+	        	debugger;
+	        	var dataArray = eval("("+data+")");
+	        	for(var i=0;i<dataArray.length;i++){
+	        		dataArray[i].time =new Date(dataArray[i].FGroupSendTime.time);
+	        		dataArray[i].FUserName = dataArray[i].TBdUser.FUserName;
+	        	}
+	        	debugger;
+                return dataArray;
+            },
 	        pager: function (pagenum, pagesize, oldpagenum) {
-	        },
-	        data: {
-	            featureClass: "P",
-	            style: "full",
-	            maxRows: 20
 	        }
 	    };
 		var dataAdapter = new $.jqx.dataAdapter(source,
@@ -84,6 +97,103 @@
 	                pageable: true,
 	                sortable: true,
 	                columns: [
+	                    { text: '短信ID', datafield: 'FSendGroupId', width: 80 },
+	                    { text: '短信类型', datafield: 'FGroupType', width: 80 },
+	                    { text: '发送人', datafield: 'FUserName', width: 150 },
+	                    { text: '提交方式', datafield: 'FSubmitType', width: 100 },
+	                    { text: '短信状态', datafield: 'FGroupSendStatus', width: 80 },
+	                    { text: '号码个数', datafield: 'FGroupPhoneNum', minwidth: 80 },
+	                    { text: '短信内容', datafield: 'FGroupContent', width: 380 },
+	                    { text: '发送时间', datafield: 'time', minwidth: 120 }
+	                ],
+	                showtoolbar: true,
+	                rendertoolbar: function (toolbar) {
+		            	var me = this;
+	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">短信发送历史记录</span>'
+	                    				  +'<div style="width:150px;height:32px;float:right;">'
+	                    						+'<button id="checkPhoneNum" style="float:left;margin-top:3px;margin-left:10px;" type="button">查询号码</button>'
+	                    						//+'<button id="failToSend" style="float:right;margin-top:3px;margin-right:10px;" type="button">失败重发</button>'
+	                    				  +'</div>');
+	                    toolbar.append(container);
+	                    $("#checkPhoneNum").jqxButton({ width: '60', height: '25', theme: theme });
+	                    //$("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
+	            	}
+	            });
+		
+		
+		/*
+		 * 号码查询
+		 */
+		$("#checkPhoneNum").click(function(){
+			var rowindex = $('#messageGrid').jqxGrid('getselectedrowindex');
+			var currentitem = $('#messageGrid').jqxGrid('getrowdata', rowindex);
+        	var GroupId = currentitem.FSendGroupId;
+ 			//集团用户
+			$('#phoneNumWindow').jqxWindow({
+                showCollapseButton: true,
+                height: 600, 
+                width: 800, 
+                theme: theme,
+                resizable: false,
+                initContent: function () {
+                    $('#phoneNumWindow').jqxWindow('focus');
+                }
+            });
+			$('#phoneNumWindow').jqxWindow('open');
+			
+			/*
+			 * 详细号码数据源
+			 */
+			function phoneNumSource(){
+				var source =
+			    {
+			        datatype: "json",
+					//datatype: "array",
+			        datafields: [
+			            { name: 'messageType'},
+			            { name: 'sendPeople'},
+			            { name: 'submitType'},
+			            { name: 'messageState'},
+			            { name: 'phoneNumber'},
+			            { name: 'messageDetails'},
+			            { name: 'sendTime'},
+			        ],
+			        //localdata: products,
+			        async: false,
+			        url: "AdminfindallSendMsgAction",
+			        data: {
+			            "tBdMessagesendgroup.FSendGroupId":GroupId
+			        },
+			        beforeprocessing: function (data) {
+			        	debugger;
+		                //return dataArray;
+		            },
+			        pagesize: 18,
+			        pager: function (pagenum, pagesize, oldpagenum) {
+			        }
+			    };
+				var dataAdapter = new $.jqx.dataAdapter(source);
+				return dataAdapter;
+			}
+			/*
+			 * 号码详细记录
+			 */
+			
+			$("#phoneNumGrid").empty();
+			
+	        /*
+			 * 号码详细信息grid
+			 */
+			
+			$("#phoneNumGrid").jqxGrid(
+	            {
+	                width: "98%",
+	                source: phoneNumSource(),
+	                theme: theme,
+	                height: "98%",
+	                pageable: true,
+	                sortable: true,
+	                columns: [
 	                    { text: '短信类型', datafield: 'messageType', width: 80 },
 	                    { text: '发送人', datafield: 'sendPeople', width: 150 },
 	                    { text: '提交方式', datafield: 'submitType', width: 100 },
@@ -95,16 +205,19 @@
 	                showtoolbar: true,
 	                rendertoolbar: function (toolbar) {
 		            	var me = this;
-	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">短信发送历史记录</span>'
-	                    				  +'<div style="width:150px;height:32px;float:right;">'
-	                    						+'<button id="checkPhoneNum" style="float:left;margin-top:3px;margin-left:10px;" type="button">查询号码</button>'
-	                    						+'<button id="failToSend" style="float:right;margin-top:3px;margin-right:10px;" type="button">失败重发</button>'
+	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">号码详细记录</span>'
+	                    				  +'<div style="width:80px;height:32px;float:right;">'
+	                    						+'<button id="exportGrid" style="float:left;margin-top:3px;margin-left:10px;" type="button">记录导出</button>'
+	                    						//+'<button id="failToSend" style="float:right;margin-top:3px;margin-right:10px;" type="button">失败重发</button>'
 	                    				  +'</div>');
 	                    toolbar.append(container);
-	                    $("#checkPhoneNum").jqxButton({ width: '60', height: '25', theme: theme });
-	                    $("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
+	                    $("#exportGrid").jqxButton({ width: '60', height: '25', theme: theme });
+	                    $("#exportGrid").click(function(){
+	                    	 $("#phoneNumGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
+	                    });
 	            	}
 	            });
+		});
 	});
 	
 	
@@ -249,6 +362,8 @@
 	            { name: 'FSex' },
 	            { name: 'FPhoneNumber' },
 	            { name: 'FRole' },
+	            { name: 'FMoney' },
+	            { name: 'FMessageNumber' },
 	            { name: 'FCompanyType' },
 	            { name: 'FCheckType' },
 	            { name: 'FRight' },
@@ -260,6 +375,7 @@
 	        pager: function (pagenum, pagesize, oldpagenum) {
 	        },
 	        beforeprocessing: function (data) {
+	        	//debugger;
                 return eval("("+data+")");
             },
 	        data: {
@@ -299,6 +415,8 @@
 	                    { text: '性别', datafield: 'FSex', width: 50 },
 	                    { text: '手机号码', datafield: 'FPhoneNumber', width: 150 },
 	                    { text: '用户类型', datafield: 'FRole', minwidth: 50 },
+	                    { text: '账户余额', datafield: 'FMoney', minwidth: 100 },
+	                    { text: '短信条数', datafield: 'FMessageNumber', minwidth: 100 },
 	                    { text: '行业类型', datafield: 'FCompanyType', width: 80 },
 	                    { text: '审核信息', datafield: 'FCheckType', minwidth: 50 },
 	                    { text: '激活状态', datafield: 'FRight', minwidth: 60 },
@@ -308,7 +426,7 @@
 	                rendertoolbar: function (toolbar) {
 		            	var me = this;
 	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">集团用户信息</span>'
-	                    				  +'<div style="width:150px;height:32px;float:right;">'
+	                    				  +'<div style="width:250px;height:32px;float:right;">'
 	                    				  		+'<button id="companyConfig" style="float:right;margin-top:3px;margin-right:10px;" type="button">配置</button>'
 	                    						+'<button id="addCompanyUser" style="float:right;margin-top:3px;margin-right:10px;" type="button">开户</button>'
 	                    						+'<button id="recharge" style="float:right;margin-top:3px;margin-right:10px;" type="button">充值</button>'
@@ -316,6 +434,7 @@
 	                    toolbar.append(container);
 	                    $("#addCompanyUser").jqxButton({ width: '60', height: '25', theme: theme });
 	                    $("#companyConfig").jqxButton({ width: '60', height: '25', theme: theme });
+	                    $("#recharge").jqxButton({ width: '60', height: '25', theme: theme });
 	            	}
 	            });
 		//集团开户
@@ -417,6 +536,81 @@
             	$('#newComUserWindow').jqxWindow('close');
             });
 		});
+		
+		//用户充值
+		$("#recharge").click(function(){
+			var rowindex = $('#commonUserGrid').jqxGrid('getselectedrowindex');
+        	//debugger;
+        	if(rowindex == -1){
+        		alert("请选择一个充值用户！");
+        	}else{
+        		var currentitem = $('#commonUserGrid').jqxGrid('getrowdata', rowindex);
+            	var FUserId = currentitem.FUserId;
+				var rechargeHtml = '<div>用户充值</div>'
+			    	   + '<div id="windowBody">'
+					   + '		<div class="newUserColumn">'
+					   + '			<div class="columnLeft">'
+					   + ' 				<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">充值金额:</span>'
+					   + '			</div>'
+					   + '			<div class="columnRight">'
+					   + '				<div id="rechargeMoney"></div><span style="float:right;width:20px;margin-right:35px;font-size:26px;margin-top: -33px;">元</span>'
+					   + ' 			</div>'
+					   + '		</div>'
+					   + ' 		<div class="newUserColumn">'
+					   + '			<button id="rechargeCancle" style="float:right;margin-top:3px;margin-right:40px;" type="button">取消</button>'
+					   + '			<button id="rechargeSure" style="float:right;margin-top:3px;margin-right:10px;" type="button">确定</button>'
+					   + '		</div>'
+					   + '</div>';
+				$("#rechargeWindow").empty();
+				$("#rechargeWindow").html(rechargeHtml);
+				//集团用户
+				$('#rechargeWindow').jqxWindow({
+		            showCollapseButton: true,
+		            height: 250, 
+		            width: 400, 
+		            theme: theme,
+		            resizable: false,
+		            initContent: function () {
+		                $('#rechargeWindow').jqxWindow('focus');
+		            }
+		        });
+				$('#rechargeWindow').jqxWindow('open');
+				$("#rechargeCancle").jqxButton({ width: '60', height: '25', theme: theme });
+		        $("#rechargeSure").jqxButton({ width: '60', height: '25', theme: theme });
+		        $("#rechargeMoney").jqxNumberInput({ width: '180px', height: '28px', theme: theme, spinButtons: true, min:0});
+		        
+		        $("#rechargeSure").click(function(){
+		        	
+		        	var money = $('#rechargeMoney').jqxNumberInput('val');
+		        	$.ajax({
+						type:"post",
+						url:"AdminrechargeAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+						data:{//设置数据源
+		        			"userID": FUserId,
+		        			"money": money
+						},
+						dataType:"json",//设置需要返回的数据类型
+						success:function(data){
+							debugger;
+							var res = eval("("+data+")");
+							if(res.message == "1"){
+								alert("充值成功！");
+							}else{
+								alert("充值失败！请稍后重试！")
+							}
+							$('#rechargeWindow').jqxWindow('close');
+							$("#commonUserGrid").jqxGrid({ source: getAllUserDate() });
+						},
+						error:function(){
+							alert("系统异常，请稍后重试！");
+							$('#rechargeWindow').jqxWindow('close');
+						}
+					});
+		        });
+        	}
+	        
+		});
+		
 		//集团用户配置
 		$("#companyConfig").click(function(){
 			var configHtml = '<div>用户配置</div>'
@@ -497,6 +691,7 @@
 		});
 	});
 	
+<<<<<<< HEAD
 	//用户充值
 	$("#recharge").click(function(){
 		var rechargeHtml = '<div>用户充值</div>'
@@ -533,6 +728,10 @@
         $("#rechargeMoney").jqxNumberInput({ width: '180px', height: '28px', theme: theme, spinButtons: true, min:0});
         
 	});
+=======
+	
+	
+>>>>>>> a9491fc7071ee06b1dc64bfa97033a1c94549123
 	
 	//普通用户管理
 	$("#commonUserManager").click(function(){
@@ -768,4 +967,26 @@
 		$(".personeInfoRight").empty();
 		$(".personeInfoRight").html(personInfohtml);
 	});
+	
+	/*
+	 * 充值记录
+	 * 
+	 */
+	$("#rechargeDetails").click(function(){
+		debugger;
+		$.ajax({
+			type:"get",
+			url:"AdminfindRechargeComsumptionAction",
+			dataType:"json",//设置需要返回的数据类型
+			success:function(data){
+				debugger;
+				var result = eval("("+data+")");
+				alert("正常，请稍后重试！");
+			},
+			error:function(){
+				alert("系统异常，请稍后重试！");
+			}
+		});
+	});
+	
 })

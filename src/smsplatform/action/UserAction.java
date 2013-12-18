@@ -6,6 +6,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+
 import com.opensymphony.xwork2.ActionContext;
 
 import smsplatform.dao.TBdMessagesend;
@@ -19,54 +23,112 @@ import smsplatform.service.LogService;
 import smsplatform.service.UserService;
 
 public class UserAction {
-	  public   Page<TBdMessagesendgroup> msgGrouPage;
-	  public   Page<TBdRechargeandconsumption> consumPage;
+	 /* public   Page<TBdMessagesendgroup> msgGrouPage;
+	  public   Page<TBdRechargeandconsumption> consumPage;*/
 	  public   TBdMessagesendgroup tBdMessagesendgroup;
 	  public   List<TBdMessagesendgroup> tBdMessagesendgroups;
-	  public List<TBdRechargeandconsumption> tBdRechargeandconsumptions;
+	  public  List<TBdRechargeandconsumption> tBdRechargeandconsumptions;
 	  public  List<TBdMessagesend> tBdMessagesends;  //查询发送短信
 	  public  TBdUser tBdUser;
-
+	  public String result;
+      
+	  
+	  public static String msg ="1";
+	  public static  JSONObject json=new JSONObject(); 
+	  public static  JsonConfig config = new JsonConfig();
 	  /**
 	   * 查询每个分组每条发送短信状态及消息
 	   * @return
 	   */
-      public String findallgroupMsg(){
+      @SuppressWarnings("unchecked")
+	public String findallgroupMsg(){
+    	
     	  UserService userService = new UserService();
 		  Long uid = (Long) ActionContext.getContext().getSession().get("uid");
-		  tBdMessagesendgroups = userService.findallgroupMsg(uid);
-		  
-		   LogService.getInstance().log(uid, "查询所有的用户短信组消息");
+		  try {
+			tBdMessagesendgroups = userService.findallgroupMsg(uid);
+			
+			config.setExcludes(new String[]{"TBdMessagesends","TBdMessagesendgroups","TBdRechargeandconsumptions","TBdLogs","handler","hibernateLazyInitializer"});
+            result=JSONArray.fromObject(tBdMessagesendgroups.toArray(), config).toString();
+			// json.accumulate("tBdMessagesendgroups", tBdMessagesendgroups);
+			// result= json.toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			msg="0";
+			result = json.fromObject(msg).toString();
+			return "fail";
+		}
+	     
+
+
+      //    result=json.fromObject(msg).toString()+ JSONArray.fromObject(tBdMessagesendgroups, config).toString();
+		 
+	      LogService.getInstance().log(uid, "查询用户所有的短信组消息");
 		  return "success";
       }
       
       
 	  public String findallSendMsg(){
+		  
 		  AdminService adminService = new AdminService();
-		  tBdMessagesends = adminService.findallSendMsg(tBdMessagesendgroup);
-		  return "success";
+		  try {
+			tBdMessagesends = adminService.findallSendMsg(tBdMessagesendgroup);
+			  config.setExcludes(new String[]{"TBdMessagesendgroup"});//除去emps属性
+			//  json.fromObject(msg).toString();
+				 result=JSONArray.fromObject(tBdMessagesends, config).toString();
+				 
+				 
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg="0";
+			result = json.fromObject(msg).toString();
+			 Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+			 LogService.getInstance().log(uid, "查询所有短信组"+tBdMessagesendgroup.getFSendGroupId()+"消息");
+			return "fail";
+		}
+		
+		 return "success";
 		  
 	  }
 	  
 	  public String findRechargeComsumption(){
 		  UserService userService = new UserService();
 		  Long uid = (Long) ActionContext.getContext().getSession().get("uid");
-		  tBdRechargeandconsumptions = userService.findRechargeComsumption(uid);
-		  return "success";
+		  try {
+			tBdRechargeandconsumptions = userService.findRechargeComsumption(uid);
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg="0";
+			result = json.fromObject(msg).toString();
+			return "fail";
+		}
+		 result=json.fromObject(msg).toString()+ JSONArray.fromObject(tBdRechargeandconsumptions, config).toString();
+		 LogService.getInstance().log(uid, "查询所有充值消费记录");
+		 return "success";
 	  }
 	  public String sendMsg(){
 		  Long uid = (Long) ActionContext.getContext().getSession().get("uid");
 		  UserService userService = new UserService();
-		  
-		  return userService.sendmsg(tBdMessagesendgroup,uid);
+		  try {
+			userService.sendmsg(tBdMessagesendgroup,uid);
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg="0";
+			result = json.fromObject(msg).toString();
+			return "fail";
+		}
+		  result=json.fromObject(msg).toString();
+		  LogService.getInstance().log(uid, "发送消息"+tBdMessagesendgroup.getFGroupContent()+tBdMessagesendgroup.getFGroupPhones());
+		  return "success";
 	  }
 	  
-	  public String findMessagesendgroup(){
+	/*  public String findMessagesendgroup(){
 		  Long uid = (Long) ActionContext.getContext().getSession().get("uid");
 		  UserService userService = new UserService();
 		  userService.findMessagesendgroup(msgGrouPage,uid);
 		  return "success";
-	  }
+	  }*/
 	  
 	  public String writeInfo(){
 		 // System.out.println("===");
@@ -77,6 +139,7 @@ public class UserAction {
 		  UserService userService = new UserService();
 		  Long uid = (Long) ActionContext.getContext().getSession().get("uid");
 		  if (userService.writeInfo(dBdUser, uid).equals("success")) {
+			LogService.getInstance().log(uid,"更新个人信息");
 			return "writeInfo";
 		  }else {
 			return "fail";
@@ -102,7 +165,7 @@ public class UserAction {
 	  
 	  
 
-	public Page<TBdMessagesendgroup> getMsgGrouPage() {
+	/*public Page<TBdMessagesendgroup> getMsgGrouPage() {
 		return msgGrouPage;
 	}
 
@@ -116,7 +179,7 @@ public class UserAction {
 
 	public void setConsumPage(Page<TBdRechargeandconsumption> consumPage) {
 		this.consumPage = consumPage;
-	}
+	}*/
 
 	public TBdMessagesendgroup gettBdMessagesendgroup() {
 		return tBdMessagesendgroup;
@@ -150,6 +213,28 @@ public class UserAction {
 	public void settBdMessagesends(List<TBdMessagesend> tBdMessagesends) {
 		this.tBdMessagesends = tBdMessagesends;
 	}
+
+
+	public List<TBdRechargeandconsumption> gettBdRechargeandconsumptions() {
+		return tBdRechargeandconsumptions;
+	}
+
+
+	public void settBdRechargeandconsumptions(
+			List<TBdRechargeandconsumption> tBdRechargeandconsumptions) {
+		this.tBdRechargeandconsumptions = tBdRechargeandconsumptions;
+	}
+
+
+	public String getResult() {
+		return result;
+	}
+
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+	
 	  
 	
 

@@ -1,9 +1,15 @@
 ﻿$(document).ready(function () {
 	var theme = "";
-	//var theme = getDemoTheme();
-	//短信管理
+	
+	/*
+	 * 短信管理
+	 */
 	var tabpanel = $('#tabstrip').jqxTabs({ width: '100%', height: "100%", position: 'top', theme: theme });
 	$("#send").jqxButton({ width: '65', height: '25', theme: theme });
+	
+	/*
+	 * 短信发送
+	 */
 	$("#send").click(function(){
 		var html = '<div class="sendrightTop">'
 				 + '	<div style="width:210px;height:40px;">'
@@ -34,7 +40,7 @@
 				 + '		<span style="width:85px;height:30px;float:left;margin-top:14px;text-align:center;font-size:12px;">短信签名：</span>'
 				 + '		<input type="text" style="width:75%;height:30px;float:left;margin-top:5px;"></input>'
 				 + '	</div>'
-				 + '</div>'
+				 + '</div>';
 		$(".managerRight").empty();
 		$(".managerRight").html(html);
 		$("#sendSure").jqxButton({ width: '60', height: '25', theme: theme });
@@ -44,6 +50,9 @@
 		var phoneString = ""; 
 		var phoneNumber = [];
 		
+		/*
+		 * 添加号码，当前仅在ie下有效
+		 */
 		$("#addNumber").click(function(){
 			var textName = $("#phoneNumTextName").val();
 			if(textName == ""){
@@ -82,11 +91,12 @@
 					type:"post",
 					url:"UsersendMsgAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
 					data:{//设置数据源
-	        			F_PhoneNumberString: phoneNumberString,
-	        			F_messageContent: messageContent
+	        			"tBdMessagesendgroup.FGroupPhones": phoneNumberString,
+	        			"tBdMessagesendgroup.FGroupContent": messageContent
 					},
 					dataType:"json",//设置需要返回的数据类型
 					success:function(data){
+						debugger;
 					},
 					error:function(){
 						alert("系统异常，请稍后重试！");
@@ -95,6 +105,10 @@
 			}
 		});
 	});
+	
+	/*
+	 * 接收短信
+	 */
 	$("#receive").jqxButton({ width: '60', height: '25', theme: theme });
 	$("#receive").click(function(){
 		var html = "接收短信";
@@ -102,45 +116,177 @@
 		$(".managerRight").html(html);
 	});
 	
+	
+	/*
+	 * 已发送短信记录
+	 */
+	
 	$("#sendedMessage").click(function(){
+		
 		var html = '<div id="messageGrid" style="margin-top:10px;margin-left:15px;"></div>';
 		$(".managerRight").empty();
 		$(".managerRight").html(html);
-		var source =
-	    {
-	        datatype: "jsonp",
-	        datafields: [
-	            { name: 'messageType' },
-	            { name: 'sendPeople' },
-	            { name: 'submitType', type: 'float' },
-	            { name: 'messageState' },
-	            { name: 'phoneNumber' }
-	        ],
-	        async: false,
-	        url: "http://ws.geonames.org/searchJSON",
-	        pagesize: 18,
-	        pager: function (pagenum, pagesize, oldpagenum) {
-	        },
-	        data: {
-	            featureClass: "P",
-	            style: "full",
-	            maxRows: 20
-	        }
-	    };
-		var dataAdapter = new $.jqx.dataAdapter(source,
-	            {
-	                formatData: function (data) {
-	                    data.name_startsWith = $("#searchField").val();
-	                    return data;
+		
+		/*
+		 * 已发送短信数据源
+		 */
+		function loadSendedMessageSource(){
+			products =
+	            [
+	                {
+	                	messageType: '群发',
+	                	sendPeople: 'test',
+	                	submitType: '平台',
+	                	messageState: '发送成功',
+	                	phoneNumber: '100',
+	                	messageDetails: '发送测试',
+	                	sendTime: '2013-12-17 23:05:23'
+	                },
+	                {
+	                	messageType: '群发',
+	                	sendPeople: 'test',
+	                	submitType: '平台',
+	                	messageState: '发送成功',
+	                	phoneNumber: '300',
+	                	messageDetails: '发送测试',
+	                	sendTime: '2013-12-17 21:05:23'
 	                }
-	            }
-	        );
+	            ]; 
+			var source =
+		    {
+		        datatype: "json",
+				//datatype: "array",
+		        datafields: [
+		            { name: 'FSendGroupId' },
+		            { name: 'FGroupType' },
+		            { name: 'FUserName' },
+		            { name: 'FSubmitType'},
+		            { name: 'FGroupSendStatus' },
+		            { name: 'FGroupPhoneNum' },
+		            { name: 'FGroupContent' },
+		            { name: 'time' },
+		        ],
+		        //localdata: products,
+		        async: false,
+		        url: "UserfindallgroupMsgAction",
+		        pagesize: 18,
+		        beforeprocessing: function (data) {
+		        	debugger;
+		        	var dataArray = eval("("+data+")");
+		        	for(var i=0;i<dataArray.length;i++){
+		        		dataArray[i].time = new Date(dataArray[i].FGroupSendTime.time);
+		        		dataArray[i].FUserName = dataArray[i].TBdUser.FUserName;
+		        	}
+	                return dataArray;
+	            },
+		        pager: function (pagenum, pagesize, oldpagenum) {
+		        }
+		    };
+			var dataAdapter = new $.jqx.dataAdapter(source);
+			return dataAdapter;
+		}
+		
 		$("#messageGrid").jqxGrid(
+            {
+                width: "97%",
+                source: loadSendedMessageSource(),
+                theme: theme,
+                height: "97%",
+                pageable: true,
+                sortable: true,
+                columns: [
+                    { text: '分组ID', datafield: 'FSendGroupId', hidden: true },
+                    { text: '短信类型', datafield: 'FGroupType', width: 80 },
+                    { text: '发送人', datafield: 'FUserName', width: 150 },
+                    { text: '提交方式', datafield: 'FSubmitType', width: 100 },
+                    { text: '短信状态', datafield: 'FGroupSendStatus', width: 80 },
+                    { text: '号码个数', datafield: 'FGroupPhoneNum', minwidth: 80 },
+                    { text: '短信内容', datafield: 'FGroupContent', width: 380 },
+                    { text: '发送时间', datafield: 'time', minwidth: 120 }
+                ],
+                showtoolbar: true,
+                rendertoolbar: function (toolbar) {
+	            	var me = this;
+                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">短信发送历史记录</span>'
+                    				  +'<div style="width:150px;height:32px;float:right;">'
+                    						+'<button id="checkPhoneNum" style="float:left;margin-top:3px;margin-left:10px;" type="button">查询号码</button>'
+                    						//+'<button id="failToSend" style="float:right;margin-top:3px;margin-right:10px;" type="button">失败重发</button>'
+                    				  +'</div>');
+                    toolbar.append(container);
+                    $("#checkPhoneNum").jqxButton({ width: '60', height: '25', theme: theme });
+                    $("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
+            	}
+            });
+		/*
+		 * 短信号码查询窗口
+		 */
+		$("#checkPhoneNum").click(function(){
+			var rowindex = $('#messageGrid').jqxGrid('getselectedrowindex');
+			var currentitem = $('#messageGrid').jqxGrid('getrowdata', rowindex);
+        	var GroupId = currentitem.FSendGroupId;
+ 			//集团用户
+			$('#phoneNumWindow').jqxWindow({
+                showCollapseButton: true,
+                height: 600, 
+                width: 800, 
+                theme: theme,
+                resizable: false,
+                initContent: function () {
+                    $('#phoneNumWindow').jqxWindow('focus');
+                }
+            });
+			$('#phoneNumWindow').jqxWindow('open');
+			
+			/*
+			 * 详细号码数据源
+			 */
+			function phoneNumSource(){
+				var source =
+			    {
+			        datatype: "json",
+					//datatype: "array",
+			        datafields: [
+			            { name: 'messageType'},
+			            { name: 'sendPeople'},
+			            { name: 'submitType'},
+			            { name: 'messageState'},
+			            { name: 'phoneNumber'},
+			            { name: 'messageDetails'},
+			            { name: 'sendTime'},
+			        ],
+			        //localdata: products,
+			        async: false,
+			        url: "UserfindallSendMsgAction",
+			        data: {
+			            "tBdMessagesendgroup.FSendGroupId":GroupId
+			        },
+			        beforeprocessing: function (data) {
+			        	debugger;
+		                //return dataArray;
+		            },
+			        pagesize: 18,
+			        pager: function (pagenum, pagesize, oldpagenum) {
+			        }
+			    };
+				var dataAdapter = new $.jqx.dataAdapter(source);
+				return dataAdapter;
+			}
+			/*
+			 * 号码详细记录
+			 */
+			
+			$("#phoneNumGrid").empty();
+			
+	        /*
+			 * 号码详细信息grid
+			 */
+			
+			$("#phoneNumGrid").jqxGrid(
 	            {
-	                width: "97%",
-	                source: dataAdapter,
+	                width: "98%",
+	                source: phoneNumSource(),
 	                theme: theme,
-	                height: "97%",
+	                height: "98%",
 	                pageable: true,
 	                sortable: true,
 	                columns: [
@@ -155,16 +301,19 @@
 	                showtoolbar: true,
 	                rendertoolbar: function (toolbar) {
 		            	var me = this;
-	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">短信发送历史记录</span>'
-	                    				  +'<div style="width:150px;height:32px;float:right;">'
-	                    						+'<button id="checkPhoneNum" style="float:left;margin-top:3px;margin-left:10px;" type="button">查询号码</button>'
-	                    						+'<button id="failToSend" style="float:right;margin-top:3px;margin-right:10px;" type="button">失败重发</button>'
+	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">号码详细记录</span>'
+	                    				  +'<div style="width:80px;height:32px;float:right;">'
+	                    						+'<button id="exportGrid" style="float:left;margin-top:3px;margin-left:10px;" type="button">记录导出</button>'
+	                    						//+'<button id="failToSend" style="float:right;margin-top:3px;margin-right:10px;" type="button">失败重发</button>'
 	                    				  +'</div>');
 	                    toolbar.append(container);
-	                    $("#checkPhoneNum").jqxButton({ width: '60', height: '25', theme: theme });
-	                    $("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
+	                    $("#exportGrid").jqxButton({ width: '60', height: '25', theme: theme });
+	                    $("#exportGrid").click(function(){
+	                    	 $("#phoneNumGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
+	                    });
 	            	}
 	            });
+		});
 	});
 	
 	
@@ -437,8 +586,8 @@
 				 + '				<input type="password" style="width:100%;height:28px;float:left;margin-left:10px;"></input>'
 				 + '			</div>'
 				 + '		</div>'
-				 + '	</div>'
+				 + '	</div>';
 		$(".personeInfoRight").empty();
 		$(".personeInfoRight").html(personInfohtml);
 	});
-})
+});

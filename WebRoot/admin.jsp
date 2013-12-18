@@ -80,7 +80,7 @@
                 			<button id="send" class="k-button" style="margin-top:10px;" type="button">发送短信</button>
                 		</div>
                 		<div style="width:210px;margin-top:10px;height:80%;">
-                			<div class="navSpanDiv"><span id="sendedMessage" class="navSpan">已发短信</span></div>
+                			<div class="navSpanDiv"><span id="managerSendedMessage" class="navSpan">已发短信</span></div>
                 			<div class="navSpanDiv"><span id="waitMessage" class="navSpan">待发短信</span></div>
                 			<div class="navSpanDiv"><span id="receiveMessage" class="navSpan">接收短信</span></div>
                 			<div class="navSpanDiv"><span id="timingMessage" class="navSpan">定时短信</span></div>
@@ -89,6 +89,12 @@
                 		</div>
                 	</div>
                 	<div class="managerRight">
+                	</div>
+                	<div id="phoneNumWindow" style="display:none">
+                		<div>电话号码详细信息</div>
+                		<div>
+                			<div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>
+                		</div>
                 	</div>
                 </div>
                 <div class="tabmain">

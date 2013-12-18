@@ -2,6 +2,8 @@ package smsplatform.action;
 
 import java.util.List;
 
+import com.opensymphony.xwork2.ActionContext;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
@@ -12,6 +14,7 @@ import smsplatform.dao.TBdRechargeandconsumption;
 import smsplatform.dao.TBdUser;
 import smsplatform.domain.Page;
 import smsplatform.service.AdminService;
+import smsplatform.service.LogService;
 import smsplatform.service.UserService;
 
 public class AdminAction {
@@ -24,17 +27,23 @@ public class AdminAction {
 	 public   TBdMessagesendgroup tBdMessagesendgroup;
 	  public  List<TBdMessagesend> tBdMessagesends;  //查询发送短信
 	  public  List<TBdMessagesendgroup> tBdMessagesendgroups;  
-     public   int usrID;
+     public   int userID;
      public   int money;
      public   String result;
-     public static String msg;
+	 private List<TBdRechargeandconsumption> tBdRechargeandconsumptions;
+     
      
      public String findallgroupMsg(){
+         JSONObject json=new JSONObject(); 
+   	     JsonConfig config = new JsonConfig();
     	 AdminService adminService = new AdminService();
     	 tBdMessagesendgroups = adminService.findallgroupMsg();
-    	 JSONObject json=new JSONObject(); 
-		 json.accumulate("tBdMessagesendgroups", tBdMessagesendgroups);
-		 result=json.toString();
+ 
+    	 config.setExcludes(new String[]{"TBdMessagesends","TBdMessagesendgroups","TBdRechargeandconsumptions","TBdLogs","handler","hibernateLazyInitializer"});
+         result=JSONArray.fromObject(tBdMessagesendgroups.toArray(), config).toString();
+			
+		 Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+		 LogService.getInstance().log(uid, "查询所有短信分組");
 		 return "success";
      }
      
@@ -43,16 +52,53 @@ public class AdminAction {
 	   * @return
 	   */
 
-	  public String findallSendMsg(){
+     public String findallSendMsg(){
+    	  String msg ="1";
+    	    JSONObject json=new JSONObject(); 
+    	 JsonConfig config = new JsonConfig();
 		  AdminService adminService = new AdminService();
-		  tBdMessagesends = adminService.findallSendMsg(tBdMessagesendgroup);
-		   JsonConfig config = new JsonConfig();
-		   JSONObject json=new JSONObject(); 
-			 json.accumulate("message", msg);
-	       result=json.toString()+JSONArray.fromObject(tBdMessagesends, config).toString();
-		  return "success";
+		  try {
+			tBdMessagesends = adminService.findallSendMsg(tBdMessagesendgroup);
+			  config.setExcludes(new String[]{"TBdMessagesendgroup"});//除去emps属性
+			//  json.fromObject(msg).toString();
+				 result=JSONArray.fromObject(tBdMessagesends, config).toString();
+				 
+				 
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg="0";
+			result = json.fromObject(msg).toString();
+			 Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+			 LogService.getInstance().log(uid, "查询所有短信组"+tBdMessagesendgroup.getFSendGroupId()+"消息");
+			return "fail";
+		}
+		
+		 return "success";
 		  
 	  }
+	 /* public String findallSendMsg(){
+		  String msg = "1";
+          JSONObject json=new JSONObject(); 
+		  try {
+			AdminService adminService = new AdminService();
+			  tBdMessagesends = adminService.findallSendMsg(tBdMessagesendgroup);
+			   JsonConfig config = new JsonConfig();
+			//   JSONObject json=new JSONObject(); 
+				 json.accumulate("message", msg);
+			   result=json.toString()+JSONArray.fromObject(tBdMessagesends, config).toString();
+			   
+			   Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+				LogService.getInstance().log(uid, "查询分組"+tBdMessagesendgroup.getFSendGroupId()+"所有短信");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			msg ="0";
+			json.accumulate("message", msg);
+			   result=json.toString();
+		}
+		  return "success";
+		  
+	  }*/
 	  /**
 	   * 查询所有用户
 	   * @return
@@ -92,6 +138,8 @@ public class AdminAction {
 			e.printStackTrace();
 			return "fail";
 		}
+		    Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+			LogService.getInstance().log(uid, "查询所有用户");
     	return "success";
      }
      /**
@@ -99,10 +147,14 @@ public class AdminAction {
       * @return
       */
      public String recharge(){
-    	 JSONObject json=new JSONObject(); 
+    	// JSONObject json=new JSONObject(); 
+    	  String msg;
+          JSONObject json=new JSONObject(); 
+    	 Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+		 LogService.getInstance().log(uid, "充值---");
     	 try {
-    		 AdminService userService = new AdminService();
-    		 userService.recharge(usrID, money);
+    		 AdminService adminService = new AdminService();
+    		 adminService.recharge(userID, money);
     		 } catch (Exception e) {
     		 // TODO Auto-generated catch block
     		 e.printStackTrace();
@@ -113,12 +165,32 @@ public class AdminAction {
     		
     		 json.accumulate("message", "1");  //成功
     		 result=json.toString();
+    		 
+    		 LogService.getInstance().log(uid,Long.valueOf(userID), "给用户ID：?，充值金额："+money);
     	 return "success";
      }
      
     
      
-     
+     public String findRechargeComsumption(){
+    	  String msg ="1";
+ 	      JSONObject json=new JSONObject(); 
+ 	      JsonConfig config = new JsonConfig();
+ 	      AdminService adminService = new AdminService();
+		  Long uid = (Long) ActionContext.getContext().getSession().get("uid");
+		  try {
+			tBdRechargeandconsumptions = adminService.findRechargeComsumption();
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg="0";
+			result = json.fromObject(msg).toString();
+			return "fail";
+		}
+		    
+			config.setExcludes(new String[]{"TBdMessagesends","TBdMessagesendgroups","TBdRechargeandconsumptions","TBdLogs","handler","hibernateLazyInitializer"});
+	           result= JSONArray.fromObject(tBdRechargeandconsumptions, config).toString();
+		 return "success";
+	  }
      
      
      
@@ -198,6 +270,38 @@ public class AdminAction {
 	public void settBdMessagesends(List<TBdMessagesend> tBdMessagesends) {
 		this.tBdMessagesends = tBdMessagesends;
 	}
+
+	public List<TBdMessagesendgroup> gettBdMessagesendgroups() {
+		return tBdMessagesendgroups;
+	}
+
+	public void settBdMessagesendgroups(
+			List<TBdMessagesendgroup> tBdMessagesendgroups) {
+		this.tBdMessagesendgroups = tBdMessagesendgroups;
+	}
+
 	
 
+
+
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+
+	
+    
 }
