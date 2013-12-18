@@ -211,12 +211,15 @@
 		 */
 		$("#checkPhoneNum").click(function(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 //			var phonehtml = '<div>查询发送号码信息</div>'
 //						+ '<div>'
 //			    		+ '	  <div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>'
 //			    		+ '</div>';
 			//$('#phoneNumWindow').empty();
 			//$('#phoneNumWindow').html(phonehtml);
+=======
+>>>>>>> origin/master
 =======
 >>>>>>> origin/master
  			//集团用户
@@ -234,9 +237,15 @@
 			
 			/*
 <<<<<<< HEAD
+<<<<<<< HEAD
 			 * 号码查询数据源
 			 */
 			function loadPhoneNumInfoSource(){
+=======
+			 * 详细号码数据源
+			 */
+			function phoneNumSource(){
+>>>>>>> origin/master
 =======
 			 * 详细号码数据源
 			 */
@@ -288,6 +297,7 @@
 			}
 			
 <<<<<<< HEAD
+<<<<<<< HEAD
 			
 			/*
 			 * 号码详细记录
@@ -300,6 +310,8 @@
 	                source: loadPhoneNumInfoSource(),
 	                theme: "",
 =======
+=======
+>>>>>>> origin/master
 			/*
 			 * 号码详细信息grid
 			 */
@@ -309,6 +321,9 @@
 	                width: "98%",
 	                source: phoneNumSource(),
 	                theme: theme,
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 	                height: "98%",
 	                pageable: true,
@@ -327,7 +342,11 @@
 		            	var me = this;
 	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">号码详细记录</span>'
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                    				  +'<div style="width:80px;height:32px;float:right;">'
+=======
+	                    				  +'<div style="width:150px;height:32px;float:right;">'
+>>>>>>> origin/master
 =======
 	                    				  +'<div style="width:150px;height:32px;float:right;">'
 >>>>>>> origin/master
@@ -337,6 +356,7 @@
 	                    toolbar.append(container);
 	                    $("#exportGrid").jqxButton({ width: '60', height: '25', theme: theme });
 <<<<<<< HEAD
+<<<<<<< HEAD
 	                    $("#exportGrid").click(function(){
 	                    	 $("#phoneNumGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
 	                    });
@@ -344,12 +364,17 @@
 	            	}
 	        });
 =======
+=======
+>>>>>>> origin/master
 	                    //$("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
 	                    $("#exportGrid").click(function () {
 	                        $("#messageGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');           
 	                    });
 	            	}
 	            });
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 		});
 	});

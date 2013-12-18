@@ -86,15 +86,21 @@
                 	</div>
                 	<div id="phoneNumWindow" style="display:none">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 		<div>查询发送号码信息</div>
                 			<div>
                 				<div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>
                 			</div>
 =======
+=======
+>>>>>>> origin/master
                 		<div>电话号码详细信息</div>
                 		<div>
                 			<div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>
                 		</div>
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
                 	</div>
                 </div>
