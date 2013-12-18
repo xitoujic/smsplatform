@@ -9,6 +9,7 @@
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxcore.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxtabs.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxbuttons.js"></script>
+	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxwindow.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxbuttongroup.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxradiobutton.js"></script>
 	    <script type="text/javascript" src="jqwidgets/jqwidgets/jqxdata.js"></script> 
@@ -80,6 +81,8 @@
                 		</div>
                 	</div>
                 	<div class="managerRight">
+                	</div>
+                	<div id="phoneNumWindow" style="display:none">
                 	</div>
                 </div>
                 <div class="tabmain">

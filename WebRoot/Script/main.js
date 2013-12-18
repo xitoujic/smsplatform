@@ -206,7 +206,27 @@
                     $("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
             	}
             });
-		
+		/*
+		 * 短信号码查询窗口
+		 */
+		$("#checkPhoneNum").click(function(){
+			var phonehtml = '<div>查询发送号码信息</div>'
+	    		+ '<div id="phoneNumGrid"></div>';
+			$('#phoneNumWindow').empty();
+			$('#phoneNumWindow').html(phonehtml);
+ 			//集团用户
+			$('#phoneNumWindow').jqxWindow({
+                showCollapseButton: true,
+                height: 600, 
+                width: 800, 
+                theme: theme,
+                resizable: false,
+                initContent: function () {
+                    $('#phoneNumWindow').jqxWindow('focus');
+                }
+            });
+			$('#phoneNumWindow').jqxWindow('open');
+		});
 	});
 	
 	
