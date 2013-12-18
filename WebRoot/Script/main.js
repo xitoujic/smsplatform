@@ -210,6 +210,21 @@
 		 * 短信号码查询窗口
 		 */
 		$("#checkPhoneNum").click(function(){
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+//			var phonehtml = '<div>查询发送号码信息</div>'
+//						+ '<div>'
+//			    		+ '	  <div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>'
+//			    		+ '</div>';
+			//$('#phoneNumWindow').empty();
+			//$('#phoneNumWindow').html(phonehtml);
+=======
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+>>>>>>> origin/zzx0102-1217
  			//集团用户
 			$('#phoneNumWindow').jqxWindow({
                 showCollapseButton: true,
@@ -224,9 +239,27 @@
 			$('#phoneNumWindow').jqxWindow('open');
 			
 			/*
+<<<<<<< HEAD
 			 * 详细号码数据源
 			 */
 			function phoneNumSource(){
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+			 * 号码查询数据源
+			 */
+			function loadPhoneNumInfoSource(){
+=======
+			 * 详细号码数据源
+			 */
+			function phoneNumSource(){
+>>>>>>> origin/master
+=======
+			 * 详细号码数据源
+			 */
+			function phoneNumSource(){
+>>>>>>> origin/master
+>>>>>>> origin/zzx0102-1217
 				products =
 		            [
 		                {
@@ -272,6 +305,25 @@
 				return dataAdapter;
 			}
 			
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+			
+			/*
+			 * 号码详细记录
+			 */
+			
+			$("#phoneNumGrid").empty();
+			$("#phoneNumGrid").jqxGrid(
+	            {
+	                width: "98%",
+	                source: loadPhoneNumInfoSource(),
+	                theme: "",
+=======
+=======
+>>>>>>> origin/master
+>>>>>>> origin/zzx0102-1217
 			/*
 			 * 号码详细信息grid
 			 */
@@ -281,6 +333,13 @@
 	                width: "98%",
 	                source: phoneNumSource(),
 	                theme: theme,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+>>>>>>> origin/zzx0102-1217
 	                height: "98%",
 	                pageable: true,
 	                sortable: true,
@@ -297,18 +356,51 @@
 	                rendertoolbar: function (toolbar) {
 		            	var me = this;
 	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">号码详细记录</span>'
+<<<<<<< HEAD
 	                    				  +'<div style="width:150px;height:32px;float:right;">'
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	                    				  +'<div style="width:80px;height:32px;float:right;">'
+=======
+	                    				  +'<div style="width:150px;height:32px;float:right;">'
+>>>>>>> origin/master
+=======
+	                    				  +'<div style="width:150px;height:32px;float:right;">'
+>>>>>>> origin/master
+>>>>>>> origin/zzx0102-1217
 	                    						+'<button id="exportGrid" style="float:left;margin-top:3px;margin-left:10px;" type="button">记录导出</button>'
 	                    						//+'<button id="failToSend" style="float:right;margin-top:3px;margin-right:10px;" type="button">失败重发</button>'
 	                    				  +'</div>');
 	                    toolbar.append(container);
 	                    $("#exportGrid").jqxButton({ width: '60', height: '25', theme: theme });
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	                    $("#exportGrid").click(function(){
+	                    	 $("#phoneNumGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
+	                    });
+	                    //$("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
+	            	}
+	        });
+=======
+=======
+>>>>>>> origin/master
+>>>>>>> origin/zzx0102-1217
 	                    //$("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
 	                    $("#exportGrid").click(function () {
 	                        $("#messageGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');           
 	                    });
 	            	}
 	            });
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+>>>>>>> origin/zzx0102-1217
 		});
 	});
 	
