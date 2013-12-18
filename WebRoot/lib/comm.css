@@ -147,7 +147,7 @@ a:link, a:visited, a:hover, a:active, a, area
 
 #tabstrip .tabmain .managerRight
 {
-	width:82%;
+	width:75%;
 	height:97%;
 	margin-left:10px;
 	margin-top: 10px;
@@ -190,7 +190,7 @@ a:link, a:visited, a:hover, a:active, a, area
 
 #tabstrip .tabmain .managerRight .sendrightBottom .addNumDiv
 {
-	width: 78%;
+	width: 85%;
 	float:left;
 	height: 40px;
 	margin-left: 22px;

@@ -249,6 +249,8 @@
 	            { name: 'FSex' },
 	            { name: 'FPhoneNumber' },
 	            { name: 'FRole' },
+	            { name: 'FMoney' },
+	            { name: 'FMessageNumber' },
 	            { name: 'FCompanyType' },
 	            { name: 'FCheckType' },
 	            { name: 'FRight' },
@@ -260,6 +262,7 @@
 	        pager: function (pagenum, pagesize, oldpagenum) {
 	        },
 	        beforeprocessing: function (data) {
+	        	debugger;
                 return eval("("+data+")");
             },
 	        data: {
@@ -299,6 +302,8 @@
 	                    { text: '性别', datafield: 'FSex', width: 50 },
 	                    { text: '手机号码', datafield: 'FPhoneNumber', width: 150 },
 	                    { text: '用户类型', datafield: 'FRole', minwidth: 50 },
+	                    { text: '账户余额', datafield: 'FMoney', minwidth: 100 },
+	                    { text: '短信条数', datafield: 'FMessageNumber', minwidth: 100 },
 	                    { text: '行业类型', datafield: 'FCompanyType', width: 80 },
 	                    { text: '审核信息', datafield: 'FCheckType', minwidth: 50 },
 	                    { text: '激活状态', datafield: 'FRight', minwidth: 60 },
@@ -308,13 +313,15 @@
 	                rendertoolbar: function (toolbar) {
 		            	var me = this;
 	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">集团用户信息</span>'
-	                    				  +'<div style="width:150px;height:32px;float:right;">'
+	                    				  +'<div style="width:250px;height:32px;float:right;">'
 	                    				  		+'<button id="companyConfig" style="float:right;margin-top:3px;margin-right:10px;" type="button">配置</button>'
 	                    						+'<button id="addCompanyUser" style="float:right;margin-top:3px;margin-right:10px;" type="button">开户</button>'
+	                    						+'<button id="recharge" style="float:right;margin-top:3px;margin-right:10px;" type="button">充值</button>'
 	                    				  +'</div>');
 	                    toolbar.append(container);
 	                    $("#addCompanyUser").jqxButton({ width: '60', height: '25', theme: theme });
 	                    $("#companyConfig").jqxButton({ width: '60', height: '25', theme: theme });
+	                    $("#recharge").jqxButton({ width: '60', height: '25', theme: theme });
 	            	}
 	            });
 		//集团开户
@@ -416,6 +423,81 @@
             	$('#newComUserWindow').jqxWindow('close');
             });
 		});
+		
+		//用户充值
+		$("#recharge").click(function(){
+			var rowindex = $('#commonUserGrid').jqxGrid('getselectedrowindex');
+        	//debugger;
+        	if(rowindex == -1){
+        		alert("请选择一个充值用户！");
+        	}else{
+        		var currentitem = $('#commonUserGrid').jqxGrid('getrowdata', rowindex);
+            	var FUserId = currentitem.FUserId;
+				var rechargeHtml = '<div>用户充值</div>'
+			    	   + '<div id="windowBody">'
+					   + '		<div class="newUserColumn">'
+					   + '			<div class="columnLeft">'
+					   + ' 				<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">充值金额:</span>'
+					   + '			</div>'
+					   + '			<div class="columnRight">'
+					   + '				<div id="rechargeMoney"></div><span style="float:right;width:20px;margin-right:35px;font-size:26px;margin-top: -33px;">元</span>'
+					   + ' 			</div>'
+					   + '		</div>'
+					   + ' 		<div class="newUserColumn">'
+					   + '			<button id="rechargeCancle" style="float:right;margin-top:3px;margin-right:40px;" type="button">取消</button>'
+					   + '			<button id="rechargeSure" style="float:right;margin-top:3px;margin-right:10px;" type="button">确定</button>'
+					   + '		</div>'
+					   + '</div>';
+				$("#rechargeWindow").empty();
+				$("#rechargeWindow").html(rechargeHtml);
+				//集团用户
+				$('#rechargeWindow').jqxWindow({
+		            showCollapseButton: true,
+		            height: 250, 
+		            width: 400, 
+		            theme: theme,
+		            resizable: false,
+		            initContent: function () {
+		                $('#rechargeWindow').jqxWindow('focus');
+		            }
+		        });
+				$('#rechargeWindow').jqxWindow('open');
+				$("#rechargeCancle").jqxButton({ width: '60', height: '25', theme: theme });
+		        $("#rechargeSure").jqxButton({ width: '60', height: '25', theme: theme });
+		        $("#rechargeMoney").jqxNumberInput({ width: '180px', height: '28px', theme: theme, spinButtons: true, min:0});
+		        
+		        $("#rechargeSure").click(function(){
+		        	
+		        	var money = $('#rechargeMoney').jqxNumberInput('val');
+		        	$.ajax({
+						type:"post",
+						url:"AdminrechargeAction",//需要用来处理ajax请求的action,excuteAjax为处理的方法名，JsonAction为action名
+						data:{//设置数据源
+		        			"tBdUser.FUserId": FUserId,
+		        			"money": money
+						},
+						dataType:"json",//设置需要返回的数据类型
+						success:function(data){
+							debugger;
+							var res = eval("("+data+")");
+							if(res.message == "1"){
+								alert("充值成功！");
+							}else{
+								alert("充值失败！请稍后重试！")
+							}
+							$('#rechargeWindow').jqxWindow('close');
+							$("#commonUserGrid").jqxGrid({ source: getAllUserDate() });
+						},
+						error:function(){
+							alert("系统异常，请稍后重试！");
+							$('#rechargeWindow').jqxWindow('close');
+						}
+					});
+		        });
+        	}
+	        
+		});
+		
 		//集团用户配置
 		$("#companyConfig").click(function(){
 			var configHtml = '<div>用户配置</div>'
@@ -495,6 +577,10 @@
             });
 		});
 	});
+	
+	
+	
+	
 	//普通用户管理
 	$("#commonUserManager").click(function(){
 		//普通用户管理

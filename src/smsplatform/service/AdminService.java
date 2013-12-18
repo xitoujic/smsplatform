@@ -27,11 +27,18 @@ public class AdminService {
 		System.out.println(tBdUserDAO.totalcount());
 		return tBdUsers;
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 09c9bd0be237741f2c67e7f899ee6facfc685419
 	public List findallgroupMsg(){
 		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
 		return smsgGroupDao.findALLObject();
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 09c9bd0be237741f2c67e7f899ee6facfc685419
 	public List findallSendMsg(TBdMessagesendgroup tBdMessagesendgroup){
 		
 		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
