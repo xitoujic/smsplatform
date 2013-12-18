@@ -118,7 +118,8 @@
                 	<div id="newComUserWindow" style="display:none">
                 	</div>
                 	<div id="cfgComUserWindow" style="display:none">
-                		
+                	</div>
+                	<div id="rechargeWindow" style="display:none">
                 	</div>
                 </div>
                 <div class="tabmain">

@@ -102,7 +102,7 @@ public class AdminAction {
     	 JSONObject json=new JSONObject(); 
     	 try {
     		 AdminService userService = new AdminService();
-    		 userService.recharge(usrID, money);
+    		 userService.recharge(tBdUser.getFUserId(), money);
     		 } catch (Exception e) {
     		 // TODO Auto-generated catch block
     		 e.printStackTrace();
