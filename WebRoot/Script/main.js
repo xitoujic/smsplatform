@@ -154,21 +154,31 @@
 	            ]; 
 			var source =
 		    {
-		        //datatype: "jsonp",
-				datatype: "array",
+		        datatype: "json",
+				//datatype: "array",
 		        datafields: [
-		            { name: 'messageType' },
-		            { name: 'sendPeople' },
-		            { name: 'submitType'},
-		            { name: 'messageState' },
-		            { name: 'phoneNumber' },
-		            { name: 'messageDetails' },
-		            { name: 'sendTime' },
+		            { name: 'FSendGroupId' },
+		            { name: 'FGroupType' },
+		            { name: 'FUserName' },
+		            { name: 'FSubmitType'},
+		            { name: 'FGroupSendStatus' },
+		            { name: 'FGroupPhoneNum' },
+		            { name: 'FGroupContent' },
+		            { name: 'time' },
 		        ],
-		        localdata: products,
-		        //async: false,
-		        //url: "http://ws.geonames.org/searchJSON",
+		        //localdata: products,
+		        async: false,
+		        url: "UserfindallgroupMsgAction",
 		        pagesize: 18,
+		        beforeprocessing: function (data) {
+		        	debugger;
+		        	var dataArray = eval("("+data+")");
+		        	for(var i=0;i<dataArray.length;i++){
+		        		dataArray[i].time = new Date(dataArray[i].FGroupSendTime.time);
+		        		dataArray[i].FUserName = dataArray[i].TBdUser.FUserName;
+		        	}
+	                return dataArray;
+	            },
 		        pager: function (pagenum, pagesize, oldpagenum) {
 		        }
 		    };
@@ -185,13 +195,14 @@
                 pageable: true,
                 sortable: true,
                 columns: [
-                    { text: '短信类型', datafield: 'messageType', width: 80 },
-                    { text: '发送人', datafield: 'sendPeople', width: 150 },
-                    { text: '提交方式', datafield: 'submitType', width: 100 },
-                    { text: '短信状态', datafield: 'messageState', width: 80 },
-                    { text: '号码个数', datafield: 'phoneNumber', minwidth: 80 },
-                    { text: '短信内容', datafield: 'messageDetails', width: 380 },
-                    { text: '发送时间', datafield: 'sendTime', minwidth: 120 }
+                    { text: '分组ID', datafield: 'FSendGroupId', hidden: true },
+                    { text: '短信类型', datafield: 'FGroupType', width: 80 },
+                    { text: '发送人', datafield: 'FUserName', width: 150 },
+                    { text: '提交方式', datafield: 'FSubmitType', width: 100 },
+                    { text: '短信状态', datafield: 'FGroupSendStatus', width: 80 },
+                    { text: '号码个数', datafield: 'FGroupPhoneNum', minwidth: 80 },
+                    { text: '短信内容', datafield: 'FGroupContent', width: 380 },
+                    { text: '发送时间', datafield: 'time', minwidth: 120 }
                 ],
                 showtoolbar: true,
                 rendertoolbar: function (toolbar) {
@@ -210,21 +221,9 @@
 		 * 短信号码查询窗口
 		 */
 		$("#checkPhoneNum").click(function(){
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-//			var phonehtml = '<div>查询发送号码信息</div>'
-//						+ '<div>'
-//			    		+ '	  <div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>'
-//			    		+ '</div>';
-			//$('#phoneNumWindow').empty();
-			//$('#phoneNumWindow').html(phonehtml);
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
->>>>>>> origin/zzx0102-1217
+			var rowindex = $('#messageGrid').jqxGrid('getselectedrowindex');
+			var currentitem = $('#messageGrid').jqxGrid('getrowdata', rowindex);
+        	var GroupId = currentitem.FSendGroupId;
  			//集团用户
 			$('#phoneNumWindow').jqxWindow({
                 showCollapseButton: true,
@@ -239,64 +238,32 @@
 			$('#phoneNumWindow').jqxWindow('open');
 			
 			/*
-<<<<<<< HEAD
 			 * 详细号码数据源
 			 */
 			function phoneNumSource(){
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-			 * 号码查询数据源
-			 */
-			function loadPhoneNumInfoSource(){
-=======
-			 * 详细号码数据源
-			 */
-			function phoneNumSource(){
->>>>>>> origin/master
-=======
-			 * 详细号码数据源
-			 */
-			function phoneNumSource(){
->>>>>>> origin/master
->>>>>>> origin/zzx0102-1217
-				products =
-		            [
-		                {
-		                	messageType: '群发',
-		                	sendPeople: 'test',
-		                	submitType: '平台',
-		                	messageState: '发送成功',
-		                	phoneNumber: '100',
-		                	messageDetails: '发送测试',
-		                	sendTime: '2013-12-17 23:05:23'
-		                },
-		                {
-		                	messageType: '群发',
-		                	sendPeople: 'test',
-		                	submitType: '平台',
-		                	messageState: '发送成功',
-		                	phoneNumber: '300',
-		                	messageDetails: '发送测试',
-		                	sendTime: '2013-12-17 21:05:23'
-		                }
-		            ]; 
 				var source =
 			    {
-			        //datatype: "jsonp",
-					datatype: "array",
+			        datatype: "json",
+					//datatype: "array",
 			        datafields: [
-			            { name: 'messageType' },
-			            { name: 'sendPeople' },
+			            { name: 'messageType'},
+			            { name: 'sendPeople'},
 			            { name: 'submitType'},
-			            { name: 'messageState' },
-			            { name: 'phoneNumber' },
-			            { name: 'messageDetails' },
-			            { name: 'sendTime' },
+			            { name: 'messageState'},
+			            { name: 'phoneNumber'},
+			            { name: 'messageDetails'},
+			            { name: 'sendTime'},
 			        ],
-			        localdata: products,
-			        //async: false,
-			        //url: "http://ws.geonames.org/searchJSON",
+			        //localdata: products,
+			        async: false,
+			        url: "UserfindallSendMsgAction",
+			        data: {
+			            "tBdMessagesendgroup.FSendGroupId":GroupId
+			        },
+			        beforeprocessing: function (data) {
+			        	debugger;
+		                //return dataArray;
+		            },
 			        pagesize: 18,
 			        pager: function (pagenum, pagesize, oldpagenum) {
 			        }
@@ -304,27 +271,13 @@
 				var dataAdapter = new $.jqx.dataAdapter(source);
 				return dataAdapter;
 			}
-			
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-			
 			/*
 			 * 号码详细记录
 			 */
 			
 			$("#phoneNumGrid").empty();
-			$("#phoneNumGrid").jqxGrid(
-	            {
-	                width: "98%",
-	                source: loadPhoneNumInfoSource(),
-	                theme: "",
-=======
-=======
->>>>>>> origin/master
->>>>>>> origin/zzx0102-1217
-			/*
+			
+	        /*
 			 * 号码详细信息grid
 			 */
 			
@@ -333,13 +286,6 @@
 	                width: "98%",
 	                source: phoneNumSource(),
 	                theme: theme,
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
->>>>>>> origin/zzx0102-1217
 	                height: "98%",
 	                pageable: true,
 	                sortable: true,
@@ -356,51 +302,17 @@
 	                rendertoolbar: function (toolbar) {
 		            	var me = this;
 	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">号码详细记录</span>'
-<<<<<<< HEAD
-	                    				  +'<div style="width:150px;height:32px;float:right;">'
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 	                    				  +'<div style="width:80px;height:32px;float:right;">'
-=======
-	                    				  +'<div style="width:150px;height:32px;float:right;">'
->>>>>>> origin/master
-=======
-	                    				  +'<div style="width:150px;height:32px;float:right;">'
->>>>>>> origin/master
->>>>>>> origin/zzx0102-1217
 	                    						+'<button id="exportGrid" style="float:left;margin-top:3px;margin-left:10px;" type="button">记录导出</button>'
 	                    						//+'<button id="failToSend" style="float:right;margin-top:3px;margin-right:10px;" type="button">失败重发</button>'
 	                    				  +'</div>');
 	                    toolbar.append(container);
 	                    $("#exportGrid").jqxButton({ width: '60', height: '25', theme: theme });
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 	                    $("#exportGrid").click(function(){
 	                    	 $("#phoneNumGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
 	                    });
-	                    //$("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
-	            	}
-	        });
-=======
-=======
->>>>>>> origin/master
->>>>>>> origin/zzx0102-1217
-	                    //$("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
-	                    $("#exportGrid").click(function () {
-	                        $("#messageGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');           
-	                    });
 	            	}
 	            });
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
->>>>>>> origin/zzx0102-1217
 		});
 	});
 	
@@ -674,8 +586,8 @@
 				 + '				<input type="password" style="width:100%;height:28px;float:left;margin-left:10px;"></input>'
 				 + '			</div>'
 				 + '		</div>'
-				 + '	</div>'
+				 + '	</div>';
 		$(".personeInfoRight").empty();
 		$(".personeInfoRight").html(personInfohtml);
 	});
-})
+});

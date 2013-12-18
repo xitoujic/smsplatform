@@ -151,5 +151,11 @@ public class AdminService {
 		SmsgGroupDao smsgGroupDao = new SmsgGroupDao();
 		return smsgGroupDao.findByProperty("FSendGroupId",uid);
 	}
+	
+	 public List findRechargeComsumption(){
+			SRechargeConsumptionDao sRechargeConsumptionDao = new SRechargeConsumptionDao();
+			
+			return sRechargeConsumptionDao.findALLObject();
+		 }
 
 }
