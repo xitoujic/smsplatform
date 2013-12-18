@@ -21,6 +21,8 @@
 		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.pager.js"></script>
 		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.sort.js"></script>
 		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.filter.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxdata.export.js"></script>
+		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.export.js"></script>
 		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.columnsresize.js"></script>
 		<script type="text/javascript" src="jqwidgets/jqwidgets/jqxgrid.selection.js"></script>
 		<!-- 系统文件引用 -->
@@ -83,6 +85,10 @@
                 	<div class="managerRight">
                 	</div>
                 	<div id="phoneNumWindow" style="display:none">
+                		<div>查询发送号码信息</div>
+                			<div>
+                				<div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>
+                			</div>
                 	</div>
                 </div>
                 <div class="tabmain">
