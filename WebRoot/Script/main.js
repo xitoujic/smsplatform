@@ -210,10 +210,6 @@
 		 * 短信号码查询窗口
 		 */
 		$("#checkPhoneNum").click(function(){
-			var phonehtml = '<div>查询发送号码信息</div>'
-	    		+ '<div id="phoneNumGrid"></div>';
-			$('#phoneNumWindow').empty();
-			$('#phoneNumWindow').html(phonehtml);
  			//集团用户
 			$('#phoneNumWindow').jqxWindow({
                 showCollapseButton: true,
@@ -226,6 +222,93 @@
                 }
             });
 			$('#phoneNumWindow').jqxWindow('open');
+			
+			/*
+			 * 详细号码数据源
+			 */
+			function phoneNumSource(){
+				products =
+		            [
+		                {
+		                	messageType: '群发',
+		                	sendPeople: 'test',
+		                	submitType: '平台',
+		                	messageState: '发送成功',
+		                	phoneNumber: '100',
+		                	messageDetails: '发送测试',
+		                	sendTime: '2013-12-17 23:05:23'
+		                },
+		                {
+		                	messageType: '群发',
+		                	sendPeople: 'test',
+		                	submitType: '平台',
+		                	messageState: '发送成功',
+		                	phoneNumber: '300',
+		                	messageDetails: '发送测试',
+		                	sendTime: '2013-12-17 21:05:23'
+		                }
+		            ]; 
+				var source =
+			    {
+			        //datatype: "jsonp",
+					datatype: "array",
+			        datafields: [
+			            { name: 'messageType' },
+			            { name: 'sendPeople' },
+			            { name: 'submitType'},
+			            { name: 'messageState' },
+			            { name: 'phoneNumber' },
+			            { name: 'messageDetails' },
+			            { name: 'sendTime' },
+			        ],
+			        localdata: products,
+			        //async: false,
+			        //url: "http://ws.geonames.org/searchJSON",
+			        pagesize: 18,
+			        pager: function (pagenum, pagesize, oldpagenum) {
+			        }
+			    };
+				var dataAdapter = new $.jqx.dataAdapter(source);
+				return dataAdapter;
+			}
+			
+			/*
+			 * 号码详细信息grid
+			 */
+			
+			$("#phoneNumGrid").jqxGrid(
+	            {
+	                width: "98%",
+	                source: phoneNumSource(),
+	                theme: theme,
+	                height: "98%",
+	                pageable: true,
+	                sortable: true,
+	                columns: [
+	                    { text: '短信类型', datafield: 'messageType', width: 80 },
+	                    { text: '发送人', datafield: 'sendPeople', width: 150 },
+	                    { text: '提交方式', datafield: 'submitType', width: 100 },
+	                    { text: '短信状态', datafield: 'messageState', width: 80 },
+	                    { text: '号码个数', datafield: 'phoneNumber', minwidth: 80 },
+	                    { text: '短信内容', datafield: 'messageDetails', width: 380 },
+	                    { text: '发送时间', datafield: 'sendTime', minwidth: 120 }
+	                ],
+	                showtoolbar: true,
+	                rendertoolbar: function (toolbar) {
+		            	var me = this;
+	                    var container = $('<span style="margin-top:10px;margin-left:10px;float:left;font-size:16px;">号码详细记录</span>'
+	                    				  +'<div style="width:150px;height:32px;float:right;">'
+	                    						+'<button id="exportGrid" style="float:left;margin-top:3px;margin-left:10px;" type="button">记录导出</button>'
+	                    						//+'<button id="failToSend" style="float:right;margin-top:3px;margin-right:10px;" type="button">失败重发</button>'
+	                    				  +'</div>');
+	                    toolbar.append(container);
+	                    $("#exportGrid").jqxButton({ width: '60', height: '25', theme: theme });
+	                    //$("#failToSend").jqxButton({ width: '60', height: '25', theme: theme });
+	                    $("#exportGrid").click(function () {
+	                        $("#messageGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');           
+	                    });
+	            	}
+	            });
 		});
 	});
 	
