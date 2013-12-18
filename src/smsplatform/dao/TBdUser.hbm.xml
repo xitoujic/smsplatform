@@ -70,7 +70,7 @@
             <column name="F_Money" precision="8" />
         </property>
         <property name="FUpdateTime" type="java.sql.Timestamp">
-            <column name="F_UpdateTime" length="19" />
+            <column name="F_UpdateTime" length="19" default="CURRENT_TIMESTAMP"/>
         </property>
         <set name="TBdMessagesendgroups" inverse="true">
             <key>
