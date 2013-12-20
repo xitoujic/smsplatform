@@ -695,8 +695,47 @@
 		});
 	});
 	
+<<<<<<< HEAD
+	//用户充值
+	$("#recharge").click(function(){
+		var rechargeHtml = '<div>用户充值</div>'
+	    	   + '<div id="windowBody">'
+			   + '		<div class="newUserColumn">'
+			   + '			<div class="columnLeft">'
+			   + ' 				<span style="float:left;width:80px;font-size:16px;text-align:center;margin-top: 5px;">充值金额:</span>'
+			   + '			</div>'
+			   + '			<div class="columnRight">'
+			   + '				<div id="rechargeMoney"></div><span style="float:right;width:20px;margin-right:35px;font-size:26px;margin-top: -33px;">元</span>'
+			   + ' 			</div>'
+			   + '		</div>'
+			   + ' 		<div class="newUserColumn">'
+			   + '			<button id="rechargeCancle" style="float:right;margin-top:3px;margin-right:40px;" type="button">取消</button>'
+			   + '			<button id="rechargeSure" style="float:right;margin-top:3px;margin-right:10px;" type="button">确定</button>'
+			   + '		</div>'
+			   + '</div>'
+		$("#rechargeWindow").empty();
+		$("#rechargeWindow").html(rechargeHtml);
+		//集团用户
+		$('#rechargeWindow').jqxWindow({
+            showCollapseButton: true,
+            height: 250, 
+            width: 400, 
+            theme: theme,
+            resizable: false,
+            initContent: function () {
+                $('#rechargeWindow').jqxWindow('focus');
+            }
+        });
+		$('#rechargeWindow').jqxWindow('open');
+		$("#rechargeCancle").jqxButton({ width: '60', height: '25', theme: theme });
+        $("#rechargeSure").jqxButton({ width: '60', height: '25', theme: theme });
+        $("#rechargeMoney").jqxNumberInput({ width: '180px', height: '28px', theme: theme, spinButtons: true, min:0});
+        
+	});
+=======
 	
 	
+>>>>>>> a9491fc7071ee06b1dc64bfa97033a1c94549123
 	
 	//普通用户管理
 	$("#commonUserManager").click(function(){
