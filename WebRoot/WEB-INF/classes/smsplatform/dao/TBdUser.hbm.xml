@@ -72,13 +72,13 @@
         <property name="FUpdateTime" type="java.sql.Timestamp">
             <column name="F_UpdateTime" length="19" default="CURRENT_TIMESTAMP"/>
         </property>
-        <set name="TBdMessagesendgroups" inverse="true">
+        <set name="TBdMessagesendgroups" inverse="true" lazy="true">
             <key>
                 <column name="F_UserID" not-null="true" />
             </key>
             <one-to-many class="smsplatform.dao.TBdMessagesendgroup" />
         </set>
-        <set name="TBdRechargeandconsumptions" inverse="true">
+        <set name="TBdRechargeandconsumptions" inverse="true" lazy="true">
             <key>
                 <column name="F_UserID" not-null="true" />
             </key>

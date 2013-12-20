@@ -40,12 +40,18 @@ public class UserAction {
 	   * 查询每个分组每条发送短信状态及消息
 	   * @return
 	   */
-      public String findallgroupMsg(){
+      @SuppressWarnings("unchecked")
+	public String findallgroupMsg(){
     	
     	  UserService userService = new UserService();
 		  Long uid = (Long) ActionContext.getContext().getSession().get("uid");
 		  try {
 			tBdMessagesendgroups = userService.findallgroupMsg(uid);
+			
+			config.setExcludes(new String[]{"TBdMessagesends","TBdMessagesendgroups","TBdRechargeandconsumptions","TBdLogs","handler","hibernateLazyInitializer"});
+            result=JSONArray.fromObject(tBdMessagesendgroups.toArray(), config).toString();
+			// json.accumulate("tBdMessagesendgroups", tBdMessagesendgroups);
+			// result= json.toString();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,9 +61,10 @@ public class UserAction {
 		}
 	     
 
-          result=json.fromObject(msg).toString()+ JSONArray.fromObject(tBdMessagesendgroups, config).toString();
+
+      //    result=json.fromObject(msg).toString()+ JSONArray.fromObject(tBdMessagesendgroups, config).toString();
 		 
-	       LogService.getInstance().log(uid, "查询用户所有的短信组消息");
+	      LogService.getInstance().log(uid, "查询用户所有的短信组消息");
 		  return "success";
       }
       
@@ -67,6 +74,11 @@ public class UserAction {
 		  AdminService adminService = new AdminService();
 		  try {
 			tBdMessagesends = adminService.findallSendMsg(tBdMessagesendgroup);
+			  config.setExcludes(new String[]{"TBdMessagesendgroup"});//除去emps属性
+			//  json.fromObject(msg).toString();
+				 result=JSONArray.fromObject(tBdMessagesends, config).toString();
+				 
+				 
 		} catch (Exception e) {
 			e.printStackTrace();
 			msg="0";
@@ -75,10 +87,8 @@ public class UserAction {
 			 LogService.getInstance().log(uid, "查询所有短信组"+tBdMessagesendgroup.getFSendGroupId()+"消息");
 			return "fail";
 		}
-	
-		 result=json.fromObject(msg).toString()+ JSONArray.fromObject(tBdMessagesends, config).toString();
-		 
-		  return "success";
+		
+		 return "success";
 		  
 	  }
 	  
