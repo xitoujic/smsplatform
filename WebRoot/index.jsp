@@ -85,10 +85,7 @@
                 	<div class="managerRight">
                 	</div>
                 	<div id="phoneNumWindow" style="display:none">
-                		<div>电话号码详细信息</div>
-                		<div>
-                			<div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>
-                		</div>
+                		
                 	</div>
                 </div>
                 <div class="tabmain">

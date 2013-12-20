@@ -107,18 +107,22 @@ public class UserAction {
 		 LogService.getInstance().log(uid, "查询所有充值消费记录");
 		 return "success";
 	  }
+	  
 	  public String sendMsg(){
 		  Long uid = (Long) ActionContext.getContext().getSession().get("uid");
 		  UserService userService = new UserService();
 		  try {
 			userService.sendmsg(tBdMessagesendgroup,uid);
+			json.accumulate("msg", msg);
+			  result= json.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 			msg="0";
 			result = json.fromObject(msg).toString();
 			return "fail";
 		}
-		  result=json.fromObject(msg).toString();
+	
+		  
 		  LogService.getInstance().log(uid, "发送消息"+tBdMessagesendgroup.getFGroupContent()+tBdMessagesendgroup.getFGroupPhones());
 		  return "success";
 	  }

@@ -220,23 +220,35 @@
 		/*
 		 * 短信号码查询窗口
 		 */
+		var windowFlag = 0;
+		var phoneNumArray = "";
 		$("#checkPhoneNum").click(function(){
 			var rowindex = $('#messageGrid').jqxGrid('getselectedrowindex');
 			var currentitem = $('#messageGrid').jqxGrid('getrowdata', rowindex);
         	var GroupId = currentitem.FSendGroupId;
+        	var html = '<div>电话号码详细信息</div>'
+        			 + '<div>'
+        			 + '	<div id="phoneNumGrid" style="margin-left:5px;margin-top:5px;"></div>'
+        			 + '</div>';
+        	$('#phoneNumWindow').empty();
+        	$('#phoneNumWindow').html(html);
+        	
  			//集团用户
-			$('#phoneNumWindow').jqxWindow({
-                showCollapseButton: true,
-                height: 600, 
-                width: 800, 
-                theme: theme,
-                resizable: false,
-                initContent: function () {
-                    $('#phoneNumWindow').jqxWindow('focus');
-                }
-            });
+        	if(windowFlag == 0){
+				$('#phoneNumWindow').jqxWindow({
+	                showCollapseButton: true,
+	                height: 600, 
+	                width: 800, 
+	                theme: theme,
+	                resizable: false,
+	                initContent: function () {
+	                    $('#phoneNumWindow').jqxWindow('focus');
+	                }
+	            });
+				windowFlag = 1;
+			};
+			$('#phoneNumWindow').on('close', function (event) { $('#phoneNumWindow').jqxWindow('destroy'); });
 			$('#phoneNumWindow').jqxWindow('open');
-			
 			/*
 			 * 详细号码数据源
 			 */
@@ -246,13 +258,11 @@
 			        datatype: "json",
 					//datatype: "array",
 			        datafields: [
-			            { name: 'messageType'},
-			            { name: 'sendPeople'},
-			            { name: 'submitType'},
-			            { name: 'messageState'},
-			            { name: 'phoneNumber'},
-			            { name: 'messageDetails'},
-			            { name: 'sendTime'},
+			            { name: 'FMessageId'},
+			            { name: 'FSendNumber'},
+			            { name: 'FSendStatus'},
+			            { name: 'FMessageStatus'},
+			            { name: 'FSendCostStatus'}
 			        ],
 			        //localdata: products,
 			        async: false,
@@ -261,8 +271,14 @@
 			            "tBdMessagesendgroup.FSendGroupId":GroupId
 			        },
 			        beforeprocessing: function (data) {
-			        	debugger;
-		                //return dataArray;
+			        	//debugger;
+		                var dataArray = eval("("+data+")");
+		                for(var f=0;f<dataArray.length;f++){
+		                	dataArray[f].FSendNumber = "," +dataArray[f].FSendNumber;
+		                	phoneNumArray += dataArray[f].FSendNumber;
+		                	
+		                }
+		                return dataArray;
 		            },
 			        pagesize: 18,
 			        pager: function (pagenum, pagesize, oldpagenum) {
@@ -290,13 +306,11 @@
 	                pageable: true,
 	                sortable: true,
 	                columns: [
-	                    { text: '短信类型', datafield: 'messageType', width: 80 },
-	                    { text: '发送人', datafield: 'sendPeople', width: 150 },
-	                    { text: '提交方式', datafield: 'submitType', width: 100 },
-	                    { text: '短信状态', datafield: 'messageState', width: 80 },
-	                    { text: '号码个数', datafield: 'phoneNumber', minwidth: 80 },
-	                    { text: '短信内容', datafield: 'messageDetails', width: 380 },
-	                    { text: '发送时间', datafield: 'sendTime', minwidth: 120 }
+                  		{ text: '目标ID', datafield: 'FMessageId', hidden:true },
+	                    { text: '目标号码', datafield: 'FSendNumber', minwidth: 180 },
+	                    { text: '发送状态', datafield: 'FSendStatus', minwidth: 150 },
+	                    { text: '发送结果', datafield: 'FMessageStatus', minwidth: 100 },
+	                    { text: '计费状态', datafield: 'FSendCostStatus', minwidth: 80 }
 	                ],
 	                showtoolbar: true,
 	                rendertoolbar: function (toolbar) {
@@ -309,7 +323,15 @@
 	                    toolbar.append(container);
 	                    $("#exportGrid").jqxButton({ width: '60', height: '25', theme: theme });
 	                    $("#exportGrid").click(function(){
-	                    	 $("#phoneNumGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
+	                    	 //$("#phoneNumGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
+	                    	 try{
+	                    	 fso = new ActiveXObject("Scripting.FileSystemObject"); 
+                    	     tf = fso.CreateTextFile("C://testfile.txt", true); 
+                    	     tf.WriteLine(phoneNumArray) ; 
+	                    }catch(e){
+	                    	alert(e);
+	                    }
+                    	     tf.Close(); 
 	                    });
 	            	}
 	            });

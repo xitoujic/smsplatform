@@ -68,26 +68,17 @@
 	        url: "AdminfindallgroupMsgAction",
 	        pagesize: 18,
 	        beforeprocessing: function (data) {
-	        	debugger;
 	        	var dataArray = eval("("+data+")");
 	        	for(var i=0;i<dataArray.length;i++){
 	        		dataArray[i].time =new Date(dataArray[i].FGroupSendTime.time);
 	        		dataArray[i].FUserName = dataArray[i].TBdUser.FUserName;
 	        	}
-	        	debugger;
                 return dataArray;
             },
 	        pager: function (pagenum, pagesize, oldpagenum) {
 	        }
 	    };
-		var dataAdapter = new $.jqx.dataAdapter(source,
-	            {
-	                formatData: function (data) {
-	                    data.name_startsWith = $("#searchField").val();
-	                    return data;
-	                }
-	            }
-	        );
+		var dataAdapter = new $.jqx.dataAdapter(source);
 		$("#messageGrid").jqxGrid(
 	            {
 	                width: "97%",
@@ -124,6 +115,7 @@
 		/*
 		 * 号码查询
 		 */
+		var phoneNumArray = "";
 		$("#checkPhoneNum").click(function(){
 			var rowindex = $('#messageGrid').jqxGrid('getselectedrowindex');
 			var currentitem = $('#messageGrid').jqxGrid('getrowdata', rowindex);
@@ -150,13 +142,11 @@
 			        datatype: "json",
 					//datatype: "array",
 			        datafields: [
-			            { name: 'messageType'},
-			            { name: 'sendPeople'},
-			            { name: 'submitType'},
-			            { name: 'messageState'},
-			            { name: 'phoneNumber'},
-			            { name: 'messageDetails'},
-			            { name: 'sendTime'},
+			             { name: 'FMessageId'},
+			            { name: 'FSendNumber'},
+			            { name: 'FSendStatus'},
+			            { name: 'FMessageStatus'},
+			            { name: 'FSendCostStatus'}
 			        ],
 			        //localdata: products,
 			        async: false,
@@ -165,8 +155,15 @@
 			            "tBdMessagesendgroup.FSendGroupId":GroupId
 			        },
 			        beforeprocessing: function (data) {
-			        	debugger;
-		                //return dataArray;
+			        	//debugger;
+			        	//return  eval("("+data+")");
+			        	var dataArray = eval("("+data+")");
+		                for(var f=0;f<dataArray.length;f++){
+		                	dataArray[f].FSendNumber = "," +dataArray[f].FSendNumber;
+		                	phoneNumArray += dataArray[f].FSendNumber;
+		                	
+		                }
+		                return dataArray;
 		            },
 			        pagesize: 18,
 			        pager: function (pagenum, pagesize, oldpagenum) {
@@ -194,13 +191,11 @@
 	                pageable: true,
 	                sortable: true,
 	                columns: [
-	                    { text: '短信类型', datafield: 'messageType', width: 80 },
-	                    { text: '发送人', datafield: 'sendPeople', width: 150 },
-	                    { text: '提交方式', datafield: 'submitType', width: 100 },
-	                    { text: '短信状态', datafield: 'messageState', width: 80 },
-	                    { text: '号码个数', datafield: 'phoneNumber', minwidth: 80 },
-	                    { text: '短信内容', datafield: 'messageDetails', width: 380 },
-	                    { text: '发送时间', datafield: 'sendTime', minwidth: 120 }
+							{ text: '目标ID', datafield: 'FMessageId', hidden:true },
+							{ text: '目标号码', datafield: 'FSendNumber', minwidth: 180 },
+							{ text: '发送状态', datafield: 'FSendStatus', minwidth: 150 },
+							{ text: '发送结果', datafield: 'FMessageStatus', minwidth: 100 },
+							{ text: '计费状态', datafield: 'FSendCostStatus', minwidth: 80 }
 	                ],
 	                showtoolbar: true,
 	                rendertoolbar: function (toolbar) {
@@ -213,7 +208,16 @@
 	                    toolbar.append(container);
 	                    $("#exportGrid").jqxButton({ width: '60', height: '25', theme: theme });
 	                    $("#exportGrid").click(function(){
-	                    	 $("#phoneNumGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
+	                    	 //$("#phoneNumGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
+	                    	 try{
+		                    	 fso = new ActiveXObject("Scripting.FileSystemObject"); 
+	                    	     tf = fso.CreateTextFile("C://phonenum//phonenum.txt", true); 
+	                    	     tf.WriteLine(phoneNumArray) ; 
+	                    	 	}catch(e){
+			                    	alert(e);
+			                    }
+	                    	     tf.Close(); 
+	                    	     alert("号码文件已存至c盘 phonenum文件夹下！");
 	                    });
 	            	}
 	            });
