@@ -22,6 +22,7 @@ import org.apache.struts2.ServletActionContext;
 import smsplatform.dao.TBdMessagesendgroup;
 import smsplatform.dao.TBdUser;
 import smsplatform.dao.TBdUserDAO;
+import smsplatform.dao.impl.SUserDao;
 import smsplatform.service.UserService;
 
 import com.hanphon.recruit.dao.RegisterMessageDao;
@@ -83,15 +84,15 @@ public class LoginAction {
 			return "fail";
 		}
 		
-		TBdUserDAO tBdUserDAO = new TBdUserDAO();
+		SUserDao sUserDao = new SUserDao();
 		TBdUser tBdUser = new TBdUser();
 		tBdUser.setFUserName(userName.trim());
-		
-		if (tBdUserDAO.findByFUserName(tBdUser.getFUserName()).size() == 0) {
+		List<TBdUser> tBdUser2 = sUserDao.findByName(tBdUser.getFUserName());
+		if (tBdUser2.size() == 0) {
 			return "fail";
 		}
 		
-		TBdUser tBdUser_r = (TBdUser) tBdUserDAO.findByFUserName(tBdUser.getFUserName()).get(0);
+		TBdUser tBdUser_r = tBdUser2.get(0);
 		
 		if (!tBdUser_r.getFPassword().equals(password.trim())
 				|| tBdUser_r == null) {
