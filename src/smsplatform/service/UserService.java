@@ -24,7 +24,42 @@ public class UserService {
 	public static double price = 0.4;
 	public TBdMessagesend tBdMessagesend;
 	public TBdMessagesendgroup tBdMessagesendgroup ;
-	
+	/**
+	 * 更新用户信息
+	 * @param tBdUser
+	 * @param uid
+	 * @return
+	 */
+	public Boolean updataUserInfo(TBdUser tBdUser,Long uid){
+		SUserDao sUserDao = new SUserDao();
+		TBdUser tBdUser2 = sUserDao.findById(uid);
+		
+		if (tBdUser.getFCheckType()!= null) {
+			tBdUser2.setFCheckType(tBdUser.getFCheckType());
+		}
+		if (tBdUser.getFEmail()!= null) {
+			tBdUser2.setFEmail(tBdUser.getFEmail());
+		}
+		if (tBdUser.getFPhoneNumber()!= null) {
+			tBdUser2.setFPhoneNumber(tBdUser.getFPhoneNumber());
+		}
+		if (tBdUser.getFPassword()!= null) {
+			tBdUser2.setFPassword(tBdUser.getFPassword());
+		}
+		if (tBdUser.getFSex()!= null) {
+			tBdUser2.setFSex(tBdUser.getFSex());
+		}
+		if (tBdUser.getFSignature()!= null) {
+			tBdUser2.setFSignature(tBdUser.getFSignature());
+		}
+		if (tBdUser.getFCompanyType()!= null) {
+			tBdUser2.setFCompanyType(tBdUser.getFCompanyType());
+		}
+
+		return sUserDao.update(tBdUser2);
+		 
+		
+	}
 	
 	public List findallSendMsg(TBdMessagesendgroup tBdMessagesendgroup){
 		
